@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eu.octanne.edora.client.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [
+    "MixinInGameHud",
+    "MixinInventoryScreen",
+    "MixinKeyboardInput"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

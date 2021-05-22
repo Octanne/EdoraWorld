@@ -1,0 +1,207 @@
+﻿Faire Systeme Kits Plugin GUI
+
+
+#ed1f24
+#181818
+
+51ae150f56751639dc0491a1b59457c3f7fe2dd36bc0212e99527317c161f9da
+Technoria
+technoria.minecraft@gmail.com
+chartan.ascentia@gmail.com
+
+Araucaria
+
+Prevoire un systeme de fausse monnaie possiblement
+
+Nom pour zone:
+- Adora
+- Arlos
+- Atanis
+- Ardena
+Pris - Dakara
+- Cartago
+- Chodawa
+- Cimmeria
+- Erebus
+- Hadante
+- Heliopolis
+- Lantia
+- Langara
+pris - Lotana
+- Madrona
+- Malkshur
+- Meronat
+Pris - Novius
+Pris - Nylus
+Pris - Oannes
+- Orilla
+- Revanna
+- Tartarus
+- Talavaris
+- Valon
+- Vorash
+- Volia
+- Narda'sh
+- Nar'ash
+- Vanel'insh
+Pris - Kallana
+Pris - Kawan
+Pris - Edora
+Pris - Othala
+Pris - Shoran'ka
+Pris - Loc'na'ko
+Pris - Tollane
+
+-------------------------------------------------------------------------------------------------------------
+                                                  ____________
+                                                 | Les Mondes |
+
+Monde Principal: (monde d'origines des Othalas)
+Nom: Edora
+Nom du peuple: Othala
+
+Histoire du monde (Synopsis):
+
+Planète possédent une faune est une flore varrié. Ce monde est très hostile, les créatures 
+qui y vivent sont toutes des predateurs nés ou des proix. Le seul peuple intelligent qui y
+vie sont les Othala, un peuple primitif mais possédent une constitution physique remarquable
+et une adaptation qui leurs permets d'être au plus haut de la chaine alimentaire.
+
+-----------------
+
+Monde d'Origine: (dit monde d'origine des Tollane'ko à cause de la perte d'une partie des infos de leur histoire)
+Nom: Loc'na'ko
+Nom du peuple: Tollane'ko
+Origine du nom: Loc'na'ko = science notre futur(survie)
+
+Histoire du monde (Synopsis):
+
+Planète découverte par les Tolane'Ko après la destruction de leur planète. Il y ont batis une
+grande civilisation capable de tout les prodiges. Ils ont a leurs apogé même réussit a créer 
+des êtres génetiquement modifier voir même à créer de toute pièces. Ils durent abandonner leur planète à cause des 
+être venue anéantire leur civilisation (les Tollane'ka).
+
+-----------------
+
+Monde Enemie: (Tout premiers monde de Tollane'ka & Tollane'ko)
+Nom: Shoran'ka
+Origine du nom: Shoran'ka = planète passé (planète du passé)
+Nom du peuple: Tollane (Dans l'intégralité Tollane'ka + Tollane'ko = Tollane)
+
+Histoire du Monde (Synopsis):
+
+Version Tollane'ko:
+
+Monde d'origine du peuple Tollane. Ce monde fut souvent divisé lors de guerre entre les partisants de la 
+technologie et ceux des anciennes croyance. Ce monde était magnifique possédent des plaines verdoyant 
+et des forêts grouillantes de vies. Les Tollane'ko fuire le monde à cause d'une catastrophe naturel qui le detruisit.
+
+Version Tollane'ka:
+
+Monde d'origine du peuple Tollane. Ce monde fut souvent diviser lors de guerre entre les                          
+partisants de la religion et les païens de la technologie. Lors du grand jugement les                          
+Tollane'ko fuirent le monde en emportant tout les ressources possible. Les Tollane durent                           
+travailler dure pour rebatir leur monde. Il gardairent à jamais une haine envert ces                          
+hérétiques que sont ces Tollane'ko.
+
+-------------------------------------------------------------------------------------------------------------
+                                                  ____________
+                                                 |Les Factions|
+
+1er Faction:
+ Nom: Kawan
+ Originaire: Loc'na'ko
+ Nom Capitale: Dakara  
+ Specificité: Pouvoirs génétique
+
+------------
+ 
+2eme Faction:
+ Nom: Othala
+ Originaire: Edora
+ Nom Capitale: Lotana
+ Spécificité: Morphologie Amplifier
+ 
+------------
+
+3eme Faction:
+ Nom: Kallana
+ Nom Capitale: Novius
+ Originaire: Loc'na'ko
+ Spécificité: Technologie Très Avancée
+
+-------------------------------------------------------------------------------------------------------------
+                                                   ___________
+                                                  |Les langues|
+
+Language d'origine Tollane & Tollane'ko:
+ Loc = science, na = notre, Shoran = planète
+ ka = passé, ko = futur, ke = présent
+ Tollane = peuple
+ Edora = Principale
+ raf = Craft
+ af = activé
+ sh = du, de "idée de positionement" 
+ ash = être l'idée général
+ daf = désactivé
+ Nylus = Argent
+ Rro = Monstre
+ Gud = Interface
+ Dez = idée d'un Regroupement
+ Hann = faction
+ Dzan = Ville
+ 
+Les Traductions:
+ Loc'na'ko = science notre futur (survie)
+ Shoran'ka = planète passé (planète du passé)
+ 
+------------------------------------------------------------------------------------------------------------------
+                                             _______________________
+											|Fonctionenement Faction|
+				
+- 1 dirigent par factions
+- 1 Ministre de l'économie
+- 1 Ministre de L'urbanisation
+- 1 Ministre de la Guerre
+
+(Les ministre candide sur le forum si validé par staff les joueurs vote pour lui nouveau ministre touyt les x temps)
+
+Ministre de l'économie:
+ Rôle:
+ - Plafonne les prix de ventes des ressources et gères les taux des taxes.
+Ministre de l'Urbanisation:
+ Rôle:
+ - Désigne les zones disponibles d'une ville
+   - Va sur place et marque la zone (Taille de ville minimal par défaut)
+ - Peux demmander la destruction d'un batiment au maire (Envoie un message au maire, le maire appuie sur oui ou non) marche du maire au ministre et vice-versa
+ - Peux lancé une requete de renvoie d'un maire.
+ 
+Ministre de la Guerre:
+ Rôle:
+ - Signer une déclaration de guerre
+ - Négocier une armistice
+ - Signer des alliances
+											
+-----------------------------------------------------------------------------------------------------------------
+                                             _______________________
+											|Fonctionenement Guildes|
+											
+Conditions de créations:
+ Allé au png avec X$ et lancé une session de recrutement (Item qui ouvre une anvil pour entré le nom de la guilde puis une autre pour entré la desc.) sa ajoute un item dans un menu du png qui porte le nom de la fac et le lore descprition si on clique sa nous ajoutes au bout de 4 pers elle est crée.
+
+Possibilité d'une guilde:
+ - Droit d'acheter une propriété(QG) de guilde
+ - Le chef peux envoyé une demande de regroupement au membres il se font tp si il accepte
+
+Les (grades) d'une guilde:
+ !!!Voir plus Tard!!!!
+ 
+---------------------------------------------------------------------------------------------------------------
+                                     ________________________________
+                                    |Fonctionenement Farme Ressources|
+									
+Les ressources se farmes comme sur rust. comme ça le farme ne dénature pas la map (les rochers, arbres etc... repop donc aleatoiremenbnt si possible)
+
+---------------------------------------------------------------------------------------------------------------
+                                              Système économiques
+Nom: Oannes

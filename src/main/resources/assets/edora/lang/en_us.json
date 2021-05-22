@@ -1,0 +1,12 @@
+{
+    "category.edora.main" : "EdoraWorld",
+    "key.edora.mainMenu" : "Menu",
+    "screen.edora.playermenu.title" : "Personal Menu",
+    "itemGroup.edora.mineral" : "Edora Minerals",
+    "item.edora.sulfur_crystal" : "Sulfur Crystal",
+    "screen.edora.selectFaction.title" : "Choose your faction",
+    "screen.edora.selectFaction.factions.kawan" : "Kawan",
+    "screen.edora.selectFaction.factions.kallana" : "Kallana",
+    "screen.edora.selectFaction.factions.othala" : "Othala",
+    "generator.genmap" : "GenMap"
+}
