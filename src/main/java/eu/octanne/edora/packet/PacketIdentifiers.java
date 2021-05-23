@@ -3,7 +3,7 @@ package eu.octanne.edora.packet;
 import eu.octanne.edora.packet.handler.MenuType;
 import eu.octanne.edora.packet.handler.PacketClientAskOpenMenu;
 import eu.octanne.edora.packet.handler.PacketServerOpenPersonalMenu;
-import eu.octanne.edora.server.mixin.accessor.ServerPlayerEntityAccessor;
+import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -18,7 +18,7 @@ public class PacketIdentifiers {
     }
 
     static public void registerHandlerClient() {
-        
+        SERVER_OPEN_PERSONAL_MENU = new PacketServerOpenPersonalMenu();
     }
 
     static public void sendClientAskOpenMenu(MenuType type) {
@@ -27,7 +27,7 @@ public class PacketIdentifiers {
 
 	public static void sendServerOpenPersonalMenu(ServerPlayerEntity player) {
         CompoundTag tag = new CompoundTag();
-        ServerPlayerEntityAccessor pE = (ServerPlayerEntityAccessor)player;
+        EdoraServerPlayerEntity pE = (EdoraServerPlayerEntity)player;
         if(pE.getNation() != null){
             tag.putString("nationName", pE.getNation().getName());
             tag.putString("townName", pE.getTown().getName());

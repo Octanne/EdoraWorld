@@ -1,9 +1,11 @@
 package eu.octanne.edora.server.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
 import eu.octanne.edora.server.gourvern.Nation;
@@ -15,29 +17,33 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 @Mixin(ServerPlayerEntity.class)
-public class MixinServerPlayerEntity {
+public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
 
-    private Nation nation;
-    private Town town;
-    private Guilde guilde;
-    private BankAccount bankAccount;
+    @Unique
+    protected Nation edora$nation;
+    @Unique
+    protected Town edora$town;
+    @Unique
+    protected Guilde edora$guilde;
+    @Unique
+    protected BankAccount edora$bankAccount;
 
-    @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag)V", at = @At("RETURN"))
+    @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
         if(tag.contains("nationID")){
-            nation = Nation.getNationFromID(tag.getUuid("nationID"));
+            edora$nation = Nation.getNationFromID(tag.getUuid("nationID"));
         }else{
-            nation = null;
+            edora$nation = null;
         }
         if(tag.contains("townID")){
-            town = Town.getTownFromID(tag.getUuid("townID"));
+            edora$town = Town.getTownFromID(tag.getUuid("townID"));
         }else{
-            town = null;
+            edora$town = null;
         }
         if(tag.contains("guildeID")){
-            guilde = Guilde.getGuildeFromID(tag.getUuid("guildeID"));
+            edora$guilde = Guilde.getGuildeFromID(tag.getUuid("guildeID"));
         }else{
-            town = null;
+            edora$town = null;
         }
         // Bank data
         int oannes = 0;
@@ -52,21 +58,56 @@ public class MixinServerPlayerEntity {
         }else{
             nylus = 0;
         }
-        bankAccount = new BankAccount(oannes, nylus);
+        edora$bankAccount = new BankAccount(oannes, nylus);
     }
 
-	@Inject( method = "writeCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag)V", at = @At("RETURN"))
-    public void writeCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
-        if(nation != null) {
-            tag.putUuid("nationID", nation.getID());
+	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
+    public void writeCustomDataToTag(CompoundTag tag, CallbackInfo info) {
+        if(edora$nation != null) {
+            tag.putUuid("nationID", edora$nation.getID());
         }
-        if(town != null) {
-            tag.putUuid("townID", town.getID());
+        if(edora$town != null) {
+            tag.putUuid("townID", edora$town.getID());
         }
-        if(guilde != null) {
-            tag.putUuid("guildeID", guilde.getID());
+        if(edora$guilde != null) {
+            tag.putUuid("guildeID", edora$guilde.getID());
         }
-        tag.putInt("nylus", bankAccount.getNylus());
-        tag.putInt("oannes", bankAccount.getOannes());
+        tag.putInt("nylus", edora$bankAccount.getNylus());
+        tag.putInt("oannes", edora$bankAccount.getOannes());
     }
+
+	@Override
+	public Nation getNation() {
+		return edora$nation;
+	}
+
+	@Override
+	public void changeNation(Nation nation) {
+		edora$nation = nation;
+	}
+
+	@Override
+	public Town getTown() {
+		return edora$town;
+	}
+
+	@Override
+	public void changeTown(Town town) {
+		edora$town = town;
+	}
+
+	@Override
+	public Guilde getGuilde() {
+		return edora$guilde;
+	}
+
+	@Override
+	public void changeGuilde(Guilde guilde) {
+		edora$guilde = guilde;
+	}
+
+	@Override
+	public BankAccount getBankAccount() {
+		return edora$bankAccount;
+	}
 }

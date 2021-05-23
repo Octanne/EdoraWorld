@@ -12,7 +12,7 @@ import eu.octanne.edora.packet.PacketIdentifiers;
 public class PacketClientAskOpenMenu extends AbstractPacketClient {
 
     public PacketClientAskOpenMenu() {
-        super("clientAskOpenMenu");
+        super("client_ask_open_menu");
     }
 
 	@Override
