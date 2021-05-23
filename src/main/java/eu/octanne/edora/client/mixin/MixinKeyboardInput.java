@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import eu.octanne.edora.client.EdoraClient;
-import eu.octanne.edora.packet.PacketIdentifiers;
-import eu.octanne.edora.packet.handler.MenuType;
+import eu.octanne.edora.packet.MenuType;
+import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.KeyboardInput;
 
@@ -20,7 +20,7 @@ public class MixinKeyboardInput {
             if(client.currentScreen == null) {
                 // Ask to server if He can open and which menu open.
                 // client.openScreen(new FactionChooseMenuScreen(client.player));
-                PacketIdentifiers.sendClientAskOpenMenu(MenuType.PERSONAL_MENU);
+                PacketClients.pcktClientAskOpenMenu.send(MenuType.PERSONAL_MENU);
             }
         }
     }

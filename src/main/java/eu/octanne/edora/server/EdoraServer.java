@@ -7,12 +7,14 @@ import org.apache.logging.log4j.Level;
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
+import eu.octanne.edora.packet.server.handler.HandlerClientAskOpenMenu;
 import eu.octanne.edora.server.event.ServerEvents;
 import eu.octanne.edora.server.event.ServerEvents.*;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class EdoraServer implements DedicatedServerModInitializer {
@@ -31,8 +33,13 @@ public class EdoraServer implements DedicatedServerModInitializer {
         // Register Commands
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> registerCommands(dispatcher, dedicated));
         // Register PacketHandlers
-        PacketIdentifiers.registerHandlerServer();
+        registerPacketHandlers();
     }
+
+    private void registerPacketHandlers() {
+        ServerPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktClientAskOpenMenu, 
+        new HandlerClientAskOpenMenu());
+	}
 
     private void registerEvents() {
         ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {

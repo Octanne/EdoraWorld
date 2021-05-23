@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 
 public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends HandledScreen<T>*/ Screen {
 
-    private static final Identifier TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/Nation_choix.png");
+    private static final Identifier TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/nation_choix.png");
     NationChooseMenuScreen.Nations selected = null;
 
     public NationChooseMenuScreen(PlayerEntity player) {
@@ -145,9 +145,9 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
     }
 
     public enum Nations {
-        Kawan(new TranslatableText("screen.edora.selectNation.Nations.kawan"), 2, 199, 2, 167),
-        Kallana(new TranslatableText("screen.edora.selectNation.Nations.kallana"), 2, 263, 2, 231),
-        Othala(new TranslatableText("screen.edora.selectNation.Nations.othala"), 2, 327, 2, 295);
+        Kawan(new TranslatableText("screen.edora.selectNation.nation.kawan"), 2, 199, 2, 167),
+        Kallana(new TranslatableText("screen.edora.selectNation.nation.kallana"), 2, 263, 2, 231),
+        Othala(new TranslatableText("screen.edora.selectNation.nation.othala"), 2, 327, 2, 295);
 
         final Text name;
 

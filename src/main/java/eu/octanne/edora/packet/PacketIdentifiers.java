@@ -1,41 +1,9 @@
 package eu.octanne.edora.packet;
 
-import eu.octanne.edora.packet.handler.MenuType;
-import eu.octanne.edora.packet.handler.PacketClientAskOpenMenu;
-import eu.octanne.edora.packet.handler.PacketServerOpenPersonalMenu;
-import eu.octanne.edora.server.EdoraServerPlayerEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.network.ServerPlayerEntity;
-
+import net.minecraft.util.Identifier;
 public class PacketIdentifiers {
 
-    private static PacketClientAskOpenMenu CLIENT_ASK_OPEN_MENU;
-    
-    private static PacketServerOpenPersonalMenu SERVER_OPEN_PERSONAL_MENU;
-    
-    static public void registerHandlerServer() {
-        CLIENT_ASK_OPEN_MENU = new PacketClientAskOpenMenu();
-    }
-
-    static public void registerHandlerClient() {
-        SERVER_OPEN_PERSONAL_MENU = new PacketServerOpenPersonalMenu();
-    }
-
-    static public void sendClientAskOpenMenu(MenuType type) {
-        CLIENT_ASK_OPEN_MENU.sendPacket(type);
-    }
-
-	public static void sendServerOpenPersonalMenu(ServerPlayerEntity player) {
-        CompoundTag tag = new CompoundTag();
-        EdoraServerPlayerEntity pE = (EdoraServerPlayerEntity)player;
-        if(pE.getNation() != null){
-            tag.putString("nationName", pE.getNation().getName());
-            tag.putString("townName", pE.getTown().getName());
-            tag.putString("guildeName", pE.getGuilde().getName());
-            tag.putInt("oannes", pE.getBankAccount().getOannes());
-            tag.putInt("nylus", pE.getBankAccount().getNylus());
-        }
-        SERVER_OPEN_PERSONAL_MENU.sendPacket(player, tag);
-	}
+    static public Identifier pktServerOpenPersonalMenu = new Identifier("server_open_personal_menu");
+    static public Identifier pktClientAskOpenMenu = new Identifier("client_ask_open_menu");
     
 }

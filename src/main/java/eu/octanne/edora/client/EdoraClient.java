@@ -5,8 +5,10 @@ import org.lwjgl.glfw.GLFW;
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
+import eu.octanne.edora.packet.client.handler.HandlerServerPersonalMenu;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -36,10 +38,15 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
         // Register Keybinds
         registerKeybinds();
         // Register PacketHandlers
-        PacketIdentifiers.registerHandlerClient();
+        registerPacketHandlers();
     }
 
-     /**
+    private void registerPacketHandlers() {
+        ClientPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktServerOpenPersonalMenu, 
+            new HandlerServerPersonalMenu());
+	}
+
+	/**
      * Keybinds
      */
     private void registerKeybinds() {

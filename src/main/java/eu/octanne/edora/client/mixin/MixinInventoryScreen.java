@@ -9,7 +9,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen;
+import eu.octanne.edora.packet.MenuType;
+import eu.octanne.edora.packet.PacketIdentifiers;
+import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
@@ -59,7 +61,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         // ADD Menu Button
         this.addButton(new ButtonWidget(this.x + 103, this.height / 2 - 24, 60, 20,
         Text.Serializer.fromJson("{\"text\":\"Menu\"}"), buttonWidget -> {
-            client.openScreen(new NationChooseMenuScreen(client.player));
+            PacketClients.pcktClientAskOpenMenu.send(MenuType.PERSONAL_MENU);
             this.mouseDown = true;
         }));
     }
