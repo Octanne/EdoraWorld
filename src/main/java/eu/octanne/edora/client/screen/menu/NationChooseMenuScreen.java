@@ -17,8 +17,16 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
     private static final Identifier TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/nation_choix.png");
     NationChooseMenuScreen.Nations selected = null;
 
-    public NationChooseMenuScreen(PlayerEntity player) {
+    public NationChooseMenuScreen(PlayerEntity player, String natName) {
         super(Text.Serializer.fromJson("{\"text\":\""+new TranslatableText("screen."+EdoraMain.MOD_ID+".playermenu.title")+"\"}"));
+        if(!natName.equals("none")) {
+            for(Nations nation : Nations.values()) {
+                if(nation.name.asString().equals(natName)){
+                    selected = nation;
+                    break;
+                }
+            }
+        }
     }
     
     @Override

@@ -19,7 +19,7 @@ public class HandlerClientAskOpenMenu implements PlayChannelHandler {
                 int idType = buf.readInt();
                 server.execute(() -> {
                     if(idType == MenuType.PERSONAL_MENU.getIndex()) {
-                        PacketServers.pcktServerOpenPersonalMenu.send(player);
+                        PacketServers.pcktServerOpenPersonalMenu.send(player,false);
                     }
                     // TODO ADD FOR OTHER MENU
                 });

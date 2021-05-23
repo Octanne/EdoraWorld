@@ -17,8 +17,10 @@ public class HandlerServerPersonalMenu implements PlayChannelHandler {
                 int idType = buf.readInt();
                 CompoundTag tag = buf.readCompoundTag();
                 client.execute(() -> {
-                    if(idType ==MenuType.NATION_SELECTOR.getIndex()) {
-                        client.openScreen(new NationChooseMenuScreen(client.player));
+                    if(idType == MenuType.NATION_SELECTOR.getIndex()) {
+                        String natName = tag.getString("factionName");
+                        if(natName != null) natName = "none";
+                        client.openScreen(new NationChooseMenuScreen(client.player,natName));
                     }else {
                         // TODO ADD OPEN PERSONAL MENU
                         client.player.sendChatMessage("Ouverture du menu personnel.");
