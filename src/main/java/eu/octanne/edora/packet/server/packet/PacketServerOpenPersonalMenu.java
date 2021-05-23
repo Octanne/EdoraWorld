@@ -23,20 +23,22 @@ public class PacketServerOpenPersonalMenu {
         CompoundTag tag = new CompoundTag();
         PacketByteBuf buf = PacketByteBufs.create();
         EdoraServerPlayerEntity pE = (EdoraServerPlayerEntity)player;
-        if(pE.getNation() != null && !forceNationChoose){
-            tag.putString("nationName", pE.getNation().getName());
-            tag.putString("townName", pE.getTown().getName());
-            tag.putString("guildeName", pE.getGuilde().getName());
-            tag.putInt("oannes", pE.getBankAccount().getOannes());
-            tag.putInt("nylus", pE.getBankAccount().getNylus());
-        }
-        
-        if(tag.isEmpty()){
-            buf.writeInt(MenuType.NATION_SELECTOR.getIndex());
-            tag.putString("nationName", pE.getNation().getName());
-            buf.writeCompoundTag(tag);
+        if(pE.getNation() != null){
+            if(forceNationChoose) {
+                buf.writeInt(MenuType.NATION_SELECTOR.getIndex());
+                tag.putString("nationName", pE.getNation().getName());
+                buf.writeCompoundTag(tag);
+            }else {
+                buf.writeInt(MenuType.PERSONAL_MENU.getIndex());
+                tag.putString("nationName", pE.getNation().getName());
+                tag.putString("townName", pE.getTown().getName());
+                tag.putString("guildeName", pE.getGuilde().getName());
+                tag.putInt("oannes", pE.getBankAccount().getOannes());
+                tag.putInt("nylus", pE.getBankAccount().getNylus());
+                buf.writeCompoundTag(tag);
+            }
         }else{
-            buf.writeInt(MenuType.PERSONAL_MENU.getIndex());
+            buf.writeInt(MenuType.NATION_SELECTOR.getIndex());
             buf.writeCompoundTag(tag);
         }
         ServerPlayNetworking.send(player, identifier, buf);

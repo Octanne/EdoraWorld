@@ -18,5 +18,13 @@ public class BankAccount {
 		return oannes;
 	}
 
+    public void setOannes(int i){
+        oannes = i;
+    }
+
+    public void setNylus(int i) {
+        nylus = i;
+    }
+
     // TODO : Economy COMMANDS
 }

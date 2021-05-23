@@ -1,10 +1,14 @@
 package eu.octanne.edora.server.mixin;
 
+import com.mojang.authlib.GameProfile;
+
+import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
@@ -14,100 +18,114 @@ import eu.octanne.edora.server.gourvern.Town;
 import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
+import net.minecraft.server.world.ServerWorld;
 
 @Mixin(ServerPlayerEntity.class)
 public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
 
-    @Unique
-    protected Nation edora$nation;
-    @Unique
-    protected Town edora$town;
-    @Unique
-    protected Guilde edora$guilde;
-    @Unique
-    protected BankAccount edora$bankAccount;
+    private static final String nationID = "nationID";
+    private static final String guildeID = "guildeID";
+    private static final String townID = "townID";
+    private static final String amountNylus = "amountNylus";
+    private static final String amountOannes = "amountOannes";
+    private static final String edoraTAG = "edora";
 
-    @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
-    public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
-        if(tag.contains("nationID")){
-            edora$nation = Nation.getNationFromID(tag.getUuid("nationID"));
-        }else{
-            edora$nation = null;
-        }
-        if(tag.contains("townID")){
-            edora$town = Town.getTownFromID(tag.getUuid("townID"));
-        }else{
-            edora$town = null;
-        }
-        if(tag.contains("guildeID")){
-            edora$guilde = Guilde.getGuildeFromID(tag.getUuid("guildeID"));
-        }else{
-            edora$town = null;
-        }
-        // Bank data
-        int oannes = 0;
-        int nylus = 0; 
-        if(tag.contains("amountOannes")){
-            oannes = tag.getInt("amountOannes");
-        }else{
-            oannes = 0;
-        }
-        if(tag.contains("amountNylus")){
-            nylus = tag.getInt("amountNylus");
-        }else{
-            nylus = 0;
-        }
-        edora$bankAccount = new BankAccount(oannes, nylus);
+    @Unique
+    private Nation edoraNation;
+    @Unique
+    private Town edoraTown;
+    @Unique
+    private Guilde edoraGuilde;
+    @Unique
+    private BankAccount edoraBankAccount;
+
+    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;"+
+    "Lnet/minecraft/server/network/ServerPlayerInteractionManager;)V")
+    private void constructClass(MinecraftServer server, ServerWorld world, GameProfile profile, ServerPlayerInteractionManager interactionManager, CallbackInfo info){
+        EdoraMain.log(Level.INFO, "Intialize default EdoraPlayer data...");
+        edoraNation = null;
+        edoraTown = null;
+        edoraGuilde = null;
+        edoraBankAccount = new BankAccount(0, 0);
     }
 
-	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
+    @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
+    public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
+        if(tag.contains(edoraTAG)){
+            CompoundTag tagEdora = tag.getCompound(edoraTAG);
+            EdoraMain.log(Level.INFO, "Loading EdoraPlayer data from .dat file...");
+            if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
+            else edoraNation = null;
+
+            if(tagEdora.contains(townID)) edoraTown = Town.getTownFromID(tagEdora.getUuid(townID));
+            else edoraTown = null;
+
+            if(tagEdora.contains(guildeID)) edoraGuilde = Guilde.getGuildeFromID(tagEdora.getUuid(guildeID));
+            else edoraGuilde = null;     
+
+            // Bank data
+            if(tagEdora.contains(amountOannes)) edoraBankAccount.setOannes(tagEdora.getInt(amountOannes));
+            if(tagEdora.contains(amountNylus)) edoraBankAccount.setNylus(tagEdora.getInt(amountNylus));     
+        }
+    }
+
+	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
     public void writeCustomDataToTag(CompoundTag tag, CallbackInfo info) {
-        if(edora$nation != null) {
-            tag.putUuid("nationID", edora$nation.getID());
+        CompoundTag tagEdora = new CompoundTag();
+        if(edoraNation != null) {
+            tagEdora.putUuid(nationID, edoraNation.getID());
+            EdoraMain.log(Level.INFO, "ADD nationID : "+edoraNation.getID());
         }
-        if(edora$town != null) {
-            tag.putUuid("townID", edora$town.getID());
+        if(edoraTown != null) {
+            tagEdora.putUuid(townID, edoraTown.getID());
+            EdoraMain.log(Level.INFO, "ADD townID : "+edoraTown.getID());
         }
-        if(edora$guilde != null) {
-            tag.putUuid("guildeID", edora$guilde.getID());
+        if(edoraGuilde != null) {
+            tagEdora.putUuid(guildeID, edoraGuilde.getID());
+            EdoraMain.log(Level.INFO, "ADD guildeID : "+edoraGuilde.getID());
         }
-        tag.putInt("nylus", edora$bankAccount.getNylus());
-        tag.putInt("oannes", edora$bankAccount.getOannes());
+        tagEdora.putInt(amountNylus, edoraBankAccount.getNylus());
+        tagEdora.putInt(amountOannes, edoraBankAccount.getOannes());
+        tag.put(edoraTAG, tagEdora);
+        EdoraMain.log(Level.INFO, "Saving EdoraPlayer data into .dat file...");
+        EdoraMain.log(Level.INFO, "<-- Edora Compound -->\n"+tagEdora.asString());
     }
 
 	@Override
 	public Nation getNation() {
-		return edora$nation;
+		return edoraNation;
 	}
 
 	@Override
 	public void changeNation(Nation nation) {
-		edora$nation = nation;
+		edoraNation = nation;
 	}
 
 	@Override
 	public Town getTown() {
-		return edora$town;
+		return edoraTown;
 	}
 
 	@Override
 	public void changeTown(Town town) {
-		edora$town = town;
+		edoraTown = town;
 	}
 
 	@Override
 	public Guilde getGuilde() {
-		return edora$guilde;
+		return edoraGuilde;
 	}
 
 	@Override
 	public void changeGuilde(Guilde guilde) {
-		edora$guilde = guilde;
+		edoraGuilde = guilde;
 	}
 
 	@Override
 	public BankAccount getBankAccount() {
-		return edora$bankAccount;
+		return edoraBankAccount;
 	}
 }

@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import eu.octanne.edora.packet.MenuType;
-import eu.octanne.edora.packet.PacketIdentifiers;
 import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
