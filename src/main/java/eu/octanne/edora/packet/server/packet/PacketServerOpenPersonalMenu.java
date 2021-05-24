@@ -30,9 +30,9 @@ public class PacketServerOpenPersonalMenu {
                 buf.writeCompoundTag(tag);
             }else {
                 buf.writeInt(MenuType.PERSONAL_MENU.getIndex());
-                tag.putString("nationName", pE.getNation().getName());
-                tag.putString("townName", pE.getTown().getName());
-                tag.putString("guildeName", pE.getGuilde().getName());
+                tag.putString("nationName", pE.getNation() != null ? pE.getNation().getName() : "none");
+                tag.putString("townName", pE.getTown() != null ? pE.getTown().getName() : "none");
+                tag.putString("guildeName", pE.getGuilde() != null ? pE.getGuilde().getName() : "none");
                 tag.putInt("oannes", pE.getBankAccount().getOannes());
                 tag.putInt("nylus", pE.getBankAccount().getNylus());
                 buf.writeCompoundTag(tag);
