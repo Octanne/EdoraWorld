@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -16,18 +17,18 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 @Pseudo
 @Mixin(InventoryScreen.class)
 public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
+
+    private static final Identifier EDORA_BUTTON_TEXTURE = new Identifier(EdoraMain.MOD_ID,"textures/gui/container/inv_main_menu.png");
 
     @Shadow
     private static final Identifier RECIPE_BUTTON_TEXTURE = new Identifier("textures/gui/recipe_button.png");
@@ -55,13 +56,18 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     private void init(CallbackInfo info) {
         // Move RECIPE
         moveRecipeBook();
-        //this.buttons.get(0).x = this.x + 76;
-        //this.buttons.get(0).y = this.y + 26;
         // ADD Menu Button
-        this.addButton(new ButtonWidget(this.x + 103, this.height / 2 - 24, 60, 20,
-        Text.Serializer.fromJson("{\"text\":\"Menu\"}"), buttonWidget -> {
+        TexturedButtonWidget menuButton = new TexturedButtonWidget(this.x + 100, 105, 20, 18, 223, 0, 18, EDORA_BUTTON_TEXTURE, 256, 256,
+        buttonWidget -> {
             PacketClients.pcktClientAskOpenMenu.send(MenuType.PERSONAL_MENU);
             this.mouseDown = true;
+        });
+        this.addButton(menuButton);
+        // ADD Other Menu Button
+        this.addButton(new TexturedButtonWidget(this.x + 146, 105, 20, 18, 223, 36, 18, EDORA_BUTTON_TEXTURE, 256, 256,
+        buttonWidget -> {
+            //PacketClients.pcktClientAskOpenMenu.send(MenuType.PERSONAL_MENU);
+            //this.mouseDown = true;
         }));
     }
 
@@ -69,7 +75,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         if(!this.buttons.isEmpty()){
             this.buttons.get(0).active = false;
             this.buttons.remove(0);
-            this.addButton(new TexturedButtonWidget(this.x + 76, this.y + 26, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE,
+            this.addButton(new TexturedButtonWidget(this.x + 123, 105, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE,
             buttonWidget -> {
                 this.recipeBook.reset(this.narrow);
                 this.recipeBook.toggleOpen();

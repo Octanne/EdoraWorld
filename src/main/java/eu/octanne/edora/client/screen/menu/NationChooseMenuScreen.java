@@ -54,8 +54,8 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          * la variable newButtonHeight augmente de 32px à chaques tours et permet de mettre les boutons les uns au dessous des autres.
          */
         int newButtonHeight = 0;
-        for (Nations Nation : Nations.values()) {
-            NationButtonWidget nationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, Nation);
+        for (Nations nation : Nations.values()) {
+            NationButtonWidget nationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, nation);
             this.addButton(nationButtonWidget);
             newButtonHeight += 32;
         }
@@ -110,10 +110,12 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
 
         @Override
         public void onPress() {
-            client.openScreen(null);
-            CompoundTag tagDATA = new CompoundTag();
-            tagDATA.putString("chooseNation", selected.name());
-            PacketClients.pcktClientValidateMenuData.send(MenuType.NATION_SELECTOR,tagDATA);
+            if(selected != null){
+                client.openScreen(null);
+                CompoundTag tagDATA = new CompoundTag();
+                tagDATA.putString("chooseNation", selected.name());
+                PacketClients.pcktClientValidateMenuData.send(MenuType.NATION_SELECTOR,tagDATA);
+            }
         }
 
         private void drawUnselected(MatrixStack matrices, TextureManager textureManager) {
@@ -135,24 +137,24 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
     }
 
     public class NationButtonWidget extends ButtonWidget {
-        NationChooseMenuScreen.Nations Nation;
+        NationChooseMenuScreen.Nations nation;
 
-        public NationButtonWidget(int x, int y, NationChooseMenuScreen.Nations Nation) {
+        public NationButtonWidget(int x, int y, NationChooseMenuScreen.Nations nation) {
             super(x, y, 131, 32,null,null);
-            this.Nation = Nation;
+            this.nation = nation;
         }
   
         @Override
         public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
-            Nation.drawUnselected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
-            if (selected == Nation || this.isHovered()) Nation.drawSelected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
-            if(this.isHovered()) renderTooltip(matrices, Text.of(Nation.name.getString()), mouseX, mouseY);
+            nation.drawUnselected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
+            if (selected == nation || this.isHovered()) nation.drawSelected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
+            if(this.isHovered()) renderTooltip(matrices, Text.of(nation.name.getString()), mouseX, mouseY);
         }
 
         @Override
         public void onPress() {
-            selected = Nation;
+            selected = nation;
         }
     }
 

@@ -20,8 +20,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class EdoraServer implements DedicatedServerModInitializer {
@@ -91,21 +89,19 @@ public class EdoraServer implements DedicatedServerModInitializer {
         EdoraMain.log(Level.INFO, "The plugin has been Disabled!");
     }
 
-    // TODO
     private PlayerJoinEvent onPlayerJoin(PlayerJoinEvent e) {
         MutableText message = e.getPlayer().getDisplayName().copy();
         message.append(new LiteralText(" viens de rejoindre Edora."));
         message.formatted(Formatting.GREEN);
-        if(e.getPlayer().getName().getString().equals("OctanneLas")) e.setJoinMessage(message);
+        e.setJoinMessage(message);
         return e;
     }
 
-    // TODO
     private PlayerLeaveEvent onPlayerLeave(PlayerLeaveEvent e) {
         MutableText message = e.getPlayer().getDisplayName().copy();
         message.append(new LiteralText(" viens de quitter Edora."));
         message.formatted(Formatting.RED);
-        if(e.getPlayer().getName().getString().equals("OctanneLas")) e.setLeftMessage(message);
+        e.setLeftMessage(message);
         return e;
     }
 

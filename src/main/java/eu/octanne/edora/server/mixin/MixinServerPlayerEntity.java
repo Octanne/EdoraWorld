@@ -1,5 +1,7 @@
 package eu.octanne.edora.server.mixin;
 
+import java.util.UUID;
+
 import com.mojang.authlib.GameProfile;
 
 import org.apache.logging.log4j.Level;
@@ -57,14 +59,22 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
         if(tag.contains(edoraTAG)){
             CompoundTag tagEdora = tag.getCompound(edoraTAG);
             if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
-            else edoraNation = null;
+            else {
+                edoraNation = null;
+                EdoraMain.log(Level.INFO, "Nation null");
+            }
 
             if(tagEdora.contains(townID)) edoraTown = Town.getTownFromID(tagEdora.getUuid(townID));
-            else edoraTown = null;
+            else {
+                edoraTown = null;
+                EdoraMain.log(Level.INFO, "Town null");
+            }
 
             if(tagEdora.contains(guildeID)) edoraGuilde = Guilde.getGuildeFromID(tagEdora.getUuid(guildeID));
-            else edoraGuilde = null;     
-
+            else {
+                edoraGuilde = null;     
+                EdoraMain.log(Level.INFO, "Guilde null");
+            }
             // Bank data
             if(tagEdora.contains(amountOannes)) edoraBankAccount.setOannes(tagEdora.getInt(amountOannes));
             if(tagEdora.contains(amountNylus)) edoraBankAccount.setNylus(tagEdora.getInt(amountNylus));
