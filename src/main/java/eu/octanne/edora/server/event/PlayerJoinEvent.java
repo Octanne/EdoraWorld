@@ -2,6 +2,9 @@ package eu.octanne.edora.server.event;
 
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 
 public class PlayerJoinEvent {
 
@@ -9,6 +12,8 @@ public class PlayerJoinEvent {
     private ServerPlayerEntity player;
 
     private boolean isFirstJoin;
+
+    private MutableText joinMessage = null;
 
     public PlayerJoinEvent(ClientConnection connection, ServerPlayerEntity player, boolean isFirstJoin) {
         this.connection = connection;
@@ -28,7 +33,15 @@ public class PlayerJoinEvent {
         return player;
     }
 
+    public void setJoinMessage(MutableText text) {
+        joinMessage = text;
+    }
+
+    public final MutableText getJoinMessage() {
+        return joinMessage != null ? joinMessage : new TranslatableText("multiplayer.player.joined", new Object[]{player.getDisplayName()}).formatted(Formatting.YELLOW);
+    }
+
     public interface PlayerJoin {
-        void onPlayerJoin(ClientConnection connection, ServerPlayerEntity player, boolean isFirstJoin);
+        PlayerJoinEvent onPlayerJoin(ClientConnection connection, ServerPlayerEntity player, boolean isFirstJoin);
     }
 }

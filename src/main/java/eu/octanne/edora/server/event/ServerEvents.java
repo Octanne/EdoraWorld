@@ -10,18 +10,22 @@ import net.fabricmc.fabric.api.event.EventFactory;
 public class ServerEvents {
     public static final Event<PlayerJoin> PLAYER_JOIN = EventFactory.createArrayBacked(PlayerJoin.class,
         listeners -> (connection, entity, isFirstJoin) -> {
+            PlayerJoinEvent result = new PlayerJoinEvent(connection, entity, isFirstJoin);
             for (PlayerJoin listener : listeners) {
-                listener.onPlayerJoin(connection, entity, isFirstJoin);
+                result = listener.onPlayerJoin(connection, entity, isFirstJoin);
             }
+            return result;
         });
     public static final Event<PlayerLeave> PLAYER_LEAVE = EventFactory.createArrayBacked(PlayerLeave.class,
-        listeners -> (entity) -> {
+        listeners -> entity -> {
+            PlayerLeaveEvent result = new PlayerLeaveEvent(entity);
             for (PlayerLeave listener : listeners) {
-                listener.onPlayerLeave(entity);
+                result = listener.onPlayerLeave(entity);
             }
+            return result;
         });
     public static final Event<PlayerMove> PLAYER_MOVED = EventFactory.createArrayBacked(PlayerMove.class,
-        listeners -> (player) -> {
+        listeners -> player -> {
             for (PlayerMove listener : listeners) {
                listener.onPlayerMove(player);
             }

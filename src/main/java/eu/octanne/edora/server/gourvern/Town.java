@@ -29,7 +29,7 @@ public class Town {
         loadFromFile();
     }
 
-    private Town(String name, String slogan, ServerPlayerEntity player){
+    private Town(String name, String slogan, ServerPlayerEntity mayorID){
         saveIntoFile();
     }
 

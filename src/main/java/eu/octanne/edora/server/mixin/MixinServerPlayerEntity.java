@@ -72,20 +72,22 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
         }
     }
 
+    
+
 	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
     public void writeCustomDataToTag(CompoundTag tag, CallbackInfo info) {
         CompoundTag tagEdora = new CompoundTag();
         if(edoraNation != null) {
             tagEdora.putUuid(nationID, edoraNation.getID());
-            EdoraMain.log(Level.INFO, "ADD nationID : "+edoraNation.getID());
+            EdoraMain.log(Level.DEBUG, "ADD nationID : "+edoraNation.getID());
         }
         if(edoraTown != null) {
             tagEdora.putUuid(townID, edoraTown.getID());
-            EdoraMain.log(Level.INFO, "ADD townID : "+edoraTown.getID());
+            EdoraMain.log(Level.DEBUG, "ADD townID : "+edoraTown.getID());
         }
         if(edoraGuilde != null) {
             tagEdora.putUuid(guildeID, edoraGuilde.getID());
-            EdoraMain.log(Level.INFO, "ADD guildeID : "+edoraGuilde.getID());
+            EdoraMain.log(Level.DEBUG, "ADD guildeID : "+edoraGuilde.getID());
         }
         tagEdora.putInt(amountNylus, edoraBankAccount.getNylus());
         tagEdora.putInt(amountOannes, edoraBankAccount.getOannes());

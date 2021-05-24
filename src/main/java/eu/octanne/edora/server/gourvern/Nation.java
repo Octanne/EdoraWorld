@@ -2,10 +2,10 @@ package eu.octanne.edora.server.gourvern;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import eu.octanne.edora.server.economy.BankAccount;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 public class Nation {
 
@@ -37,7 +37,7 @@ public class Nation {
         return null;
     }
 
-    Nation(String name, String slogan, ServerPlayerEntity player){
+    public Nation(String name, String slogan, UUID playerID){
         jsonFile = new File("/config/Nation/"+name+".json");
         if(jsonFile.exists()){
             loadFromFile();
@@ -46,7 +46,7 @@ public class Nation {
             this.name = name;
             this.slogan = slogan;
             bank = new NationBank();
-            gouvernment = new Gouvernment(player != null ? player.getUuid() : null);
+            gouvernment = new Gouvernment(playerID);
         }
         nationsList.add(this);
     }
@@ -71,11 +71,11 @@ public class Nation {
         return gouvernment;
     }
 
-    public ArrayList<UUID> getCitizensID(){
+    public List<UUID> getCitizensID(){
         return citizensID;
     }
 
-    public ArrayList<UUID> getTownsID(){
+    public List<UUID> getTownsID(){
         return townsID;
     }
 
@@ -131,7 +131,7 @@ public class Nation {
         }
 
     }
-    static public class NationBank {
+    public static class NationBank {
 
         private BankAccount mainAccount, warAccount, urbaAccount, commercialAccount;
 
