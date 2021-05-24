@@ -8,9 +8,10 @@ import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
 import eu.octanne.edora.packet.server.handler.HandlerClientAskOpenMenu;
+import eu.octanne.edora.packet.server.handler.HandlerClientValidateMenuData;
+import eu.octanne.edora.server.event.PlayerJoinEvent;
+import eu.octanne.edora.server.event.PlayerLeaveEvent;
 import eu.octanne.edora.server.event.ServerEvents;
-import eu.octanne.edora.server.event.ServerEvents.*;
-
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -39,25 +40,18 @@ public class EdoraServer implements DedicatedServerModInitializer {
     private void registerPacketHandlers() {
         ServerPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktClientAskOpenMenu, 
         new HandlerClientAskOpenMenu());
+        ServerPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktClientValideMenuData, 
+        new HandlerClientValidateMenuData());
 	}
 
     private void registerEvents() {
-        ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
-            onPreEnable();
-        });
-        ServerLifecycleEvents.SERVER_STARTED.register((minecraftServer) -> {
-            onEnable();
-        });
+        ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> onPreEnable());
+        ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> onEnable());
+        ServerLifecycleEvents.SERVER_STOPPING.register(minecraftServer -> onPreDisable());
+        ServerLifecycleEvents.SERVER_STOPPED.register(minecraftServer -> onDisable());
 
-        ServerLifecycleEvents.SERVER_STOPPING.register((minecraftServer) -> {
-            onPreDisable();
-        });
-        ServerLifecycleEvents.SERVER_STOPPED.register((minecraftServer) -> {
-            onDisable();
-        });
-        ServerEvents.PLAYER_JOIN.register((server, connection, player) -> {
-            onPlayerJoin(new PlayerJoinEvent(server, connection, player));
-        });
+        ServerEvents.PLAYER_JOIN.register((connection, player, isFirstJoin) -> onPlayerJoin(new PlayerJoinEvent(connection, player,isFirstJoin)));
+        ServerEvents.PLAYER_LEAVE.register(player -> onPlayerLeave(new PlayerLeaveEvent(player)));
     }
 
     private void onPreEnable() {
@@ -85,8 +79,13 @@ public class EdoraServer implements DedicatedServerModInitializer {
     }
 
     private void onPlayerJoin(PlayerJoinEvent e) {
-        EdoraMain.log(Level.INFO, "The player " + e.getPlayer().getName().getString() + " just connect to the server!");
+       
     }
+
+    private void onPlayerLeave(PlayerLeaveEvent e) {
+        
+    }
+
 
     /**
      * Fabric Wiki : https://fabricmc.net/wiki/tutorial:commands
@@ -94,5 +93,6 @@ public class EdoraServer implements DedicatedServerModInitializer {
      */
     private void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
         //GenmapCommand.register(dispatcher);
+
     }
 }

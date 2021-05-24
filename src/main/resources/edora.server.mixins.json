@@ -8,7 +8,8 @@
   "server": [
     "MixinPlayerManager",
     "MixinPlayerMoved",
-    "MixinServerPlayerEntity"
+    "MixinServerPlayerEntity",
+    "MixinServerPlayerNetworkHandler"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,22 +1,18 @@
 package eu.octanne.edora.server.mixin;
 
-import eu.octanne.edora.EdoraMain;
-import eu.octanne.edora.server.event.ServerEvents;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.server.event.ServerEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.entity.Entity;
-
-import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Entity.class)
 public class MixinPlayerMoved {
@@ -29,7 +25,7 @@ public class MixinPlayerMoved {
             return;
         //if it's a Player
         final PlayerEntity player = (PlayerEntity) (Object) this;
-        ServerEvents.PLAYER_MOVED.invoker().playerMoved(player);
+        ServerEvents.PLAYER_MOVED.invoker().onPlayerMove(player);
 
         final ChunkPos playerPos = new ChunkPos(player.getBlockPos());
         if(!( lastPlayerPos.containsKey(player) && lastPlayerPos.get(player).equals(playerPos) )){//skip if it's a player in the same chunk
@@ -42,9 +38,7 @@ public class MixinPlayerMoved {
                 oldPos = lastPlayerPos.get(player);
                 lastPlayerPos.replace(player, playerPos);
             }
-            
-            EdoraMain.LOGGER.log(Level.INFO,player.getName().asString() + " has moved to " + playerPos);
-            ServerEvents.PLAYER_MOVED_CHUNK.invoker().playerMovedChunk(player, oldPos, playerPos);
+            ServerEvents.PLAYER_MOVED_CHUNK.invoker().onPlayerMoveChunk(player, oldPos, playerPos);
         }
     }
 }

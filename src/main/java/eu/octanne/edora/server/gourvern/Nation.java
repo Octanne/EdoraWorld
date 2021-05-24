@@ -8,12 +8,12 @@ import eu.octanne.edora.server.economy.BankAccount;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class Nation {
-    
-    static public Nation OTHALA = new Nation("Othala", "adding a slogan here", null);
-    static public Nation KALLANA = new Nation("Kallana", "adding a slogan here", null);
-    static public Nation KAWAN = new Nation("Kawan", "adding a slogan here", null);
 
-    static private ArrayList<Nation> nationsList = new ArrayList<Nation>();
+    private static ArrayList<Nation> nationsList = new ArrayList<>();
+
+    public static Nation OTHALA = new Nation("Othala", "adding a slogan here", null);
+    public static Nation KALLANA = new Nation("Kallana", "adding a slogan here", null);
+    public static Nation KAWAN = new Nation("Kawan", "adding a slogan here", null);
 
     private UUID id;
     private String name;
@@ -27,8 +27,13 @@ public class Nation {
     private ArrayList<UUID> citizensID;
     private ArrayList<UUID> townsID;
 
-    static public Nation getNationFromID(UUID id) {
+    public static Nation getNationFromID(UUID id) {
         for(Nation nat : nationsList) if(nat.getID().equals(id)) return nat;
+        return null;
+    }
+
+    public static Nation getNationFromName(String name) {
+        for(Nation nat : nationsList) if(nat.getName().equals(name)) return nat;
         return null;
     }
 
@@ -41,7 +46,7 @@ public class Nation {
             this.name = name;
             this.slogan = slogan;
             bank = new NationBank();
-            gouvernment = new Gouvernment(player.getUuid());
+            gouvernment = new Gouvernment(player != null ? player.getUuid() : null);
         }
         nationsList.add(this);
     }

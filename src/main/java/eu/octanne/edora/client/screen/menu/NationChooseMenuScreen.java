@@ -2,12 +2,15 @@ package eu.octanne.edora.client.screen.menu;
 
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.client.EdoraClient;
+import eu.octanne.edora.packet.MenuType;
+import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -52,8 +55,8 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          */
         int newButtonHeight = 0;
         for (Nations Nation : Nations.values()) {
-            NationButtonWidget NationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, Nation);
-            this.addButton(NationButtonWidget);
+            NationButtonWidget nationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, Nation);
+            this.addButton(nationButtonWidget);
             newButtonHeight += 32;
         }
     }
@@ -62,7 +65,6 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (EdoraClient.menuKeybind.matchesKey(keyCode, scanCode) || this.client.options.keyInventory.matchesKey(keyCode, scanCode)) {
             this.onClose();
-            // TODO SEND CLOSE CHOOSE Nation MENU
             return true;
         }else {
             return super.keyPressed(keyCode, scanCode, modifiers);
@@ -109,7 +111,9 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         @Override
         public void onPress() {
             client.openScreen(null);
-            // TODO SEND Nation CHOOSE TO SERVER
+            CompoundTag tagDATA = new CompoundTag();
+            tagDATA.putString("chooseNation", selected.name());
+            PacketClients.pcktClientValidateMenuData.send(MenuType.NATION_SELECTOR,tagDATA);
         }
 
         private void drawUnselected(MatrixStack matrices, TextureManager textureManager) {

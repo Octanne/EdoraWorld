@@ -45,18 +45,17 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;"+
     "Lnet/minecraft/server/network/ServerPlayerInteractionManager;)V")
     private void constructClass(MinecraftServer server, ServerWorld world, GameProfile profile, ServerPlayerInteractionManager interactionManager, CallbackInfo info){
-        EdoraMain.log(Level.INFO, "Intialize default EdoraPlayer data...");
         edoraNation = null;
         edoraTown = null;
         edoraGuilde = null;
         edoraBankAccount = new BankAccount(0, 0);
+        EdoraMain.log(Level.INFO, "Intialize default EdoraPlayer data.");
     }
 
     @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
             CompoundTag tagEdora = tag.getCompound(edoraTAG);
-            EdoraMain.log(Level.INFO, "Loading EdoraPlayer data from .dat file...");
             if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
             else edoraNation = null;
 
@@ -68,7 +67,8 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
 
             // Bank data
             if(tagEdora.contains(amountOannes)) edoraBankAccount.setOannes(tagEdora.getInt(amountOannes));
-            if(tagEdora.contains(amountNylus)) edoraBankAccount.setNylus(tagEdora.getInt(amountNylus));     
+            if(tagEdora.contains(amountNylus)) edoraBankAccount.setNylus(tagEdora.getInt(amountNylus));
+            EdoraMain.log(Level.INFO, "Loading EdoraPlayer data from .dat file.");
         }
     }
 
@@ -90,9 +90,11 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
         tagEdora.putInt(amountNylus, edoraBankAccount.getNylus());
         tagEdora.putInt(amountOannes, edoraBankAccount.getOannes());
         tag.put(edoraTAG, tagEdora);
-        EdoraMain.log(Level.INFO, "Saving EdoraPlayer data into .dat file...");
+        EdoraMain.log(Level.INFO, "Saving EdoraPlayer data into .dat file.");
         EdoraMain.log(Level.INFO, "<-- Edora Compound -->\n"+tagEdora.asString());
     }
+
+    
 
 	@Override
 	public Nation getNation() {
