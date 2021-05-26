@@ -1,10 +1,12 @@
 package eu.octanne.edora.packet.client.handler;
 
+import eu.octanne.edora.client.screen.menu.EdoraInventoryScreen;
 import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen;
 import eu.octanne.edora.packet.MenuType;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking.PlayChannelHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
@@ -21,9 +23,14 @@ public class HandlerServerPersonalMenu implements PlayChannelHandler {
                         String natName = tag.getString("factionName");
                         if(natName != null) natName = "none";
                         client.openScreen(new NationChooseMenuScreen(client.player,natName));
-                    }else {
-                        // TODO ADD OPEN PERSONAL MENU
-                        client.player.sendChatMessage("Ouverture du menu personnel.");
+                    }else if(idType == MenuType.PERSONAL_MENU.getIndex()) {
+                        if(client.currentScreen instanceof EdoraInventoryScreen) {
+                            EdoraInventoryScreen edoraScreen = (EdoraInventoryScreen) client.currentScreen;
+                            edoraScreen.openEdoraMenu(tag);
+                        }else {
+                            client.openScreen(new InventoryScreen(client.player));
+                            ((EdoraInventoryScreen)client.currentScreen).openEdoraMenu(tag);
+                        }
                     }
                 });
 		
