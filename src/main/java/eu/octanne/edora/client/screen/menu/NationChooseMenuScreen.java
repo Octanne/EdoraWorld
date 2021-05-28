@@ -18,12 +18,12 @@ import net.minecraft.util.Identifier;
 public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends HandledScreen<T>*/ Screen {
 
     private static final Identifier TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/nation_choix.png");
-    NationChooseMenuScreen.Nations selected = null;
+    NationEnum selected = null;
 
     public NationChooseMenuScreen(PlayerEntity player, String natName) {
         super(Text.Serializer.fromJson("{\"text\":\""+new TranslatableText("screen."+EdoraMain.MOD_ID+".playermenu.title")+"\"}"));
         if(!natName.equals("none")) {
-            for(Nations nation : Nations.values()) {
+            for(NationEnum nation : NationEnum.values()) {
                 if(nation.name.asString().equals(natName)){
                     selected = nation;
                     break;
@@ -50,11 +50,11 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         this.addButton(doneButton);
 
         /**
-         * Boucle pour créer tous les boutons représentant les Nations définis dans this.Nations
+         * Boucle pour créer tous les boutons représentant les Nation définis dans this.Nation
          * la variable newButtonHeight augmente de 32px à chaques tours et permet de mettre les boutons les uns au dessous des autres.
          */
         int newButtonHeight = 0;
-        for (Nations nation : Nations.values()) {
+        for (NationEnum nation : NationEnum.values()) {
             NationButtonWidget nationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, nation);
             this.addButton(nationButtonWidget);
             newButtonHeight += 32;
@@ -101,10 +101,11 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         @Override
         public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
-            this.drawUnselected(matrices, minecraftClient.getTextureManager());
             if (this.isHovered()) {
                 this.drawSelected(matrices, minecraftClient.getTextureManager());
                 renderTooltip(matrices, Text.of("Valider"), mouseX, mouseY);
+            }else{
+                this.drawUnselected(matrices, minecraftClient.getTextureManager());
             }
         }
 
@@ -136,10 +137,10 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
 
     }
 
-    public class NationButtonWidget extends ButtonWidget {
-        NationChooseMenuScreen.Nations nation;
+    class NationButtonWidget extends ButtonWidget {
+        NationEnum nation;
 
-        public NationButtonWidget(int x, int y, NationChooseMenuScreen.Nations nation) {
+        public NationButtonWidget(int x, int y, NationEnum nation) {
             super(x, y, 131, 32,null,null);
             this.nation = nation;
         }
@@ -147,8 +148,8 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         @Override
         public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
-            nation.drawUnselected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
             if (selected == nation || this.isHovered()) nation.drawSelected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
+            else nation.drawUnselected(matrices, minecraftClient.getTextureManager(), this.x, this.y);
             if(this.isHovered()) renderTooltip(matrices, Text.of(nation.name.getString()), mouseX, mouseY);
         }
 
@@ -158,7 +159,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
     }
 
-    public enum Nations {
+    enum NationEnum {
         Kawan(new TranslatableText("screen.edora.selectNation.nation.kawan"), 2, 199, 2, 167),
         Kallana(new TranslatableText("screen.edora.selectNation.nation.kallana"), 2, 263, 2, 231),
         Othala(new TranslatableText("screen.edora.selectNation.nation.othala"), 2, 327, 2, 295);
@@ -179,7 +180,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          * @param selectedU Coordonnée la plus à gauche du sprite
          * @param selectedV Coordonnée la plus en haut du sprite
          */
-        Nations(Text name, float unselectedU, float unselectedV, float selectedU, float selectedV){
+        NationEnum(Text name, float unselectedU, float unselectedV, float selectedU, float selectedV){
             this.name = name;
 
             this.unselectedU = unselectedU;
@@ -206,5 +207,4 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          }
 
     }
-
 }
