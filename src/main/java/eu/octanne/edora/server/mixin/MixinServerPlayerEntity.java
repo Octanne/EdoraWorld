@@ -29,7 +29,6 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     private static final String nationID = "nationID";
     private static final String guildeID = "guildeID";
     private static final String townID = "townID";
-    private static final String amountNylus = "amountNylus";
     private static final String amountOannes = "amountOannes";
     private static final String edoraTAG = "edora";
 
@@ -48,7 +47,7 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
         edoraNation = null;
         edoraTown = null;
         edoraGuilde = null;
-        edoraBankAccount = new BankAccount(0, 0);
+        edoraBankAccount = new BankAccount(0);
         EdoraMain.log(Level.INFO, "Intialize default EdoraPlayer data.");
     }
 
@@ -75,7 +74,6 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
             }
             // Bank data
             if(tagEdora.contains(amountOannes)) edoraBankAccount.setOannes(tagEdora.getInt(amountOannes));
-            if(tagEdora.contains(amountNylus)) edoraBankAccount.setNylus(tagEdora.getInt(amountNylus));
             EdoraMain.log(Level.INFO, "Loading EdoraPlayer data from .dat file.");
         }
     }
@@ -97,7 +95,6 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
             tagEdora.putUuid(guildeID, edoraGuilde.getID());
             EdoraMain.log(Level.DEBUG, "ADD guildeID : "+edoraGuilde.getID());
         }
-        tagEdora.putInt(amountNylus, edoraBankAccount.getNylus());
         tagEdora.putInt(amountOannes, edoraBankAccount.getOannes());
         tag.put(edoraTAG, tagEdora);
         EdoraMain.log(Level.INFO, "Saving EdoraPlayer data into .dat file.");

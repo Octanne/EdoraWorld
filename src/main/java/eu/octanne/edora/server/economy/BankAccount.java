@@ -4,21 +4,15 @@ import java.util.Map;
 
 public class BankAccount {
     
-    private int nylus;
     private int oannes;
 
-    public BankAccount(int oannes, int nylus){
-        this.nylus = nylus;
+    public BankAccount(int oannes){
         this.oannes = oannes;
     }
 
     public static BankAccount fromMap(Map<String, Integer> map)  {
-        return new BankAccount(map.get("nylus"), map.get("oannes"));
+        return new BankAccount(map.get("oannes"));
     }
-
-	public int getNylus() {
-		return nylus;
-	}
 
 	public int getOannes() {
 		return oannes;
@@ -26,10 +20,6 @@ public class BankAccount {
 
     public void setOannes(int i){
         oannes = i;
-    }
-
-    public void setNylus(int i) {
-        nylus = i;
     }
 
     // TODO : Economy COMMANDS

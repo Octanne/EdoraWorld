@@ -17,7 +17,7 @@ public class Town {
     private String slogan;
     
     private UUID mayorID;
-    private UUID adjointIDS[] = new UUID[5];
+    private UUID[] adjointIDS = new UUID[5];
     private BankAccount bank;
 
     private File jsonFile;
@@ -83,10 +83,9 @@ public class Town {
         return true;
     }
 
-    public final static ArrayList<Town> getLoadTowns() {
+    public static final List<Town> getLoadTowns() {
         return towns;
     }
-
 
     // TODO NEED TO MAKE TAKE THE TOWN ON HARDDISK IF NOT FOUND AND AFTER IS NOT ON IT RETURN NULL
     public static Town getTownFromID(UUID uuid) {

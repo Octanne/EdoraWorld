@@ -81,6 +81,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         this.addButton(new TexturedButtonWidget(this.x + 146, this.y + 61, 20, 18, 223, 36, 18, EDORA_MAIN_MENU, 256, 256,
         buttonWidget -> {
             this.mouseDown = true;
+            this.mouseDown = true;
         }));
 
         // EDORA MENU
@@ -104,9 +105,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             this.buttons.get(0).active = false;
             this.buttons.remove(0);
             this.addButton(new TexturedButtonWidget(this.x + 123, this.y + 61, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE,
-            buttonWidget -> {
-                toggleRecipeButton();
-            }));
+            buttonWidget -> toggleRecipeButton() ));
         }
     }
 
@@ -174,7 +173,6 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             natButton = new NationButton(x - 39 , y + 19, NationButton.NationEnum.valueOf(data.getString("nationName")));
             this.addButton(natButton);
         }
-        // TODO read DATA to SHOW
     }
 
     @Override
@@ -196,7 +194,6 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     @Override
     public void updateData(CompoundTag dataTAG) {
         edoraDATA = dataTAG;
-        // TODO read DATA to UPDATE
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Guilde {
     private String slogan;
     
     private UUID chiefID;
-    private UUID adjointIDS[] = new UUID[5];
+    private UUID[] adjointIDS = new UUID[5];
     private BankAccount bank;
 
     private File jsonFile;
@@ -83,7 +83,7 @@ public class Guilde {
         return true;
     }
 
-    public final static ArrayList<Guilde> getLoadGuildes() {
+    public static final List<Guilde> getLoadGuildes() {
         return guildes;
     }
 

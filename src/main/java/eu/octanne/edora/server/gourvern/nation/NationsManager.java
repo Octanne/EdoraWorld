@@ -30,7 +30,7 @@ public class NationsManager {
 
     private static ArrayList<Nation> nationsList = new ArrayList<>();
 
-    public static ArrayList<Nation> getNationsList() {
+    public static List<Nation> getNationsList() {
         return nationsList;
     }
 
@@ -58,14 +58,12 @@ public class NationsManager {
 
     private static Nation getNationFromJson(String json) {
         Gson gson = new Gson();
-        Nation nation = gson.fromJson(json, Nation.class);
-        return nation;
+        return gson.fromJson(json, Nation.class);
     }
 
     private static String getJsonFromNation(Nation nation) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(nation);
-        return json;
+        return gson.toJson(nation);
     }
 
     private static Boolean saveNationToJsonFile(Nation nation) {
@@ -74,7 +72,7 @@ public class NationsManager {
         File configFile = getConfigFile(uuid);
 
         try {
-            configFile.createNewFile();
+            if(configFile.createNewFile()) EdoraMain.log(Level.INFO, "Erreur le fichier n'a pu être crée.");
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(configFile), StandardCharsets.UTF_8));
             writer.write(json);
             writer.close();
@@ -83,7 +81,7 @@ public class NationsManager {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }  
+        }
     }
 
     private static Nation getNationFromJsonFile(UUID uuid) {
@@ -123,10 +121,10 @@ public class NationsManager {
         Gouvernment globalGouvernment = new Gouvernment(null, null, null, null);
 
         // Bank
-        BankAccount globalBankMainAccount = new BankAccount(0, 0);
-        BankAccount globalBankWarAccount = new BankAccount(0, 0);
-        BankAccount globalBankUrbaAccount = new BankAccount(0, 0);
-        BankAccount globalBankCommercialAccount = new BankAccount(0, 0);
+        BankAccount globalBankMainAccount = new BankAccount(0);
+        BankAccount globalBankWarAccount = new BankAccount(0);
+        BankAccount globalBankUrbaAccount = new BankAccount(0);
+        BankAccount globalBankCommercialAccount = new BankAccount(0);
         NationBank globalBank = new NationBank(
             globalBankMainAccount,
             globalBankWarAccount,

@@ -34,7 +34,6 @@ public class PacketServerOpenPersonalMenu {
                 tag.putString("townName", pE.getTown() != null ? pE.getTown().getName() : "none");
                 tag.putString("guildeName", pE.getGuilde() != null ? pE.getGuilde().getName() : "none");
                 tag.putInt("oannes", pE.getBankAccount().getOannes());
-                tag.putInt("nylus", pE.getBankAccount().getNylus());
                 buf.writeCompoundTag(tag);
             }
         }else{
