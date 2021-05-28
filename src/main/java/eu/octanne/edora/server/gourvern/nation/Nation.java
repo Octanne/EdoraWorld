@@ -100,7 +100,7 @@ public class Nation {
         }
 
     }
-    public static class NationBank {
+    protected static class NationBank {
 
         private BankAccount mainAccount, warAccount, urbaAccount, commercialAccount;
 
