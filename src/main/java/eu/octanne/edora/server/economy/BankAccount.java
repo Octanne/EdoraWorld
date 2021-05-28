@@ -1,5 +1,9 @@
 package eu.octanne.edora.server.economy;
 
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
 public class BankAccount {
     
     private int nylus;
@@ -8,6 +12,10 @@ public class BankAccount {
     public BankAccount(int oannes, int nylus){
         this.nylus = nylus;
         this.oannes = oannes;
+    }
+
+    public static BankAccount fromMap(Map<String, Integer> map)  {
+        return new BankAccount(map.get("nylus"), map.get("oannes"));
     }
 
 	public int getNylus() {

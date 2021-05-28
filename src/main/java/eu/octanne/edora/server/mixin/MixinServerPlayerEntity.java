@@ -13,8 +13,9 @@ import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
-import eu.octanne.edora.server.gourvern.Nation;
 import eu.octanne.edora.server.gourvern.Town;
+import eu.octanne.edora.server.gourvern.nation.NationsManager;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -54,7 +55,7 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
             CompoundTag tagEdora = tag.getCompound(edoraTAG);
-            if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
+            if(tagEdora.contains(nationID)) edoraNation = NationsManager.getNationFromID(tagEdora.getUuid(nationID));
             else {
                 edoraNation = null;
                 EdoraMain.log(Level.INFO, "Nation null");

@@ -1,5 +1,8 @@
 package eu.octanne.edora.server;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import org.apache.logging.log4j.Level;
@@ -12,6 +15,7 @@ import eu.octanne.edora.packet.server.handler.HandlerClientValidateMenuData;
 import eu.octanne.edora.server.event.PlayerJoinEvent;
 import eu.octanne.edora.server.event.PlayerLeaveEvent;
 import eu.octanne.edora.server.event.ServerEvents;
+import eu.octanne.edora.server.gourvern.nation.NationsManager;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -26,8 +30,14 @@ public class EdoraServer implements DedicatedServerModInitializer {
 
     private static MinecraftServer minecraftServer;
 
+    private static Path configPath = Paths.get("config", EdoraMain.MOD_ID);
+
     public static final MinecraftServer getMinecraftServer() {
         return minecraftServer;
+    }
+
+    public static Path getConfigPath() {
+        return configPath;
     }
 
     public EdoraServer() {
@@ -73,6 +83,8 @@ public class EdoraServer implements DedicatedServerModInitializer {
 
     private void onEnable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Loading of the plugin...");
+
+        NationsManager.loadAllNations();
 
         EdoraMain.log(Level.INFO, "The plugin has been loaded!");
     }

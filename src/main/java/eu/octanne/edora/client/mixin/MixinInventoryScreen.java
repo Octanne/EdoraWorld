@@ -203,5 +203,4 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     public boolean edoraMenuIsOpen() {
         return edoraMenuOpenState;
     }
-
 }

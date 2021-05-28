@@ -2,8 +2,8 @@ package eu.octanne.edora.server;
 
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
-import eu.octanne.edora.server.gourvern.Nation;
 import eu.octanne.edora.server.gourvern.Town;
+import eu.octanne.edora.server.gourvern.nation.Nation;
 public interface EdoraServerPlayerEntity {
 
     Nation getNation();
