@@ -14,12 +14,17 @@ import eu.octanne.edora.client.screen.menu.EdoraInventoryScreen;
 import eu.octanne.edora.client.screen.menu.button.NationButton;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.FontManager;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.realms.util.TextRenderingUtils;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -78,7 +83,12 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             else toggleEdoraMenu();
             this.mouseDown = true;
         });
-        this.addButton(menuButton);        
+        this.addButton(menuButton);
+        // Nation Button
+        if(edoraMenuIsOpen()) {
+            natButton = new NationButton(x - 39 , y + 19, NationButton.NationEnum.valueOf(edoraDATA.getString("nationName")));
+            this.addButton(natButton);
+        }
     }
 
     private void moveRecipeBook() {
@@ -105,7 +115,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     @Override
     public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.client.getTextureManager().bindTexture(edoraMenuOpenState ? EDORA_MAIN_MENU : BACKGROUND_TEXTURE);
+        this.client.getTextureManager().bindTexture(edoraMenuIsOpen() ? EDORA_MAIN_MENU : BACKGROUND_TEXTURE);
         int i = this.x;
         int j = this.y;
 
@@ -113,6 +123,14 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         // DRAW SLOT OF SECOND ARMOR
         this.client.getTextureManager().bindTexture(EDORA_MAIN_MENU);
         this.drawTexture(matrices, x + 76, y + 7, 123, 7, 18, 54);
+
+        // DRAW EDORA MENU DATA
+        if(edoraMenuIsOpen()) {
+            String townN = edoraDATA.getString("townName");
+            drawCenteredString(matrices, textRenderer, townN.equals("none") ? "Aucune" : townN, x - 19, y + 71, 125845);
+            String guildeN = edoraDATA.getString("guildeName");
+            drawCenteredString(matrices, textRenderer, guildeN.equals("none") ? "Aucune" : townN, x - 19, y + 93, 16753920);
+        }
 
         InventoryScreen.drawEntity(i + 51, j + 75, 30, (float)(i + 51) - this.mouseX, (float)(j + 75 - 50) - this.mouseY, this.client.player);
     }

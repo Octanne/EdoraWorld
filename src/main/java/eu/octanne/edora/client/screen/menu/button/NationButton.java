@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
@@ -67,12 +68,12 @@ public class NationButton extends ButtonWidget
         textureManager.bindTexture(EdoraInventoryScreen.EDORA_MAIN_MENU);
         matrices.push();
         matrices.translate((double)x, (double)y, 0.0D);
-        drawTexture(matrices, 0, 0, nation.u, nation.v, 41, 39);
+        drawTexture(matrices, 0, 0, nation.u, nation.v, width, height);
         // DRAW LINE AROUND BUTTON
-        drawVerticalLine(matrices, x, y, y+height, 16776960);
-        drawVerticalLine(matrices, x+width, y, y+height, 16776960);
-        drawHorizontalLine(matrices, x, x+width, y+height, 16776960);
-        drawHorizontalLine(matrices, x, x+width, y, 16776960);
+        drawVerticalLine(matrices, 0, 0, height, 16711680);
+        drawVerticalLine(matrices, width, 0, height, 16711680);
+        drawHorizontalLine(matrices, 0, width, 0, 16711680);
+        drawHorizontalLine(matrices, 0, width, height, 16711680);
         matrices.pop();
      }
 }
