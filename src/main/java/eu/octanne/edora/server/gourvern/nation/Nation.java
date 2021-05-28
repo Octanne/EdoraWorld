@@ -1,4 +1,4 @@
-package eu.octanne.edora.server.gourvern;
+package eu.octanne.edora.server.gourvern.nation;
 
 import java.util.ArrayList;
 import java.util.List;

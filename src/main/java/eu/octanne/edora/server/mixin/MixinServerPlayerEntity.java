@@ -14,8 +14,9 @@ import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
-import eu.octanne.edora.server.gourvern.Nation;
 import eu.octanne.edora.server.gourvern.Town;
+import eu.octanne.edora.server.gourvern.nation.Nation;
+import eu.octanne.edora.server.gourvern.nation.NationsManager;
 
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -58,11 +59,11 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
             CompoundTag tagEdora = tag.getCompound(edoraTAG);
-            // if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
-            // else {
+            if(tagEdora.contains(nationID)) edoraNation = NationsManager.getNationFromID(tagEdora.getUuid(nationID));
+            else {
                 edoraNation = null;
                 EdoraMain.log(Level.INFO, "Nation null");
-            // }
+            }
 
             if(tagEdora.contains(townID)) edoraTown = Town.getTownFromID(tagEdora.getUuid(townID));
             else {
