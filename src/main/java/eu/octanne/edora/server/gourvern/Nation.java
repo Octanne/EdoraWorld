@@ -3,6 +3,7 @@ package eu.octanne.edora.server.gourvern;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import eu.octanne.edora.server.economy.BankAccount;
@@ -153,6 +154,12 @@ public class Nation {
         }
         public BankAccount geCommercial(){
             return commercialAccount;
+        }
+
+        public static NationBank fromMap(Map<String, Map<String, Integer>> map)  {
+            NationBank nationBank = new NationBank();
+
+            return nationBank;
         }
     }
 }

@@ -1,5 +1,8 @@
 package eu.octanne.edora.server.economy;
 
+import java.util.List;
+import java.util.Map;
+
 public class BankAccount {
     
     private int nylus;
@@ -24,6 +27,10 @@ public class BankAccount {
 
     public void setNylus(int i) {
         nylus = i;
+    }
+
+    public static BankAccount fromMap(Map<String, Integer> map)  {
+        return new BankAccount(map.get("nylus"), map.get("oannes"));
     }
 
     // TODO : Economy COMMANDS
