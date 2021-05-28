@@ -1,11 +1,15 @@
-package eu.octanne.edora.client.mixin;
+package eu.octanne.edora.mixin;
 
+import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.EdoraMain;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
@@ -27,8 +31,9 @@ public class MixinPlayerScreenHandler extends AbstractRecipeScreenHandler<Crafti
     @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/entity/player/PlayerInventory;ZLnet/minecraft/entity/player/PlayerEntity;)V")
     private void constructClass(PlayerInventory inventory, boolean onServer, PlayerEntity owner, CallbackInfo info){
         for(int n = 0; n < 3; ++n) {
-            this.addSlot(new Slot(inventory /* change for create new one ,*/, 40, 77, 8 + n * 18));
+            this.addSlot(new Slot(inventory, 41 + n, 77, 8 + n * 18));
         }
+        EdoraMain.log(Level.INFO, "Add 3 new slots!");
     }
 
     @Shadow
@@ -66,14 +71,18 @@ public class MixinPlayerScreenHandler extends AbstractRecipeScreenHandler<Crafti
         return 0;
     }
 
-    @Shadow
-    public RecipeBookCategory getCategory() {
-        return null;
-    }
 
     @Shadow
     public boolean canUse(PlayerEntity player) {
-        return false;
+        return true;
+    }
+
+    @Shadow
+    @Environment(EnvType.CLIENT)
+    @Override
+    public RecipeBookCategory getCategory() {
+        // Auto-generated method stub
+        return null;
     }
 
     

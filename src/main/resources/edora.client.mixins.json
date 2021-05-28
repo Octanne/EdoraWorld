@@ -7,8 +7,7 @@
   "client": [
     "MixinInGameHud",
     "MixinInventoryScreen",
-    "MixinKeyboardInput",
-    "MixinPlayerScreenHandler"
+    "MixinKeyboardInput"
   ],
   "server": [],
   "injectors": {

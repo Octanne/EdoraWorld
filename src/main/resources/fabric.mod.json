@@ -29,7 +29,8 @@
   },
   "mixins": [
     "edora.client.mixins.json",
-    "edora.server.mixins.json"
+    "edora.server.mixins.json",
+    "edora.common.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.7.4",
