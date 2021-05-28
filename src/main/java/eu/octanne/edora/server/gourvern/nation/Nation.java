@@ -18,28 +18,14 @@ public class Nation {
     private ArrayList<UUID> citizensID;
     private ArrayList<UUID> townsID;
 
-    public Nation() {
-
-    }
-
-    public static Nation nationTest() {
-        Nation nation = new Nation();
-        nation.id = UUID.randomUUID();
-        nation.name = "SimoniNation";
-        nation.slogan = "La nation de la mère patrie";
-
-        nation.gouvernment = new Gouvernment(UUID.randomUUID());
-        nation.gouvernment.warLeader = UUID.randomUUID();
-        nation.gouvernment.urbaLeader = UUID.randomUUID();
-        nation.gouvernment.commercialLeader = UUID.randomUUID();
-
-        nation.bank = new NationBank();
-        nation.bank.mainAccount = new BankAccount(1233, 32224);
-        nation.bank.warAccount = new BankAccount(345, 13284834);
-        nation.bank.urbaAccount = new BankAccount(883, 13249);
-        nation.bank.commercialAccount = new BankAccount(474, 39034);
-
-        return nation;
+    public Nation(UUID id, String name, String slogan, Gouvernment gouvernment, NationBank bank, ArrayList<UUID> citizensID, ArrayList<UUID> townsID) {
+        this.id = id;
+        this.name = name;
+        this.slogan = slogan;
+        this.gouvernment = gouvernment;
+        this.bank = bank;
+        this.citizensID = citizensID;
+        this.townsID = townsID;
     }
 
     public UUID getID(){
@@ -74,9 +60,11 @@ public class Nation {
 
         private UUID leader, warLeader, urbaLeader, commercialLeader;
 
-        Gouvernment(UUID leader){
-            // Create
+        Gouvernment(UUID leader, UUID warLeader, UUID urbaLeader, UUID commercialLeader){
             this.leader = leader;
+            this.warLeader = warLeader;
+            this.urbaLeader = urbaLeader;
+            this.commercialLeader = commercialLeader;
         }
 
         public void setLeaderID(UUID playerID){
@@ -116,7 +104,11 @@ public class Nation {
 
         private BankAccount mainAccount, warAccount, urbaAccount, commercialAccount;
 
-        NationBank(){
+        NationBank(BankAccount mainAccount, BankAccount warAccount, BankAccount urbaAccount, BankAccount commercialAccount){
+            this.mainAccount = mainAccount;
+            this.warAccount = warAccount;
+            this.urbaAccount = urbaAccount;
+            this.commercialAccount = commercialAccount;
         }
 
         public BankAccount getMain(){
