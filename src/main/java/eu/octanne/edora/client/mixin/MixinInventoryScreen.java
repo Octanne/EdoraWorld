@@ -10,25 +10,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import eu.octanne.edora.client.EdoraClient;
 import eu.octanne.edora.client.screen.menu.EdoraInventoryScreen;
 import eu.octanne.edora.client.screen.menu.button.NationButton;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.FontManager;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.client.realms.util.TextRenderingUtils;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
@@ -63,6 +61,16 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         super(player.playerScreenHandler, player.inventory, new TranslatableText("container.crafting"));
         this.passEvents = true;
         this.titleX = 97;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if(EdoraClient.menuKeybind.matchesKey(keyCode, scanCode)) {
+            if(!edoraMenuOpenState) PacketClients.pcktClientAskOpenMenu.send(MenuType.PERSONAL_MENU);
+            else toggleEdoraMenu();
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Inject(at = @At("RETURN"), method = "init()V")
@@ -127,9 +135,16 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         // DRAW EDORA MENU DATA
         if(edoraMenuIsOpen()) {
             String townN = edoraDATA.getString("townName");
-            drawCenteredString(matrices, textRenderer, townN.equals("none") ? "Aucune" : townN, x - 19, y + 71, 125845);
+            Text noneT = new TranslatableText("screen.edora.any");
+            Text townTitle = new TranslatableText("screen.edora.town");
+            drawCenteredText(matrices, textRenderer, townN.equals("none") ? noneT : new LiteralText(townN), x - 19, y + 71, 125845);
+            drawCenteredText(matrices, textRenderer, townTitle, x - 19, y + 61, 4416899);
             String guildeN = edoraDATA.getString("guildeName");
-            drawCenteredString(matrices, textRenderer, guildeN.equals("none") ? "Aucune" : townN, x - 19, y + 93, 16753920);
+            Text guildeTitle = new TranslatableText("screen.edora.guilde");
+            drawCenteredText(matrices, textRenderer, guildeN.equals("none") ? noneT : new LiteralText(townN), x - 19, y + 93, 16753920);
+            drawCenteredText(matrices, textRenderer, guildeTitle, x - 19, y + 83, 4416899);
+            Text nationTitle = new TranslatableText("screen.edora.nation");
+            drawCenteredText(matrices, textRenderer, nationTitle, x - 19, y + 8, 4416899);
         }
 
         InventoryScreen.drawEntity(i + 51, j + 75, 30, (float)(i + 51) - this.mouseX, (float)(j + 75 - 50) - this.mouseY, this.client.player);
