@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import org.apache.logging.log4j.Level;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen.Nations;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
 import eu.octanne.edora.packet.server.handler.HandlerClientAskOpenMenu;
@@ -12,6 +13,7 @@ import eu.octanne.edora.packet.server.handler.HandlerClientValidateMenuData;
 import eu.octanne.edora.server.event.PlayerJoinEvent;
 import eu.octanne.edora.server.event.PlayerLeaveEvent;
 import eu.octanne.edora.server.event.ServerEvents;
+import eu.octanne.edora.server.gourvern.NationsManager;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -73,6 +75,8 @@ public class EdoraServer implements DedicatedServerModInitializer {
 
     private void onEnable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Loading of the plugin...");
+
+        NationsManager.test();
 
         EdoraMain.log(Level.INFO, "The plugin has been loaded!");
     }

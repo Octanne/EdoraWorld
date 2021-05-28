@@ -2,6 +2,18 @@
     "id": "26acb3df-c473-47a1-bb39-baa6719350bf",
     "name": "Othala",
     "slogan": "Le slogan de la faction. MIAOU.",
+    "citizensID": [
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf"
+    ],
+    "townsID": [
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf",
+        "26acb3df-c473-47a1-bb39-baa6719350bf"
+    ],
     "gouvernment": {
         "leader": "26acb3df-c473-47a1-bb39-baa6719350bf",
         "warLeader": "26acb3df-c473-47a1-bb39-baa6719350bf",

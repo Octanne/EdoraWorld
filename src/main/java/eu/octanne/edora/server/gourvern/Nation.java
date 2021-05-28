@@ -1,20 +1,12 @@
 package eu.octanne.edora.server.gourvern;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import eu.octanne.edora.server.economy.BankAccount;
 
 public class Nation {
-
-    private static ArrayList<Nation> nationsList = new ArrayList<>();
-
-    public static Nation OTHALA = new Nation("Othala", "adding a slogan here", null);
-    public static Nation KALLANA = new Nation("Kallana", "adding a slogan here", null);
-    public static Nation KAWAN = new Nation("Kawan", "adding a slogan here", null);
 
     private UUID id;
     private String name;
@@ -23,41 +15,31 @@ public class Nation {
     private Gouvernment gouvernment;
     private NationBank bank;
 
-    private File jsonFile;
-
     private ArrayList<UUID> citizensID;
     private ArrayList<UUID> townsID;
 
-    public static Nation getNationFromID(UUID id) {
-        for(Nation nat : nationsList) if(nat.getID().equals(id)) return nat;
-        return null;
+    public Nation() {
+
     }
 
-    public static Nation getNationFromName(String name) {
-        for(Nation nat : nationsList) if(nat.getName().equals(name)) return nat;
-        return null;
-    }
+    public static Nation nationTest() {
+        Nation nation = new Nation();
+        nation.id = UUID.randomUUID();
+        nation.name = "SimoniNation";
+        nation.slogan = "La nation de la mère patrie";
 
-    public Nation(String name, String slogan, UUID playerID){
-        jsonFile = new File("/config/Nation/"+name+".json");
-        if(jsonFile.exists()){
-            loadFromFile();
-        }else{
-            id = UUID.randomUUID();
-            this.name = name;
-            this.slogan = slogan;
-            bank = new NationBank();
-            gouvernment = new Gouvernment(playerID);
-        }
-        nationsList.add(this);
-    }
+        nation.gouvernment = new Gouvernment(UUID.randomUUID());
+        nation.gouvernment.warLeader = UUID.randomUUID();
+        nation.gouvernment.urbaLeader = UUID.randomUUID();
+        nation.gouvernment.commercialLeader = UUID.randomUUID();
 
-    private fromMap(Map map) {
-        id = UUID.randomUUID();
-        name = map.get("name");
-        slogan = map.get("slogan");
-        gouvernment Gouvernment.fromMap(map.get("gouvernment"));
-        nationBank = NationBank.fromMap(map.get("nationBank"));
+        nation.bank = new NationBank();
+        nation.bank.mainAccount = new BankAccount(1233, 32224);
+        nation.bank.warAccount = new BankAccount(345, 13284834);
+        nation.bank.urbaAccount = new BankAccount(883, 13249);
+        nation.bank.commercialAccount = new BankAccount(474, 39034);
+
+        return nation;
     }
 
     public UUID getID(){
@@ -87,32 +69,14 @@ public class Nation {
     public List<UUID> getTownsID(){
         return townsID;
     }
-
-    private boolean loadFromFile(){
-        // TODO : loadData
-        return false;
-    }
-
-    public boolean saveIntoFile(){
-        // TODO : saveData
-        return false;
-    }
     
-    protected class Gouvernment {
+    protected static class Gouvernment {
 
         private UUID leader, warLeader, urbaLeader, commercialLeader;
 
         Gouvernment(UUID leader){
             // Create
             this.leader = leader;
-        }
-
-        public static Gouvernment fromMap(Map<String, String> map) {
-            Gouvernment gouvernment = new Gouvernment(map.get("leader"));
-
-            gouvernment.warLeader = map.get("warLeader");
-            gouvernment.urbaLeader = map.get("urbaLeader");
-            gouvernment.commercialLeader = map.get("commercialLeader");
         }
 
         public void setLeaderID(UUID playerID){
@@ -153,21 +117,6 @@ public class Nation {
         private BankAccount mainAccount, warAccount, urbaAccount, commercialAccount;
 
         NationBank(){
-            mainAccount = new BankAccount(0,0);
-            warAccount = new BankAccount(0,0);
-            urbaAccount = new BankAccount(0,0);
-            commercialAccount = new BankAccount(0,0);
-        }
-
-        public static NationBank fromMap(Map<String, Map<String, Integer>> map)  {
-            NationBank nationBank = new NationBank();
-            
-            nationBank.mainAccount = BankAccount.fromMap(map.get("mainAccount"));
-            nationBank.warAccount = BankAccount.fromMap(map.get("warAccount"));
-            nationBank.urbaAccount = BankAccount.fromMap(map.get("urbaAccount"));
-            nationBank.commercialAccount = BankAccount.fromMap(map.get("commercialAccount"));
-
-            return nationBank;
         }
 
         public BankAccount getMain(){

@@ -20,17 +20,17 @@ public class HandlerClientValidateMenuData implements PlayChannelHandler {
                 int idType = buf.readInt();
                 CompoundTag tag = buf.readCompoundTag();
                 server.execute(() -> {
-                    if(idType == MenuType.NATION_SELECTOR.getIndex()) {
-                        EdoraServerPlayerEntity ePlayer = (EdoraServerPlayerEntity) player;
-                        String name = tag.getString("chooseNation");
-                        Nation nation = Nation.getNationFromName(name);
-                        if(nation != null){
-                            ePlayer.changeNation(nation);
-                            player.sendMessage(new LiteralText("Choix de la Nation validée."), true);
-                        }else{
-                            player.sendMessage(new LiteralText("Erreur lors du traitement de votre réponse."), true);
-                        }
-                    }
+                    // if(idType == MenuType.NATION_SELECTOR.getIndex()) {
+                    //     EdoraServerPlayerEntity ePlayer = (EdoraServerPlayerEntity) player;
+                    //     String name = tag.getString("chooseNation");
+                    //     Nation nation = Nation.getNationFromName(name);
+                    //     if(nation != null){
+                    //         ePlayer.changeNation(nation);
+                    //         player.sendMessage(new LiteralText("Choix de la Nation validée."), true);
+                    //     }else{
+                    //         player.sendMessage(new LiteralText("Erreur lors du traitement de votre réponse."), true);
+                    //     }
+                    // }
                     // TODO ADD FOR OTHER MENU
                 });
 	}

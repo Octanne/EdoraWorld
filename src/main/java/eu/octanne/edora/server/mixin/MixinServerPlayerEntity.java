@@ -58,11 +58,11 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
             CompoundTag tagEdora = tag.getCompound(edoraTAG);
-            if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
-            else {
+            // if(tagEdora.contains(nationID)) edoraNation = Nation.getNationFromID(tagEdora.getUuid(nationID));
+            // else {
                 edoraNation = null;
                 EdoraMain.log(Level.INFO, "Nation null");
-            }
+            // }
 
             if(tagEdora.contains(townID)) edoraTown = Town.getTownFromID(tagEdora.getUuid(townID));
             else {
