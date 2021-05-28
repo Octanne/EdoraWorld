@@ -1,8 +1,6 @@
 package eu.octanne.edora.server.economy;
 
-import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class BankAccount {
     
