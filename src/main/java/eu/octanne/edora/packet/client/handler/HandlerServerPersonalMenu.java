@@ -20,7 +20,7 @@ public class HandlerServerPersonalMenu implements PlayChannelHandler {
                 CompoundTag tag = buf.readCompoundTag();
                 client.execute(() -> {
                     if(idType == MenuType.NATION_SELECTOR.getIndex()) {
-                        String natName = tag.getString("factionName");
+                        String natName = tag.getString("nationName");
                         if(natName != null) natName = "none";
                         client.openScreen(new NationChooseMenuScreen(client.player,natName));
                     }else if(idType == MenuType.PERSONAL_MENU.getIndex()) {

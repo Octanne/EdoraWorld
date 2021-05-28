@@ -1,12 +1,11 @@
 package eu.octanne.edora.server.mixin;
 
-import java.util.UUID;
-
 import com.mojang.authlib.GameProfile;
 
 import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -15,10 +14,7 @@ import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.economy.BankAccount;
 import eu.octanne.edora.server.gourvern.Guilde;
 import eu.octanne.edora.server.gourvern.Town;
-import eu.octanne.edora.server.gourvern.nation.Nation;
 import eu.octanne.edora.server.gourvern.nation.NationsManager;
-
-import org.spongepowered.asm.mixin.injection.At;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;

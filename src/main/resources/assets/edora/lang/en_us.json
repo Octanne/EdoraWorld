@@ -8,5 +8,9 @@
     "screen.edora.selectNation.nation.kawan" : "Kawan",
     "screen.edora.selectNation.nation.kallana" : "Kallana",
     "screen.edora.selectNation.nation.othala" : "Othala",
+    "screen.edora.any" : "Any",
+    "screen.edora.nation" : "Nation",
+    "screen.edora.guilde" : "Guild",
+    "screen.edora.town" : "Town",
     "generator.genmap" : "GenMap"
 }
