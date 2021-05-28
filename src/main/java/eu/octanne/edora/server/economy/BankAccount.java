@@ -13,6 +13,10 @@ public class BankAccount {
         this.oannes = oannes;
     }
 
+    public static BankAccount fromMap(Map<String, Integer> map)  {
+        return new BankAccount(map.get("nylus"), map.get("oannes"));
+    }
+
 	public int getNylus() {
 		return nylus;
 	}
@@ -27,10 +31,6 @@ public class BankAccount {
 
     public void setNylus(int i) {
         nylus = i;
-    }
-
-    public static BankAccount fromMap(Map<String, Integer> map)  {
-        return new BankAccount(map.get("nylus"), map.get("oannes"));
     }
 
     // TODO : Economy COMMANDS

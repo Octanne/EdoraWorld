@@ -52,6 +52,14 @@ public class Nation {
         nationsList.add(this);
     }
 
+    private fromMap(Map map) {
+        id = UUID.randomUUID();
+        name = map.get("name");
+        slogan = map.get("slogan");
+        gouvernment Gouvernment.fromMap(map.get("gouvernment"));
+        nationBank = NationBank.fromMap(map.get("nationBank"));
+    }
+
     public UUID getID(){
         return id;
     }
@@ -99,6 +107,14 @@ public class Nation {
             this.leader = leader;
         }
 
+        public static Gouvernment fromMap(Map<String, String> map) {
+            Gouvernment gouvernment = new Gouvernment(map.get("leader"));
+
+            gouvernment.warLeader = map.get("warLeader");
+            gouvernment.urbaLeader = map.get("urbaLeader");
+            gouvernment.commercialLeader = map.get("commercialLeader");
+        }
+
         public void setLeaderID(UUID playerID){
             this.leader = playerID;
         }
@@ -143,6 +159,17 @@ public class Nation {
             commercialAccount = new BankAccount(0,0);
         }
 
+        public static NationBank fromMap(Map<String, Map<String, Integer>> map)  {
+            NationBank nationBank = new NationBank();
+            
+            nationBank.mainAccount = BankAccount.fromMap(map.get("mainAccount"));
+            nationBank.warAccount = BankAccount.fromMap(map.get("warAccount"));
+            nationBank.urbaAccount = BankAccount.fromMap(map.get("urbaAccount"));
+            nationBank.commercialAccount = BankAccount.fromMap(map.get("commercialAccount"));
+
+            return nationBank;
+        }
+
         public BankAccount getMain(){
             return mainAccount;
         }
@@ -154,12 +181,6 @@ public class Nation {
         }
         public BankAccount geCommercial(){
             return commercialAccount;
-        }
-
-        public static NationBank fromMap(Map<String, Map<String, Integer>> map)  {
-            NationBank nationBank = new NationBank();
-
-            return nationBank;
         }
     }
 }
