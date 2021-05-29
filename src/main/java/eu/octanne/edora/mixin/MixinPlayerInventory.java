@@ -41,7 +41,7 @@ public class MixinPlayerInventory implements Inventory, Nameable {
         this.combinedInventory = ImmutableList.of(this.main, this.armor, this.offHand, this.edoraSlot);
     }
 
-    @Inject(at = @At("RETURN"), method = "serialize(Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/nbt/ListTag;")
+    @Inject(at = @At("RETURN"), method = "serialize(Lnet/minecraft/nbt/ListTag;)Lnet/minecraft/nbt/ListTag;")
     private void serialize(ListTag tag, CallbackInfoReturnable<ListTag> info) {
         CompoundTag compoundTag3;
         for(int k = 0; k < this.edoraSlot.size(); ++k) {

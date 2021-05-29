@@ -39,6 +39,5 @@
   },
   "suggests": {
     "another-mod": "*"
-  },
-  "accessWidener" : "edora.accesswidener"
+  }
 }
