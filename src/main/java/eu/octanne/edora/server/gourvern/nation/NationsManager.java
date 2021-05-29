@@ -35,6 +35,8 @@ public class NationsManager {
     }
 
     public static void loadAllNations() {
+        createNationDirectoryIfNotExist();
+
         String[] nationFileArray = EdoraServer.getConfigPath().resolve(configFolderName).toFile().list();
         createDefaultsNationsIfNotExist(nationFileArray);
 
@@ -42,16 +44,29 @@ public class NationsManager {
             UUID uuid = UUID.fromString(FilenameUtils.removeExtension(nationFile));
             Nation nation = getNationFromJsonFile(uuid);
             nationsList.add(nation);
+            EdoraMain.log(Level.INFO, "Chargement de la nation " + nation.getName());
         }
     }
 
     private static void createDefaultsNationsIfNotExist(String[] nationFileArray) {
         List<String> nationFileList = Arrays.asList(nationFileArray);
-
         for(Nation nation : getDefaultNations()) {
-            EdoraMain.log(Level.INFO, nation.getID().toString());
-            if(!nationFileList.contains(nation.getID() + ".json")) {
+            String fileName = nation.getID() + ".json";
+            if(!nationFileList.contains(fileName)) {
+                EdoraMain.log(Level.INFO, "Création et chargement de la nation " + nation.getName());
                 saveNationToJsonFile(nation);
+                nationsList.add(nation);
+            }
+        }
+    }
+
+    private static void createNationDirectoryIfNotExist() {
+        File configFile = EdoraServer.getConfigPath().resolve(configFolderName).toFile();
+        if (!configFile.exists()) {
+            if(configFile.mkdirs()) {
+                EdoraMain.log(Level.INFO, "Crétation du dossier de config : " + configFile.getAbsolutePath());
+            } else {
+                EdoraMain.log(Level.ERROR, "Impossible de créer le dossier de config : " + configFile.getAbsolutePath());
             }
         }
     }
@@ -72,13 +87,14 @@ public class NationsManager {
         File configFile = getConfigFile(uuid);
 
         try {
-            if(configFile.createNewFile()) EdoraMain.log(Level.INFO, "Erreur le fichier n'a pu être crée.");
+            configFile.createNewFile();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(configFile), StandardCharsets.UTF_8));
             writer.write(json);
             writer.close();
 
             return true;
         } catch (IOException e) {
+            EdoraMain.log(Level.ERROR, "Erreur le fichier n'a pu être crée.");
             e.printStackTrace();
             return false;
         }
