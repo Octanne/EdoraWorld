@@ -144,8 +144,10 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             drawCenteredText(matrices, textRenderer, guildeTitle, x - 19, y + 83, 4416899);
             Text nationTitle = new TranslatableText("screen.edora.nation");
             drawCenteredText(matrices, textRenderer, nationTitle, x - 19, y + 8, 4416899);
-        }
 
+            Text moneyT = new LiteralText(edoraDATA.getInt("oannes")+"");
+            drawCenteredText(matrices, textRenderer, moneyT, x - 19, y + 121, 16571451);
+        }
         InventoryScreen.drawEntity(i + 51, j + 75, 30, (float)(i + 51) - this.mouseX, (float)(j + 75 - 50) - this.mouseY, this.client.player);
     }
 

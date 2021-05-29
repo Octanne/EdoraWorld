@@ -2,9 +2,13 @@ package eu.octanne.edora.client.screen.menu.button;
 
 import eu.octanne.edora.client.screen.menu.EdoraInventoryScreen;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.Drawable;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
@@ -69,10 +73,6 @@ public class NationButton extends ButtonWidget
         matrices.translate((double)x, (double)y, 0.0D);
         drawTexture(matrices, 0, 0, nation.u, nation.v, width, height);
         // DRAW LINE AROUND BUTTON
-        drawVerticalLine(matrices, 0, 0, height, 16711680);
-        drawVerticalLine(matrices, width, 0, height, 16711680);
-        drawHorizontalLine(matrices, 0, width, 0, 16711680);
-        drawHorizontalLine(matrices, 0, width, height, 16711680);
         matrices.pop();
      }
 }
