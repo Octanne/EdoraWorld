@@ -41,7 +41,7 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     @Unique
     private BankAccount edoraBankAccount;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;"+
+    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;Lcom/mojang/authlib/GameProfile;"+
     "Lnet/minecraft/server/network/ServerPlayerInteractionManager;)V")
     private void constructClass(MinecraftServer server, ServerWorld world, GameProfile profile, ServerPlayerInteractionManager interactionManager, CallbackInfo info){
         edoraNation = null;
