@@ -103,7 +103,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
             MinecraftClient minecraftClient = MinecraftClient.getInstance();
             if (this.isHovered()) {
                 this.drawSelected(matrices, minecraftClient.getTextureManager());
-                renderTooltip(matrices, Text.of("Valider"), mouseX, mouseY);
+                renderTooltip(matrices, new TranslatableText("screen.edora.selectNation.ok"), mouseX, mouseY);
             }else{
                 this.drawUnselected(matrices, minecraftClient.getTextureManager());
             }
