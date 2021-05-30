@@ -7,6 +7,7 @@ import eu.octanne.edora.item.items.RingItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.Settings;
@@ -37,7 +38,12 @@ public class EdoraItems {
     /**************Faction : Any**************/
     public static EcuItem NYLUS_ECU;
     public static EcuItem OANNES_ECU;
+    /**************Faction : Kawan**************/
+    public static Item KAWAN_ITEM;
+    /**************Faction : Kallana**************/
+    public static Item KALLANA_ITEM;
     /**************Faction : Othala**************/
+    public static Item OTHALA_ITEM;
     public static RingItem X_ILLUMINATION; // TODO: le nom n'est pas définif
 
     @Environment(EnvType.CLIENT)
@@ -52,12 +58,15 @@ public class EdoraItems {
             .build();
         KAWAN_GROUP = FabricItemGroupBuilder.create( // TODO: icon
             new Identifier(EdoraMain.MOD_ID, "kawan"))
+            .icon(() -> new ItemStack(KAWAN_ITEM))
             .build();
         KALLANA_GROUP = FabricItemGroupBuilder.create( // TODO: icon
             new Identifier(EdoraMain.MOD_ID, "kallana"))
+            .icon(() -> new ItemStack(KALLANA_ITEM))
             .build();
         OTHALA_GROUP = FabricItemGroupBuilder.create( // TODO: icon
             new Identifier(EdoraMain.MOD_ID, "othala"))
+            .icon(() -> new ItemStack(OTHALA_ITEM))
             .build();
     }
 
@@ -74,7 +83,14 @@ public class EdoraItems {
         OANNES_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.UNCOMMON));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "oannes_ecu"), OANNES_ECU);
 
+        /**************Faction : Kawan**************/
+        KAWAN_ITEM = new Item(new Settings().group(KAWAN_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kawan_item"), KAWAN_ITEM);
+        /**************Faction : Kallana**************/
+        KALLANA_ITEM = new Item(new Settings().group(KALLANA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kallana_item"), KALLANA_ITEM);
         /**************Faction : Othala**************/
-
+        OTHALA_ITEM = new Item(new Settings().group(OTHALA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "othala_item"), OTHALA_ITEM);
     }
 }
