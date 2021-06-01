@@ -3,6 +3,7 @@ package eu.octanne.edora.client;
 import org.lwjgl.glfw.GLFW;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.block.EdoraBlocks;
 import eu.octanne.edora.client.screen.BackpackScreen;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
@@ -39,6 +40,8 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
         EdoraItems.registryItems();
         // Register Screens
         registerScreens();
+        // Register Blocks
+        EdoraBlocks.registryBlocks();
         // Register Keybinds
         registerKeybinds();
         // Register PacketHandlers

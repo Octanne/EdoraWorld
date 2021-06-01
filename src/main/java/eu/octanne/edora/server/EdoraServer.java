@@ -8,6 +8,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import org.apache.logging.log4j.Level;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.block.EdoraBlocks;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
 import eu.octanne.edora.packet.server.handler.HandlerClientAskOpenMenu;
@@ -55,6 +56,10 @@ public class EdoraServer implements DedicatedServerModInitializer {
         CommandRegistrationCallback.EVENT.register(this::registerCommands);
         // Register PacketHandlers
         registerPacketHandlers();
+        // Register Items
+        EdoraItems.registryItems();
+        // Register Blocks
+        EdoraBlocks.registryBlocks();
     }
 
     private void registerPacketHandlers() {
@@ -76,7 +81,6 @@ public class EdoraServer implements DedicatedServerModInitializer {
 
     private void onPreEnable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Loading of the plugin...");
-        EdoraItems.registryItems();
         minecraftServer = server;
         EdoraMain.log(Level.INFO, "The plugin has been loaded!");
     }
