@@ -19,7 +19,9 @@
   "icon": "assets/edora/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [],
+    "main": [
+      "eu.octanne.edora.EdoraMain"
+    ],
     "client": [
       "eu.octanne.edora.client.EdoraClient"
     ],
