@@ -2,12 +2,8 @@ package eu.octanne.edora.item.items;
 
 import java.util.List;
 
-import org.apache.logging.log4j.Level;
-import org.lwjgl.system.CallbackI.I;
-
-import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
-import eu.octanne.edora.screenHandler.BackpackScreenHandler;
+import eu.octanne.edora.screenhandler.BackpackScreenHandler;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
 import eu.octanne.edora.server.gourvern.nation.Nation;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -18,7 +14,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;

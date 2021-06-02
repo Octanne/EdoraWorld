@@ -1,12 +1,11 @@
-package eu.octanne.edora.screenHandler;
+package eu.octanne.edora.screenhandler;
 
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.BackpackItem;
-import eu.octanne.edora.screenHandler.slot.BackpackSlot;
+import eu.octanne.edora.screenhandler.slot.BackpackSlot;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;

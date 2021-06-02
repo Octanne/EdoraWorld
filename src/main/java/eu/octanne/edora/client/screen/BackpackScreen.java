@@ -2,18 +2,11 @@ package eu.octanne.edora.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import org.apache.logging.log4j.Level;
-
-import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.BackpackItem;
-import eu.octanne.edora.screenHandler.BackpackScreenHandler;
+import eu.octanne.edora.screenhandler.BackpackScreenHandler;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 

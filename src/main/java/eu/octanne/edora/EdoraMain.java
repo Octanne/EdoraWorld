@@ -4,8 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import eu.octanne.edora.client.screen.BackpackScreen;
-import eu.octanne.edora.screenHandler.BackpackScreenHandler;
+import eu.octanne.edora.screenhandler.BackpackScreenHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandlerType;

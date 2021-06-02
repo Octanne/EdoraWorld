@@ -1,4 +1,4 @@
-package eu.octanne.edora.screenHandler.slot;
+package eu.octanne.edora.screenhandler.slot;
 
 import eu.octanne.edora.item.items.BackpackItem;
 import net.minecraft.inventory.Inventory;
