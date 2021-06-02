@@ -1,9 +1,7 @@
 package eu.octanne.edora.block.blocks;
 
-import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.Nullable;
 
-import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.block.enums.EdoraSlabType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -41,10 +39,10 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
     static {
         TYPE = EdoraSlabType.SLAB_TYPE;
         WATERLOGGED = Properties.WATERLOGGED;
-        NORTH_SHAPE = Block.createCuboidShape(0D, 0D, 0D, 16D, 16D, 8D);
-        SOUTH_SHAPE = Block.createCuboidShape(0D, 0D, 8D, 16D, 16D, 16D);
-        WEST_SHAPE = Block.createCuboidShape(0D, 0D, 0D, 8D, 16D, 16D);
-        EAST_SHAPE = Block.createCuboidShape(8D, 0D, 0D, 16D, 16D, 16D);
+        NORTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+        SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
+        WEST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
+        EAST_SHAPE = Block.createCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
         BOTTOM_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
         TOP_SHAPE = Block.createCuboidShape(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     }
@@ -55,6 +53,7 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
                 .with(WATERLOGGED, false));
     }
 
+    @Override
     public boolean hasSidedTransparency(BlockState state) {
         return state.get(TYPE) != EdoraSlabType.DOUBLE;
     }
@@ -62,6 +61,11 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(TYPE, WATERLOGGED);
     }
+
+    /*@Override
+    public VoxelShape getCullingFace(BlockView world, BlockPos pos, Direction direction) {
+        return this.shapeCache != null && this.shapeCache.extrudedFaces != null ? this.shapeCache.extrudedFaces[direction.ordinal()] : VoxelShapes.extrudeFace(this.getCullingShape(world, pos), direction);
+    }*/
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -90,7 +94,7 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
         Direction direction = ctx.getSide();
         double xRel = ctx.getHitPos().x - (double)ctx.getBlockPos().getX();
-        double yRel = ctx.getHitPos().y - (double)ctx.getBlockPos().getY();
+        //double yRel = ctx.getHitPos().y - (double)ctx.getBlockPos().getY();
         double zRel = ctx.getHitPos().z - (double)ctx.getBlockPos().getZ();
         boolean isDownOrUp = direction == Direction.DOWN || direction == Direction.UP;
         
@@ -107,7 +111,16 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
             } else if (direction == Direction.WEST) {
                 slabType = EdoraSlabType.EAST;
             } else if (isDownOrUp) {
-                EdoraMain.log(Level.INFO, "LOC : "+xRel+" "+yRel+" "+zRel);
+                if(xRel < zRel && xRel <= 1 - zRel){
+                    slabType = EdoraSlabType.WEST;
+                }else if(xRel < zRel && zRel > 1 - xRel){
+                    slabType = EdoraSlabType.SOUTH;
+                }else if(zRel <= xRel && zRel <= 1 - xRel){
+                    slabType = EdoraSlabType.NORTH;
+                }else{
+                    slabType = EdoraSlabType.EAST;
+                }
+                //EdoraMain.log(Level.INFO, "LOC : "+xRel+" "+yRel+" "+zRel);
             }
             return this.getDefaultState().with(TYPE, slabType).with(WATERLOGGED, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
         } else {
