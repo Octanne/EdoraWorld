@@ -1,7 +1,9 @@
 package eu.octanne.edora.block.blocks;
 
+import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.Nullable;
 
+import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.block.enums.EdoraSlabType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -61,6 +63,7 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
         builder.add(TYPE, WATERLOGGED);
     }
 
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         EdoraSlabType slabType = state.get(TYPE);
         switch (slabType) {
@@ -86,49 +89,82 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
         BlockPos blockPos = ctx.getBlockPos();
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
         Direction direction = ctx.getSide();
-        EdoraSlabType slabType;
-
-        if(ctx.getPlayer().isSneaking()) {
-            switch (direction) {
-                case EAST:
-                    slabType = EdoraSlabType.EAST;
-                    break;
-                case WEST:
-                    slabType = EdoraSlabType.WEST;
-                    break;
-                case NORTH:
-                    slabType = EdoraSlabType.NORTH;
-                    break;
-                default:
-                    slabType = EdoraSlabType.SOUTH;
-                    break;
+        double xRel = ctx.getHitPos().x - (double)ctx.getBlockPos().getX();
+        double yRel = ctx.getHitPos().y - (double)ctx.getBlockPos().getY();
+        double zRel = ctx.getHitPos().z - (double)ctx.getBlockPos().getZ();
+        boolean isDownOrUp = direction == Direction.DOWN || direction == Direction.UP;
+        
+        if (blockState.isOf(this)) {
+            return this.getDefaultState().with(TYPE, EdoraSlabType.DOUBLE).with(WATERLOGGED, false);
+        }else if (ctx.getPlayer().isSneaking()) {
+            EdoraSlabType slabType = EdoraSlabType.BOTTOM;
+            if (direction == Direction.NORTH) {
+                slabType = EdoraSlabType.SOUTH;
+            } else if (direction == Direction.SOUTH) {
+                slabType = EdoraSlabType.NORTH;
+            } else if (direction == Direction.EAST) {
+                slabType = EdoraSlabType.WEST;
+            } else if (direction == Direction.WEST) {
+                slabType = EdoraSlabType.EAST;
+            } else if (isDownOrUp) {
+                EdoraMain.log(Level.INFO, "LOC : "+xRel+" "+yRel+" "+zRel);
             }
-            if(blockState.isOf(this) && slabType == blockState.get(TYPE)){
-                return ((BlockState) blockState.with(TYPE, EdoraSlabType.DOUBLE)).with(WATERLOGGED, false);
-            }
-        }else {
-            if (blockState.isOf(this) && (blockState.get(TYPE) == EdoraSlabType.BOTTOM || blockState.get(TYPE) == EdoraSlabType.TOP)) return ((BlockState) blockState.with(TYPE, EdoraSlabType.DOUBLE)).with(WATERLOGGED, false);
-            if(direction != Direction.DOWN && (direction == Direction.UP || ctx.getHitPos().y - (double)blockPos.getY() <= 0.5D)) {
-                slabType = EdoraSlabType.BOTTOM;
-            }else slabType = EdoraSlabType.TOP;
+            return this.getDefaultState().with(TYPE, slabType).with(WATERLOGGED, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
+        } else {
+            return oldPlacement(ctx);
         }
-        return this.getDefaultState().with(TYPE, slabType).with(WATERLOGGED, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
     }
 
+    private BlockState oldPlacement(ItemPlacementContext ctx) {
+        BlockPos blockPos = ctx.getBlockPos();
+        BlockState blockState = ctx.getWorld().getBlockState(blockPos);
+        Direction direction = ctx.getSide();
+        if (blockState.isOf(this) && (blockState.get(TYPE) == EdoraSlabType.BOTTOM || blockState.get(TYPE) == EdoraSlabType.TOP)) {
+            return ((BlockState)blockState.with(TYPE, EdoraSlabType.DOUBLE)).with(WATERLOGGED, false);
+        } else {
+            FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
+            BlockState blockState2 = ((BlockState)this.getDefaultState().with(TYPE, EdoraSlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+            return direction != Direction.DOWN && (direction == Direction.UP || ctx.getHitPos().y - (double)blockPos.getY() <= 0.5D) ? blockState2 : blockState2.with(TYPE, EdoraSlabType.TOP);
+        }
+    }
+
+    @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         ItemStack itemStack = context.getStack();
         EdoraSlabType slabType = state.get(TYPE);
+        Direction direction = context.getSide();
+        double xRel = context.getHitPos().x - (double)context.getBlockPos().getX();
+        double yRel = context.getHitPos().y - (double)context.getBlockPos().getY();
+        double zRel = context.getHitPos().z - (double)context.getBlockPos().getZ();
         if (slabType != EdoraSlabType.DOUBLE && itemStack.getItem() == this.asItem()) {
-            if (context.canReplaceExisting()) {
-                boolean bl = context.getHitPos().y - (double) context.getBlockPos().getY() > 0.5D;
-                Direction direction = context.getSide();
-                if (slabType == EdoraSlabType.BOTTOM) {
-                    return direction == Direction.UP || bl && direction.getAxis().isHorizontal();
-                } else {
-                    return direction == Direction.DOWN || !bl && direction.getAxis().isHorizontal();
-                }
-            } else {
-                return true;
+            if (context.getPlayer().isSneaking()) {
+                // Check Fill UP
+                if ((direction == Direction.UP && slabType == EdoraSlabType.BOTTOM) ||
+                        (slabType == EdoraSlabType.BOTTOM && yRel >= 0.5)) return true;
+                // Check Fill Down
+                else if ((direction == Direction.DOWN && slabType == EdoraSlabType.TOP) || 
+                        (slabType == EdoraSlabType.TOP && yRel <= 0.5)) return true;
+                // Check Fill WEST
+                else if((direction == Direction.WEST && slabType == EdoraSlabType.EAST) ||
+                        (slabType == EdoraSlabType.EAST && xRel <= 0.5)) return true;
+                // Check Fill EAST
+                else if((direction == Direction.EAST && slabType == EdoraSlabType.WEST) ||
+                        (slabType == EdoraSlabType.WEST && xRel >= 0.5)) return true;
+                // Check Fill SOUTH
+                else if((direction == Direction.SOUTH && slabType == EdoraSlabType.NORTH) ||
+                    (slabType == EdoraSlabType.NORTH && zRel >= 0.5)) return true;
+                // Check Fill NORTH
+                else if((direction == Direction.NORTH && slabType == EdoraSlabType.SOUTH) ||
+                    (slabType == EdoraSlabType.SOUTH && zRel <= 0.5)) return true;
+                else return false;
+            }else {
+                // Check Fill UP
+                if ((direction == Direction.UP && slabType == EdoraSlabType.BOTTOM) ||
+                        (slabType == EdoraSlabType.BOTTOM && yRel >= 0.5)) return true;
+                // Check Fill Down
+                else if ((direction == Direction.DOWN && slabType == EdoraSlabType.TOP) || 
+                        (slabType == EdoraSlabType.TOP && yRel <= 0.5)) return true;
+                else return false;
             }
         } else {
             return false;
