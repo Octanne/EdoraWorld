@@ -1,9 +1,12 @@
 package eu.octanne.edora.item;
 
+import java.util.UUID;
+
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.BackpackItem;
 import eu.octanne.edora.item.items.EcuItem;
 import eu.octanne.edora.item.items.MineralItem;
+import eu.octanne.edora.item.items.Settings.BackpackSettings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -90,25 +93,25 @@ public class EdoraItems {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "nylus_ecu"), NYLUS_ECU);
         OANNES_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.UNCOMMON));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "oannes_ecu"), OANNES_ECU);
-        POUCH = new BackpackItem(new Settings().group(MINERAL_GROUP).maxCount(1), 9); //TODO: changer le group
+        POUCH = new BackpackItem(new Settings().group(MINERAL_GROUP).maxCount(1), new BackpackSettings(9)); //TODO: changer le group
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "pouch"), POUCH);
 
         /**************Faction : Kawan**************/
         KAWAN_ITEM = new Item(new Settings());
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kawan_item"), KAWAN_ITEM);
-        KAWAN_BACKPACK = new BackpackItem(new Settings().group(KAWAN_GROUP).maxCount(1), 27); //TODO: changer le nom
+        KAWAN_BACKPACK = new BackpackItem(new Settings().group(KAWAN_GROUP).maxCount(1), new BackpackSettings(27, UUID.fromString("e73edf1a-1242-4455-bcbd-6dff2ce87089"))); //TODO: changer le nom
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kawan_backpack"), KAWAN_BACKPACK);
         
         /**************Faction : Kallana**************/
         KALLANA_ITEM = new Item(new Settings());
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kallana_item"), KALLANA_ITEM);
-        QUANTUMPACK = new BackpackItem(new Settings().group(KALLANA_GROUP).maxCount(1), 54);
+        QUANTUMPACK = new BackpackItem(new Settings().group(KALLANA_GROUP).maxCount(1), new BackpackSettings(54, UUID.fromString("23c6761c-443f-42c4-a5db-02ad7f85fc4b")));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "quantumpack"), QUANTUMPACK);
 
         /**************Faction : Othala**************/
         OTHALA_ITEM = new Item(new Settings());
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "othala_item"), OTHALA_ITEM);
-        OTHALA_BACKPACK = new BackpackItem(new Settings().group(OTHALA_GROUP).maxCount(1), 27); //TODO: changer le nom
+        OTHALA_BACKPACK = new BackpackItem(new Settings().group(OTHALA_GROUP).maxCount(1), new BackpackSettings(27, UUID.fromString("c12d2130-52ae-43c5-bd42-642de372e4c8"))); //TODO: changer le nom
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "othala_backpack"), OTHALA_BACKPACK);
     }
 }
