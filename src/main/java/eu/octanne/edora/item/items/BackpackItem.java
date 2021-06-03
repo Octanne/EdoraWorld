@@ -2,7 +2,6 @@ package eu.octanne.edora.item.items;
 
 import java.util.List;
 
-import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
 import eu.octanne.edora.screenhandler.BackpackScreenHandler;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
@@ -19,6 +18,8 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
@@ -42,6 +43,7 @@ public class BackpackItem extends Item {
                 EdoraServerPlayerEntity edoraPlayer = (EdoraServerPlayerEntity)player;
                 Nation playerNation = edoraPlayer.getNation();
                 if((playerNation.getID().equals(bSettings.getNationID())) || (bSettings.getNationID() == null)) {
+                    player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
                     player.openHandledScreen(new ExtendedScreenHandlerFactory(){
         
                         @Override
@@ -63,9 +65,11 @@ public class BackpackItem extends Item {
                 } else {
                     wrongNation(world, player);
                     player.setStackInHand(hand, ItemStack.EMPTY);
-                    player.sendMessage(new TranslatableText(EdoraMain.MOD_ID,"message.edora.backpack.destroy"), true);
+                    player.sendMessage(new TranslatableText("message.edora.backpack.destroy"), true);
+                    player.playSound(SoundEvents.UI_TOAST_IN, SoundCategory.PLAYERS, 5, 1.5);
                 }
             } else {
+                player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
                 player.openHandledScreen(new ExtendedScreenHandlerFactory(){
         
                     @Override
