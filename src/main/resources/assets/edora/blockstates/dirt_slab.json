@@ -1,0 +1,31 @@
+{
+    "variants": {
+      "type=bottom": {
+        "model": "edora:block/dirt_slab"
+      },
+      "type=double": {
+        "model": "minecraft:block/dirt"
+      },
+      "type=top": {
+        "model": "edora:block/dirt_slab_top"
+      },
+      "type=east": {
+        "model": "edora:block/dirt_slab_vert",
+        "y" : 90,
+        "uvlock": true
+      },
+      "type=west": {
+        "model": "edora:block/dirt_slab_vert",
+        "y" : -90,
+        "uvlock": true
+      },
+      "type=north": {
+        "model": "edora:block/dirt_slab_vert"
+      },
+      "type=south": {
+        "model": "edora:block/dirt_slab_vert",
+        "y" : 180,
+        "uvlock": true
+      }
+    }
+  }

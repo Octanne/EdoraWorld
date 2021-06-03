@@ -1,9 +1,6 @@
 {
   "parent": "block/block",
   "textures": {
-    "bottom": "minecraft:block/andesite",
-    "top": "minecraft:block/andesite",
-    "side": "minecraft:block/andesite",
     "particle": "#side"
   },
   "elements": [
