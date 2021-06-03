@@ -9,6 +9,10 @@
     "itemGroup.edora.othala" : "Othala",
     "itemGroup.edora.blocks" : "Blocs d'Edora",
     "item.edora.sulfur_crystal" : "Crystal de Soufre",
+    "item.edora.pouch" : "Poche",
+    "item.edora.othala_backpack" : "Sac",
+    "item.edora.kawan_backpack" : "Sac",
+    "item.edora.quantumpack" : "Quantum Sac",
     "screen.edora.selectNation.title" : "Choisis ta Nation",
     "screen.edora.selectNation.nation.kawan" : "Kawan",
     "screen.edora.selectNation.nation.kallana" : "Kallana",
@@ -17,5 +21,6 @@
     "screen.edora.any" : "Aucune",
     "screen.edora.guilde" : "Guilde",
     "screen.edora.town" : "Ville",
+    "message.edora.backpack.destroy" : "Vous n'avez pas les capacitées pour l'ouvrir... Le sac s'est détruit.",
     "generator.genmap" : "GenMap"
 }

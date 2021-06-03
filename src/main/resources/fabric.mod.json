@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "edora",
-  "version": "${version}",
+  "version": "0.3",
 
   "name": "EdoraWorld",
   "description": "A mod for an RPG experience in Minecraft across the World of Edora",
@@ -19,9 +19,6 @@
   "icon": "assets/edora/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "eu.octanne.edora.EdoraMain"
-    ],
     "client": [
       "eu.octanne.edora.client.EdoraClient"
     ],

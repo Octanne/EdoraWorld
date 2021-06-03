@@ -76,7 +76,7 @@ public class EdoraItems {
             .icon(() -> new ItemStack(OTHALA_ITEM))
             .build();
         BLOCK_GROUP = FabricItemGroupBuilder.create(
-            new Identifier(EdoraMain.MOD_ID, "edora_blocs"))
+            new Identifier(EdoraMain.MOD_ID, "blocks"))
             .icon(() -> new ItemStack(Items.HAY_BLOCK))
             .build();
     }

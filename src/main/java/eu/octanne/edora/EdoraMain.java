@@ -4,13 +4,14 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import eu.octanne.edora.block.EdoraBlocks;
+import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.screenhandler.BackpackScreenHandler;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
-public class EdoraMain implements ModInitializer{
+public class EdoraMain {
 
     public static Logger LOGGER = LogManager.getLogger();
 
@@ -28,9 +29,9 @@ public class EdoraMain implements ModInitializer{
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
     }
 
-    @Override
     public void onInitialize() {
-        
+        EdoraItems.registryItems();
+        EdoraBlocks.registryBlocks();
     }
 
 }

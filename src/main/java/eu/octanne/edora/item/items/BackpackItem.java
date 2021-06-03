@@ -2,6 +2,7 @@ package eu.octanne.edora.item.items;
 
 import java.util.List;
 
+import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
 import eu.octanne.edora.screenhandler.BackpackScreenHandler;
 import eu.octanne.edora.server.EdoraServerPlayerEntity;
@@ -37,11 +38,36 @@ public class BackpackItem extends Item {
         backpackItemStack = player.getStackInHand(hand);
         
         if(!world.isClient) {
-            EdoraServerPlayerEntity edoraPlayer = (EdoraServerPlayerEntity)player;
-            Nation playerNation = edoraPlayer.getNation();
-            if((playerNation.getID().equals(bSettings.getNationID())) || (bSettings.getNationID() == null)) {
+            if(player instanceof EdoraServerPlayerEntity) {
+                EdoraServerPlayerEntity edoraPlayer = (EdoraServerPlayerEntity)player;
+                Nation playerNation = edoraPlayer.getNation();
+                if((playerNation.getID().equals(bSettings.getNationID())) || (bSettings.getNationID() == null)) {
+                    player.openHandledScreen(new ExtendedScreenHandlerFactory(){
+        
+                        @Override
+                        public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+                            buf.writeItemStack(backpackItemStack);
+                        }
+        
+                        @Override
+                        public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+                            return new BackpackScreenHandler(syncId, inv, backpackItemStack);
+                        }
+        
+                        @Override
+                        public Text getDisplayName() {
+                            return new TranslatableText(backpackItemStack.getTranslationKey());
+                        }
+                        
+                    });
+                } else {
+                    wrongNation(world, player);
+                    player.setStackInHand(hand, ItemStack.EMPTY);
+                    player.sendMessage(new TranslatableText(EdoraMain.MOD_ID,"message.edora.backpack.destroy"), true);
+                }
+            } else {
                 player.openHandledScreen(new ExtendedScreenHandlerFactory(){
-    
+        
                     @Override
                     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
                         buf.writeItemStack(backpackItemStack);
@@ -58,10 +84,6 @@ public class BackpackItem extends Item {
                     }
                     
                 });
-            } else {
-                wrongNation(world, player);
-                player.setStackInHand(hand, ItemStack.EMPTY);
-                // player.sendMessage(Text.of("Ce backpack appartient à une autre nation, il s'est détruit"), true);
             }
         }
 

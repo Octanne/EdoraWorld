@@ -13,12 +13,10 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.Identifier;
 
 public class BackpackScreenHandler extends ScreenHandler {
 
     private final ItemStack backpakItemStack;
-    private static Identifier TEXTURE;
     private SimpleInventory inventory;
 
     public BackpackScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {

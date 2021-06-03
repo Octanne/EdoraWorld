@@ -8,8 +8,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import org.apache.logging.log4j.Level;
 
 import eu.octanne.edora.EdoraMain;
-import eu.octanne.edora.block.EdoraBlocks;
-import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
 import eu.octanne.edora.packet.server.handler.HandlerClientAskOpenMenu;
 import eu.octanne.edora.packet.server.handler.HandlerClientValidateMenuData;
@@ -27,7 +25,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
-public class EdoraServer implements DedicatedServerModInitializer {
+public class EdoraServer extends EdoraMain implements DedicatedServerModInitializer {
 
     private static MinecraftServer minecraftServer;
 
@@ -56,10 +54,9 @@ public class EdoraServer implements DedicatedServerModInitializer {
         CommandRegistrationCallback.EVENT.register(this::registerCommands);
         // Register PacketHandlers
         registerPacketHandlers();
-        // Register Items
-        EdoraItems.registryItems();
-        // Register Blocks
-        EdoraBlocks.registryBlocks();
+
+        // init Client Server Share Part
+        onInitialize();
     }
 
     private void registerPacketHandlers() {

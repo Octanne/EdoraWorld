@@ -3,7 +3,6 @@ package eu.octanne.edora.client;
 import org.lwjgl.glfw.GLFW;
 
 import eu.octanne.edora.EdoraMain;
-import eu.octanne.edora.block.EdoraBlocks;
 import eu.octanne.edora.client.screen.BackpackScreen;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.packet.PacketIdentifiers;
@@ -21,7 +20,7 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
     /**
      * KeyBinding
      */
-    static public final KeyBinding menuKeybind = new KeyBinding("key." + EdoraMain.MOD_ID + ".mainMenu", InputUtil.Type.KEYSYM,
+    public static final KeyBinding menuKeybind = new KeyBinding("key." + EdoraMain.MOD_ID + ".mainMenu", InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_M, "category." + EdoraMain.MOD_ID + ".main");
 
 
@@ -34,18 +33,18 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
      */
     @Override
     public void onInitializeClient() {
-        // Register Items Group
-        EdoraItems.registryItemGroups();
-        // Register Items
-        EdoraItems.registryItems();
-        // Register Screens
-        registerScreens();
-        // Register Blocks
-        EdoraBlocks.registryBlocks();
         // Register Keybinds
         registerKeybinds();
         // Register PacketHandlers
         registerPacketHandlers();
+        // Register Items Group
+        EdoraItems.registryItemGroups();
+        // Register Screens
+        registerScreens();
+
+
+        // init Client Server Share Part
+        onInitialize();
     }
 
     private void registerPacketHandlers() {
@@ -69,7 +68,7 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
      * MinecraftClient
      * @return client
      */
-    static public MinecraftClient getClient() {
+    public static MinecraftClient getClient() {
         return MinecraftClient.getInstance();
     }
 
