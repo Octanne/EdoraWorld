@@ -43,7 +43,7 @@ public class BackpackItem extends Item {
                 EdoraServerPlayerEntity edoraPlayer = (EdoraServerPlayerEntity)player;
                 Nation playerNation = edoraPlayer.getNation();
                 if((playerNation.getID().equals(bSettings.getNationID())) || (bSettings.getNationID() == null)) {
-                    player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
+                    player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1.0f,1.0f);
                     player.openHandledScreen(new ExtendedScreenHandlerFactory(){
         
                         @Override
@@ -66,10 +66,10 @@ public class BackpackItem extends Item {
                     wrongNation(world, player);
                     player.setStackInHand(hand, ItemStack.EMPTY);
                     player.sendMessage(new TranslatableText("message.edora.backpack.destroy"), true);
-                    player.playSound(SoundEvents.UI_TOAST_IN, SoundCategory.PLAYERS, 5, 1.5);
+                    player.playSound(SoundEvents.UI_TOAST_IN, SoundCategory.PLAYERS, 5.0f, 1.5f);
                 }
             } else {
-                player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1,1);
+                player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1.0f,1.0f);
                 player.openHandledScreen(new ExtendedScreenHandlerFactory(){
         
                     @Override
