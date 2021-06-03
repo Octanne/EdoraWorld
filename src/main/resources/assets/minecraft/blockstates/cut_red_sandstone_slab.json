@@ -6,8 +6,26 @@
     "type=double": {
       "model": "minecraft:block/cut_red_sandstone"
     },
-    "type=top": {
-      "model": "minecraft:block/cut_red_sandstone_slab_top"
+	"type=top": {
+	  "model": "minecraft:block/cut_red_sandstone_top"
+    },
+    "type=east": {
+      "model": "minecraft:block/cut_red_sandstone_slab_vert",
+      "y" : 90,
+      "uvlock": true
+    },
+    "type=west": {
+      "model": "minecraft:block/cut_red_sandstone_slab_vert",
+      "y" : -90,
+      "uvlock": true
+    },
+    "type=north": {
+      "model": "minecraft:block/cut_red_sandstone_slab_vert"
+    },
+    "type=south": {
+      "model": "minecraft:block/cut_red_sandstone_slab_vert",
+      "y" : 180,
+      "uvlock": true
     }
   }
 }

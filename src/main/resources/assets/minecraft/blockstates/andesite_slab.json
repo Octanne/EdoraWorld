@@ -8,6 +8,24 @@
     },
     "type=top": {
       "model": "minecraft:block/andesite_slab_top"
+    },
+    "type=east": {
+      "model": "minecraft:block/andesite_slab_vert",
+      "y" : 90,
+      "uvlock": true
+    },
+    "type=west": {
+      "model": "minecraft:block/andesite_slab_vert",
+      "y" : -90,
+      "uvlock": true
+    },
+    "type=north": {
+      "model": "minecraft:block/andesite_slab_vert"
+    },
+    "type=south": {
+      "model": "minecraft:block/andesite_slab_vert",
+      "y" : 180,
+      "uvlock": true
     }
   }
 }
