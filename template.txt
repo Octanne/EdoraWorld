@@ -1,0 +1,21 @@
+    },
+    "type=east": {
+      "model": "edora:block/type_block_slab_vert",
+      "y" : 90,
+      "uvlock": true
+    },
+    "type=west": {
+      "model": "edora:block/type_block_slab_vert",
+      "y" : -90,
+      "uvlock": true
+    },
+    "type=north": {
+      "model": "edora:block/type_block_slab_vert"
+    },
+    "type=south": {
+      "model": "edora:block/type_block_slab_vert",
+      "y" : 180,
+      "uvlock": true
+    }
+  }
+}
