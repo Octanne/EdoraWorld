@@ -7,9 +7,13 @@ import eu.octanne.edora.item.items.BackpackItem;
 import eu.octanne.edora.item.items.EcuItem;
 import eu.octanne.edora.item.items.MineralItem;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
+import eu.octanne.edora.materials.ModularQuantumArmorMaterial;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.item.ItemGroup;
@@ -49,6 +53,11 @@ public class EdoraItems {
     /**************Faction : Kallana**************/
     public static Item KALLANA_ITEM;
     public static BackpackItem QUANTUMPACK;
+    public static ArmorMaterial MODULAR_QUANTUM_ARMOR_MATERIAL;
+    public static Item MODULAR_QUANTUM_HELMET;
+    public static Item MODULAR_QUANTUM_CHESTPLATE;
+    public static Item MODULAR_QUANTUM_LEGGINGS;
+    public static Item MODULAR_QUANTUM_BOOTS;
     /**************Faction : Othala**************/
     public static Item OTHALA_ITEM;
     public static BackpackItem OTHALA_BACKPACK;
@@ -107,6 +116,15 @@ public class EdoraItems {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "kallana_item"), KALLANA_ITEM);
         QUANTUMPACK = new BackpackItem(new Settings().group(KALLANA_GROUP).maxCount(1), new BackpackSettings(54, UUID.fromString("23c6761c-443f-42c4-a5db-02ad7f85fc4b")));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "quantumpack"), QUANTUMPACK);
+        MODULAR_QUANTUM_ARMOR_MATERIAL = new ModularQuantumArmorMaterial();
+        MODULAR_QUANTUM_HELMET = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(KALLANA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum_helmet"), MODULAR_QUANTUM_HELMET);
+        MODULAR_QUANTUM_CHESTPLATE = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(KALLANA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum_chestplate"), MODULAR_QUANTUM_CHESTPLATE);
+        MODULAR_QUANTUM_LEGGINGS = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(KALLANA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum_leggings"), MODULAR_QUANTUM_LEGGINGS);
+        MODULAR_QUANTUM_BOOTS = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(KALLANA_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum_boots"), MODULAR_QUANTUM_BOOTS);
 
         /**************Faction : Othala**************/
         OTHALA_ITEM = new Item(new Settings());
