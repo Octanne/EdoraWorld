@@ -7,7 +7,7 @@
       "model": "minecraft:block/cut_red_sandstone"
     },
 	"type=top": {
-	  "model": "minecraft:block/cut_red_sandstone_top"
+	  "model": "minecraft:block/cut_red_sandstone_slab_top"
     },
     "type=east": {
       "model": "minecraft:block/cut_red_sandstone_slab_vert",

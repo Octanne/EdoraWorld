@@ -146,12 +146,13 @@ public class EdoraItems {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"copper"), COPPER);
         ORICALC = new MineralItem(new Settings().group(MINERAL_GROUP));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"oricalc"), ORICALC);
+        
         /**************Faction : Any**************/
         NYLUS_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.RARE));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "nylus_ecu"), NYLUS_ECU);
         OANNES_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.UNCOMMON));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "oannes_ecu"), OANNES_ECU);
-        POUCH = new BackpackItem(new Settings().group(MINERAL_GROUP).maxCount(1), new BackpackSettings(9)); //TODO: changer le group
+        POUCH = new BackpackItem(new Settings().group(ECONOMY_GROUP).maxCount(1), new BackpackSettings(9)); 
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "pouch"), POUCH);
 
         /**************Faction : Kawan**************/
