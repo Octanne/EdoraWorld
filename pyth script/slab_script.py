@@ -3,7 +3,7 @@ from os.path import isfile, join
 mypath = "blockstates\\"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
-templateF = open("template.txt")
+templateF = open("slab_template.txt")
 linesTemplate = templateF.readlines()
 templateF.close()
 
