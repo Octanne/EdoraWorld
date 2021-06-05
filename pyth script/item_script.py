@@ -1,29 +1,112 @@
 from os import listdir, rename
 from os.path import isfile, join
+import os as os
 from PIL import Image, ImageDraw, ImageFont
-mypath = "..\\src\\main\\resources\\assets\\edora\\models\\item\\"
 
-itemNames = ["silver","lead","transformium","lithium","magnesium","calcium","radium","uranium","plutonium","rhodium",
-			 "titane","manganese","nickel","palladium","copper","oricalc"]
+modelsPath = "gen\\assets\\edora\\models\\item\\"
+texturesPath = "gen\\assets\\edora\\textures\\item\\"
+font = ImageFont.truetype("C:\\Windows\\Fonts\\Arial.ttf", 12)
 
-templateF = open("mineral_item_template.txt")
-linesTemplate = templateF.readlines()
-templateF.close()
+# create folder of path
+if not os.path.exists(modelsPath):
+  os.makedirs(modelsPath)
+if not os.path.exists(texturesPath):
+  os.makedirs(texturesPath+"\\mineral")
+  
+  
+# ingot, compressed, dusted & crystal
+itemsData = [["silver",True,False,True,False],["lead",True,False,True,False],["lithium",False,True,True,True],
+             ["magnesium",False,True,True,False],["calcium",False,True,True,True]]
 
-fnt = ImageFont.truetype("C:\\Windows\\Fonts\\Arial.ttf", 12)
+templateFile = open("json_template\\basic_item_template.txt","r")
+linesTemplate = templateFile.readlines(-1)
+templateFile.close()
 
-for itemName in itemNames:
-  print("file for item : "+itemName + " in proccess...")
-  f = open(mypath+itemName+".json", "w")
-  for line in linesTemplate:
-    f.write(line.replace("{$item_name}",itemName))
+javaAttributDef = []
+javaAttributAsign = []
 
-  f.close()
-  print(itemName + ".json generate!")
-  img = Image.new('RGB', (32, 32), color = (73, 109, 137))
+
+for itemData in itemsData:
+  print("generatiion of : "+itemData[0]+" begin...")
+  
+  # Gen Textureplaceholder
+  img = Image.new('RGB', (64, 64), color = (73, 109, 137))
   d = ImageDraw.Draw(img)
-  d.text((4,8), itemName[0]+itemName[1]+itemName[2], font=fnt, fill=(255,255,0))
-  img.save("..\\src\\main\\resources\\assets\\edora\\textures\\item\\mineral\\"+itemName+'.png')
-  print(itemName + ".png generate!")
+  d.text((4,8), itemData[0], font=font, fill=(255,255,0))
 
-print("Done !")
+  if itemData[1] == True :
+    # Java
+    localName = "ingot_"+itemData[0]
+    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributAsign.append(localName.upper()+" = new IngotMineralItem(new Settings().group(MINERAL_GROUP));")
+    javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
+    print(localName.lower()+" java integration generate!")
+    # Json
+    f = open(modelsPath+localName.lower()+".json", "w")
+    for line in linesTemplate:
+      f.write(line.replace("{$item_name}",localName.lower()))
+    f.close()
+    print(localName.lower()+".json generate!")
+    # TEXTURE
+    img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
+    print(localName.lower() + ".png generate!")
+  if itemData[2] == True :
+    # Java
+    localName = "compressed_"+itemData[0]
+    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributAsign.append(localName.upper()+" = new CompressedMineralItem(new Settings().group(MINERAL_GROUP));")
+    javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
+    print(localName.lower()+" java integration generate!")
+    # Json
+    f = open(modelsPath+localName.lower()+".json", "w")
+    for line in linesTemplate:
+      f.write(line.replace("{$item_name}",localName.lower()))
+    f.close()
+    print(localName.lower()+".json generate!")
+    # TEXTURE
+    img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
+    print(localName.lower() + ".png generate!")
+  if itemData[3] == True :
+    # Java
+    localName = "dusted_"+itemData[0]
+    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributAsign.append(localName.upper()+" = new DustedMineralItem(new Settings().group(MINERAL_GROUP));")
+    javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
+    print(localName.lower()+" java integration generate!")
+    # Json
+    f = open(modelsPath+localName.lower()+".json", "w")
+    for line in linesTemplate:
+      f.write(line.replace("{$item_name}",localName.lower()))
+    f.close()
+    print(localName.lower()+".json generate!")
+    # TEXTURE
+    img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
+    print(localName.lower() + ".png generate!")
+  if itemData[4] == True :
+    # Java
+    localName = "crystal_"+itemData[0]
+    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributAsign.append(localName.upper()+" = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));")
+    javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
+    print(localName.lower()+" java integration generate!")
+    # Json
+    f = open(modelsPath+localName.lower()+".json", "w")
+    for line in linesTemplate:
+      f.write(line.replace("{$item_name}",localName.lower()))
+    f.close()
+    print(localName.lower()+".json generate!")
+    # TEXTURE
+    img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
+    print(localName.lower() + ".png generate!")
+
+# Write java code on file
+print("Write java on file...")
+codeJavaFile = open("gen\\java_code.txt","w")
+for line in javaAttributDef:
+  codeJavaFile.write(line+"\n")
+codeJavaFile.write("\n")
+for line in javaAttributAsign:
+  codeJavaFile.write(line+"\n")
+codeJavaFile.close()
+
+print("Job done!")

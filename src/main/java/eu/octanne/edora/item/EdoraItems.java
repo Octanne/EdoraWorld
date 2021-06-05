@@ -5,8 +5,8 @@ import java.util.UUID;
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.item.items.BackpackItem;
 import eu.octanne.edora.item.items.EcuItem;
-import eu.octanne.edora.item.items.MineralItem;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
+import eu.octanne.edora.item.items.minerals.CrystalMineralItem;
 import eu.octanne.edora.materials.ModularQuantumArmorMaterial;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -42,23 +42,8 @@ public class EdoraItems {
     public static ItemGroup BLOCK_GROUP;
 
     /**************Mineral Items**************/
-    public static MineralItem SULFUR_CRYSTAL;
-    public static MineralItem SILVER;
-    public static MineralItem LEAD;
-    public static MineralItem TRANSFORMIUM;
-    public static MineralItem LITHIUM;
-    public static MineralItem MAGNESIUM;
-    public static MineralItem CALCIUM;
-    public static MineralItem RADIUM;
-    public static MineralItem URANIUM;
-    public static MineralItem PLUTONIUM;
-    public static MineralItem RHODIUM;
-    public static MineralItem TITANE;
-    public static MineralItem MANGANESE;
-    public static MineralItem NICKEL;
-    public static MineralItem PALLADIUM;
-    public static MineralItem COPPER;
-    public static MineralItem ORICALC;
+    public static CrystalMineralItem SULFUR_CRYSTAL;
+    
     /**************Faction : Any**************/
     public static EcuItem NYLUS_ECU;
     public static EcuItem OANNES_ECU;
@@ -106,46 +91,14 @@ public class EdoraItems {
             .build();
     }
 
-    public static void registryItems(){
+    public static void registryItems() {
         /**
          * Registry Items
          */
-
+        
         /**************Mineral Items**************/
-        SULFUR_CRYSTAL = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM,  new Identifier(EdoraMain.MOD_ID, "sulfur_crystal"), SULFUR_CRYSTAL);
-        SILVER = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"silver"), SILVER);
-        LEAD = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"lead"), LEAD);
-        TRANSFORMIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"transformium"), TRANSFORMIUM);
-        LITHIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"lithium"), LITHIUM);
-        MAGNESIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"magnesium"), MAGNESIUM);
-        CALCIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"calcium"), CALCIUM);
-        RADIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"radium"), RADIUM);
-        URANIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"uranium"), URANIUM);
-        PLUTONIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"plutonium"), PLUTONIUM);
-        RHODIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"rhodium"), RHODIUM);
-        TITANE = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"titane"), TITANE);
-        MANGANESE = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"manganese"), MANGANESE);
-        NICKEL = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"nickel"), NICKEL);
-        PALLADIUM = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"palladium"), PALLADIUM);
-        COPPER = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"copper"), COPPER);
-        ORICALC = new MineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID,"oricalc"), ORICALC);
+        SULFUR_CRYSTAL = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "sulfur_crystal"), SULFUR_CRYSTAL);
         
         /**************Faction : Any**************/
         NYLUS_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.RARE));

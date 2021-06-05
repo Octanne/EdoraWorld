@@ -1,4 +1,4 @@
-package eu.octanne.edora.item.items;
+package eu.octanne.edora.item.items.minerals;
 
 import net.minecraft.item.Item;
 
