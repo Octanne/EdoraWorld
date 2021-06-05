@@ -15,8 +15,11 @@ if not os.path.exists(texturesPath):
   
   
 # ingot, compressed, dusted & crystal
-itemsData = [["silver",True,False,True,False],["lead",True,False,True,False],["lithium",False,True,True,True],
-             ["magnesium",False,True,True,False],["calcium",False,True,True,True]]
+itemsData = [["silver",True,False,True,False],
+			 ["lead",True,False,True,False],
+			 ["lithium",False,True,True,True],
+             ["magnesium",False,True,True,False],
+			 ["calcium",False,True,True,True]]
 
 templateFile = open("json_template\\basic_item_template.txt","r")
 linesTemplate = templateFile.readlines(-1)
@@ -98,6 +101,22 @@ for itemData in itemsData:
     # TEXTURE
     img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
     print(localName.lower() + ".png generate!")
+    
+  # Java
+  localName = "raw_"+itemData[0]
+  javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+  javaAttributAsign.append(localName.upper()+" = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));")
+  javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
+  print(localName.lower()+" java integration generate!")
+  # Json
+  f = open(modelsPath+localName.lower()+".json", "w")
+  for line in linesTemplate:
+    f.write(line.replace("{$item_name}",localName.lower()))
+  f.close()
+  print(localName.lower()+".json generate!")
+  # TEXTURE
+  img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
+  print(localName.lower() + ".png generate!")
 
 # Write java code on file
 print("Write java on file...")

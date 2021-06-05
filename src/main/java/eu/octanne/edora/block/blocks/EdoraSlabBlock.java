@@ -62,11 +62,6 @@ public class EdoraSlabBlock extends Block implements Waterloggable {
         builder.add(TYPE, WATERLOGGED);
     }
 
-    /*@Override
-    public VoxelShape getCullingFace(BlockView world, BlockPos pos, Direction direction) {
-        return this.shapeCache != null && this.shapeCache.extrudedFaces != null ? this.shapeCache.extrudedFaces[direction.ordinal()] : VoxelShapes.extrudeFace(this.getCullingShape(world, pos), direction);
-    }*/
-
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         EdoraSlabType slabType = state.get(TYPE);
