@@ -42,7 +42,7 @@ public class BackpackItem extends Item {
             if(player instanceof EdoraServerPlayerEntity) {
                 EdoraServerPlayerEntity edoraPlayer = (EdoraServerPlayerEntity)player;
                 Nation playerNation = edoraPlayer.getNation();
-                if(bSettings.getNationID() == null || (playerNation != null && playerNation.getID().equals(bSettings.getNationID())) {
+                if(bSettings.getNationID() == null || (playerNation != null && playerNation.getID().equals(bSettings.getNationID()))) {
                     player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,1.0f,1.0f);
                     player.openHandledScreen(new ExtendedScreenHandlerFactory(){
         
