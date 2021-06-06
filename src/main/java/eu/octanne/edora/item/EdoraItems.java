@@ -11,6 +11,7 @@ import eu.octanne.edora.materials.ModularQuantumArmorMaterial;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -30,6 +31,8 @@ public class EdoraItems {
      */
     @Environment(EnvType.CLIENT)
     public static ItemGroup MINERAL_GROUP;
+    @Environment(EnvType.CLIENT)
+    public static ItemGroup ORE_GROUP;
     @Environment(EnvType.CLIENT)
     public static ItemGroup ECONOMY_GROUP;
     @Environment(EnvType.CLIENT)
@@ -68,6 +71,10 @@ public class EdoraItems {
         MINERAL_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "mineral"))
             .icon(() -> new ItemStack(SULFUR_CRYSTAL))
+            .build();
+        ORE_GROUP = FabricItemGroupBuilder.create(
+            new Identifier(EdoraMain.MOD_ID, "ore"))
+            .icon(() -> new ItemStack(Blocks.GOLD_ORE))
             .build();
         ECONOMY_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "economy"))

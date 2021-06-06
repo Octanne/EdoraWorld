@@ -22,4 +22,8 @@ public class EdoraBlocks {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_slab"), new BlockItem(DIRT_SLAB, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
     }
 
+    public static void registryOreBlocks() {
+        
+    }
+
 }

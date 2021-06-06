@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "edora:block/{$block_name}" }
+  }
+}

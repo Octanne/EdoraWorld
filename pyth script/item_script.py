@@ -30,7 +30,7 @@ javaAttributAsign = []
 
 
 for itemData in itemsData:
-  print("generatiion of : "+itemData[0]+" begin...")
+  print("generation of : "+itemData[0]+" begin...")
   
   # Gen Textureplaceholder
   img = Image.new('RGB', (64, 64), color = (73, 109, 137))
@@ -56,7 +56,7 @@ for itemData in itemsData:
   if itemData[2] == True :
     # Java
     localName = "compressed_"+itemData[0]
-    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributDef.append("public static CompressedMineralItem "+localName.upper()+";")
     javaAttributAsign.append(localName.upper()+" = new CompressedMineralItem(new Settings().group(MINERAL_GROUP));")
     javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
     print(localName.lower()+" java integration generate!")
@@ -72,7 +72,7 @@ for itemData in itemsData:
   if itemData[3] == True :
     # Java
     localName = "dusted_"+itemData[0]
-    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributDef.append("public static DustedMineralItem "+localName.upper()+";")
     javaAttributAsign.append(localName.upper()+" = new DustedMineralItem(new Settings().group(MINERAL_GROUP));")
     javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
     print(localName.lower()+" java integration generate!")
@@ -88,7 +88,7 @@ for itemData in itemsData:
   if itemData[4] == True :
     # Java
     localName = "crystal_"+itemData[0]
-    javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
+    javaAttributDef.append("public static CrystalMineralItem "+localName.upper()+";")
     javaAttributAsign.append(localName.upper()+" = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));")
     javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
     print(localName.lower()+" java integration generate!")
@@ -101,26 +101,11 @@ for itemData in itemsData:
     # TEXTURE
     img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
     print(localName.lower() + ".png generate!")
-    
-  # Java
-  localName = "raw_"+itemData[0]
-  javaAttributDef.append("public static IngotMineralItem "+localName.upper()+";")
-  javaAttributAsign.append(localName.upper()+" = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));")
-  javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+localName.lower()+"\"), "+localName.upper()+");")
-  print(localName.lower()+" java integration generate!")
-  # Json
-  f = open(modelsPath+localName.lower()+".json", "w")
-  for line in linesTemplate:
-    f.write(line.replace("{$item_name}",localName.lower()))
-  f.close()
-  print(localName.lower()+".json generate!")
-  # TEXTURE
-  img.save(texturesPath+"mineral\\"+localName.lower()+'.png')
-  print(localName.lower() + ".png generate!")
 
 # Write java code on file
 print("Write java on file...")
 codeJavaFile = open("gen\\java_code.txt","w")
+codeJavaFile.write("\n")
 for line in javaAttributDef:
   codeJavaFile.write(line+"\n")
 codeJavaFile.write("\n")
