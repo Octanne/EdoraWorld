@@ -5,7 +5,7 @@ import net.minecraft.block.OreBlock;
 public class EdoraOreBlock extends OreBlock {
 
     public EdoraOreBlock(Settings settings) {
-        super(settings);
+        super(settings.requiresTool());
     }
     
 }

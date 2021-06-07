@@ -25,12 +25,13 @@ if not os.path.exists(texturesItemPath):
 if not os.path.exists(blockstatesPath):
   os.makedirs(blockstatesPath)
   
-# name, fortune?, min drop? & max drop?
-oresData = [["silver",True,1,2],
-             ["magnesium",True,2,6],
-             ["oricalc",True,4,5],
-             ["transformium",True,3,5],
-             ["bauxyte",True,1,3]]
+# name, fortune?, min drop?, max drop? & mining level 
+# (0 -> Wooden / Golden Pickaxe 1 -> Stone Pickaxe 2 -> Iron Pickaxe 3 -> Diamond Pickaxe 4 -> Netherite Pickaxe)
+oresData = [["silver",True,1,2,2],
+             ["magnesium",True,2,6,2],
+             ["oricalc",True,4,5,2],
+             ["transformium",True,3,5,2],
+             ["bauxyte",True,1,3,2]]
              
 # Load Templates
 
@@ -100,7 +101,7 @@ for oreData in oresData:
 
   # Block & Item Block
   javaAttributDef.append("public static EdoraOreBlock "+block_name.upper()+";")
-  javaAttributAsign.append(block_name.upper()+" = new EdoraOreBlock(new Settings().group(EdoraItems.ORE_GROUP));")
+  javaAttributAsign.append(block_name.upper()+" = new EdoraOreBlock(FabricBlockSettings.of(ORE_MATERIAL).breakByTool(FabricToolTags.PICKAXES, "+str(oreData[4])+").requiresTool());")
   javaAttributAsign.append("Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, \""+block_name.lower()+"\"), "+block_name.upper()+");")
   javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+block_name.lower()+"\"), new BlockItem("+block_name.upper()+", new Item.Settings().group(EdoraItems.ORE_GROUP)));")
   print(block_name.lower()+" java integration generate!")
