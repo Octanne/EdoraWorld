@@ -29,7 +29,7 @@ public class MixinPlayerManager {
     PlayerJoinEvent eventJoin;
 
     @Inject(method = "onPlayerConnect(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ServerPlayerEntity;)V",
-        at = @At(target = "Lnet/minecraft/server/PlayerManager;loadPlayerData(Lnet/minecraft/server/network/ServerPlayerEntity;)Lnet/minecraft/nbt/CompoundTag;",
+        at = @At(target = "Lnet/minecraft/server/PlayerManager;loadPlayerData(Lnet/minecraft/server/network/ServerPlayerEntity;)Lnet/minecraft/nbt/NbtCompound;",
                 shift = Shift.AFTER, value = "INVOKE_ASSIGN"),
         locals = LocalCapture.CAPTURE_FAILSOFT)
     private void onPlayerJoin(ClientConnection clientConnection, ServerPlayerEntity entity, CallbackInfo info,

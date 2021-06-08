@@ -19,7 +19,6 @@ import eu.octanne.edora.server.gourvern.nation.NationsManager;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.world.ServerWorld;
 
 @Mixin(ServerPlayerEntity.class)
@@ -40,9 +39,8 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     @Unique
     private BankAccount edoraBankAccount;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;Lcom/mojang/authlib/GameProfile;"+
-    "Lnet/minecraft/server/network/ServerPlayerInteractionManager;)V")
-    private void constructClass(MinecraftServer server, ServerWorld world, GameProfile profile, ServerPlayerInteractionManager interactionManager, CallbackInfo info){
+    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/server/MinecraftServer;Lnet/minecraft/server/world/ServerWorld;Lcom/mojang/authlib/GameProfile;)V")
+    private void constructClass(MinecraftServer server, ServerWorld world, GameProfile profile, CallbackInfo info){
         edoraNation = null;
         edoraTown = null;
         edoraGuilde = null;
@@ -50,7 +48,7 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
         EdoraMain.log(Level.INFO, "Intialize default EdoraPlayer data.");
     }
 
-    @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
+    @Inject( method = "readCustomDataFromNbt(Lnet/minecraft/nbt/NbtCompound;)V", at = @At("TAIL"))
     public void readCustomDataFromTag(NbtCompound tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
             NbtCompound tagEdora = tag.getCompound(edoraTAG);
@@ -79,7 +77,7 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
 
     
 
-	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
+	@Inject( method = "writeCustomDataToNbt(Lnet/minecraft/nbt/NbtCompound;)V", at = @At("TAIL"))
     public void writeCustomDataToTag(NbtCompound tag, CallbackInfo info) {
         NbtCompound tagEdora = new NbtCompound();
         if(edoraNation != null) {
