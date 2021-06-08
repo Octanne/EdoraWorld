@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import eu.octanne.edora.server.event.PlayerJoinEvent;
 import eu.octanne.edora.server.event.ServerEvents;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
@@ -33,7 +33,7 @@ public class MixinPlayerManager {
                 shift = Shift.AFTER, value = "INVOKE_ASSIGN"),
         locals = LocalCapture.CAPTURE_FAILSOFT)
     private void onPlayerJoin(ClientConnection clientConnection, ServerPlayerEntity entity, CallbackInfo info,
-    GameProfile gameProfile, UserCache userCache, String string, CompoundTag compoundTag){
+    GameProfile gameProfile, UserCache userCache, String string, NbtCompound compoundTag){
         eventJoin = ServerEvents.PLAYER_JOIN.invoker().onPlayerJoin(clientConnection, entity, compoundTag == null);
     }
 

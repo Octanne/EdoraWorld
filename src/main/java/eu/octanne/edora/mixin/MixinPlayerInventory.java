@@ -17,8 +17,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.collection.DefaultedList;
@@ -41,30 +41,30 @@ public class MixinPlayerInventory implements Inventory, Nameable {
         this.combinedInventory = ImmutableList.of(this.main, this.armor, this.offHand, this.edoraSlot);
     }
 
-    @Inject(at = @At("RETURN"), method = "serialize(Lnet/minecraft/nbt/ListTag;)Lnet/minecraft/nbt/ListTag;")
-    private void serialize(ListTag tag, CallbackInfoReturnable<ListTag> info) {
-        CompoundTag compoundTag3;
+    @Inject(at = @At("RETURN"), method = "writeNbt(Lnet/minecraft/nbt/ListTag;)Lnet/minecraft/nbt/ListTag;")
+    private void writeNbt(NbtList tag, CallbackInfoReturnable<NbtList> info) {
+        NbtCompound compoundTag3;
         for(int k = 0; k < this.edoraSlot.size(); ++k) {
             if (!((ItemStack)this.edoraSlot.get(k)).isEmpty()) {
-               compoundTag3 = new CompoundTag();
+               compoundTag3 = new NbtCompound();
                compoundTag3.putByte("Slot", (byte)(k + 110));
-               ((ItemStack)this.edoraSlot.get(k)).toTag(compoundTag3);
+               ((ItemStack)this.edoraSlot.get(k)).writeNbt(compoundTag3);
                tag.add(compoundTag3);
             }
         }
     }
 
     @Overwrite
-    public void deserialize(ListTag tag) {
+    public void readNbt(NbtList tag) {
         this.main.clear();
         this.armor.clear();
         this.offHand.clear();
         this.edoraSlot.clear();
 
         for(int i = 0; i < tag.size(); ++i) {
-            CompoundTag compoundTag = tag.getCompound(i);
+            NbtCompound compoundTag = tag.getCompound(i);
             int j = compoundTag.getByte("Slot") & 255;
-            ItemStack itemStack = ItemStack.fromTag(compoundTag);
+            ItemStack itemStack = ItemStack.fromNbt(compoundTag);
             if (!itemStack.isEmpty()) {
                if (j >= 0 && j < this.main.size()) {
                   this.main.set(j, itemStack);

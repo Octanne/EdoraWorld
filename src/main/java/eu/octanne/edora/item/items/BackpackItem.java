@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -96,7 +96,7 @@ public class BackpackItem extends Item {
 
     public void wrongNation(World world, PlayerEntity player) {
         SimpleInventory bInventory = new SimpleInventory(getNbSlots());
-        ListTag inventoryTag = backpackItemStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+        NbtList inventoryTag = backpackItemStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
         BackpackScreenHandler.fromTag(inventoryTag, bInventory);
 
         List<ItemStack> backpackItems = bInventory.clearToList();

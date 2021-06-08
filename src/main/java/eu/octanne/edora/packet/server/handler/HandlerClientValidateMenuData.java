@@ -6,7 +6,7 @@ import eu.octanne.edora.server.gourvern.nation.Nation;
 import eu.octanne.edora.server.gourvern.nation.NationsManager;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.PlayChannelHandler;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -19,7 +19,7 @@ public class HandlerClientValidateMenuData implements PlayChannelHandler {
 	public void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
     PacketByteBuf buf, PacketSender responseSender) {
                 int idType = buf.readInt();
-                CompoundTag tag = buf.readCompoundTag();
+                NbtCompound tag = buf.readNbt();
                 server.execute(() -> {
                     if(idType == MenuType.NATION_SELECTOR.getIndex()) {
                         EdoraServerPlayerEntity ePlayer = (EdoraServerPlayerEntity) player;

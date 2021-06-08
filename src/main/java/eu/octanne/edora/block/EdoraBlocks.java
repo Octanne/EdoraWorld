@@ -6,8 +6,8 @@ import eu.octanne.edora.item.EdoraItems;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricMaterialBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -15,7 +15,7 @@ import net.minecraft.util.registry.Registry;
 
 public class EdoraBlocks {
 
-    public static final Material ORE_MATERIAL = new FabricMaterialBuilder(MaterialColor.STONE).build();
+    public static final Material ORE_MATERIAL = new FabricMaterialBuilder(MapColor.STONE_GRAY).build();
 
     public static final EdoraSlabBlock DIRT_SLAB = new EdoraSlabBlock(Block.Settings.copy(Blocks.DIRT));
 

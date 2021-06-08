@@ -5,8 +5,7 @@ import eu.octanne.edora.server.EdoraServerPlayerEntity;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -20,25 +19,25 @@ public class PacketServerOpenPersonalMenu {
     }
 
     public void send(ServerPlayerEntity player, boolean forceNationChoose) {
-        CompoundTag tag = new CompoundTag();
+        NbtCompound tag = new NbtCompound();
         PacketByteBuf buf = PacketByteBufs.create();
         EdoraServerPlayerEntity pE = (EdoraServerPlayerEntity)player;
         if(pE.getNation() != null){
             if(forceNationChoose) {
                 buf.writeInt(MenuType.NATION_SELECTOR.getIndex());
                 tag.putString("nationName", pE.getNation().getName());
-                buf.writeCompoundTag(tag);
+                buf.writeNbt(tag);
             }else {
                 buf.writeInt(MenuType.PERSONAL_MENU.getIndex());
                 tag.putString("nationName", pE.getNation() != null ? pE.getNation().getName() : "none");
                 tag.putString("townName", pE.getTown() != null ? pE.getTown().getName() : "none");
                 tag.putString("guildeName", pE.getGuilde() != null ? pE.getGuilde().getName() : "none");
                 tag.putInt("oannes", pE.getBankAccount().getOannes());
-                buf.writeCompoundTag(tag);
+                buf.writeNbt(tag);
             }
         }else{
             buf.writeInt(MenuType.NATION_SELECTOR.getIndex());
-            buf.writeCompoundTag(tag);
+            buf.writeNbt(tag);
         }
         ServerPlayNetworking.send(player, identifier, buf);
     }

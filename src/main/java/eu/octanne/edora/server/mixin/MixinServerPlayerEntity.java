@@ -16,8 +16,7 @@ import eu.octanne.edora.server.gourvern.Guilde;
 import eu.octanne.edora.server.gourvern.Town;
 import eu.octanne.edora.server.gourvern.nation.Nation;
 import eu.octanne.edora.server.gourvern.nation.NationsManager;
-
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
@@ -52,9 +51,9 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     }
 
     @Inject( method = "readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
-    public void readCustomDataFromTag(CompoundTag tag, CallbackInfo info) {
+    public void readCustomDataFromTag(NbtCompound tag, CallbackInfo info) {
         if(tag.contains(edoraTAG)){
-            CompoundTag tagEdora = tag.getCompound(edoraTAG);
+            NbtCompound tagEdora = tag.getCompound(edoraTAG);
             if(tagEdora.contains(nationID)) edoraNation = NationsManager.getNationFromID(tagEdora.getUuid(nationID));
             else {
                 edoraNation = null;
@@ -81,8 +80,8 @@ public class MixinServerPlayerEntity implements EdoraServerPlayerEntity {
     
 
 	@Inject( method = "writeCustomDataToTag(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
-    public void writeCustomDataToTag(CompoundTag tag, CallbackInfo info) {
-        CompoundTag tagEdora = new CompoundTag();
+    public void writeCustomDataToTag(NbtCompound tag, CallbackInfo info) {
+        NbtCompound tagEdora = new NbtCompound();
         if(edoraNation != null) {
             tagEdora.putUuid(nationID, edoraNation.getID());
             EdoraMain.log(Level.DEBUG, "ADD nationID : "+edoraNation.getID());

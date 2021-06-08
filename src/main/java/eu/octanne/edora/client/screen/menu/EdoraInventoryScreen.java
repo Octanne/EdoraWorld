@@ -3,7 +3,7 @@ package eu.octanne.edora.client.screen.menu;
 import org.spongepowered.asm.mixin.Unique;
 
 import eu.octanne.edora.EdoraMain;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 
 public interface EdoraInventoryScreen {
@@ -13,12 +13,12 @@ public interface EdoraInventoryScreen {
 
     public boolean edoraMenuIsOpen();
 
-    public void openEdoraMenu(CompoundTag dataTAG);
+    public void openEdoraMenu(NbtCompound dataTAG);
 
     public void closeEdoraMenu();
 
     public boolean toggleEdoraMenu();
 
-    public void updateData(CompoundTag dataTAG);
+    public void updateData(NbtCompound dataTAG);
 
 }

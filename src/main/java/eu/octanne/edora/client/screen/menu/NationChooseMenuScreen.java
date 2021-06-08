@@ -2,6 +2,8 @@ package eu.octanne.edora.client.screen.menu;
 
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.client.EdoraClient;
+import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen.NationButtonWidget;
+import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen.NationEnum;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +12,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -47,7 +49,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
 
         // Création du bouton en bas à droite
         DoneButtonWidget doneButton = new DoneButtonWidget(i + 122, j + 141);
-        this.addButton(doneButton);
+        this.addDrawableChild(doneButton);
 
         /**
          * Boucle pour créer tous les boutons représentant les Nation définis dans this.Nation
@@ -56,7 +58,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         int newButtonHeight = 0;
         for (NationEnum nation : NationEnum.values()) {
             NationButtonWidget nationButtonWidget = new NationButtonWidget(i + 8, j + 28 + newButtonHeight, nation);
-            this.addButton(nationButtonWidget);
+            this.addDrawableChild(nationButtonWidget);
             newButtonHeight += 32;
         }
     }
@@ -113,7 +115,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         public void onPress() {
             if(selected != null){
                 client.openScreen(null);
-                CompoundTag tagDATA = new CompoundTag();
+                NbtCompound tagDATA = new NbtCompound();
                 tagDATA.putString("chooseNation", selected.name());
                 PacketClients.pcktClientValidateMenuData.send(MenuType.NATION_SELECTOR,tagDATA);
             }

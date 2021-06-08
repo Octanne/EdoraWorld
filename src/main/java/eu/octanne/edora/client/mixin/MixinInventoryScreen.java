@@ -1,11 +1,15 @@
 package eu.octanne.edora.client.mixin;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,15 +19,16 @@ import eu.octanne.edora.client.screen.menu.EdoraInventoryScreen;
 import eu.octanne.edora.client.screen.menu.button.NationButton;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
+import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
-import net.minecraft.client.gui.widget.AbstractButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -55,10 +60,10 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     @Unique
     private NationButton natButton = null;
     @Unique
-    private CompoundTag edoraDATA = null;
+    private NbtCompound edoraDATA = null;
 
     public MixinInventoryScreen(PlayerEntity player) {
-        super(player.playerScreenHandler, player.inventory, new TranslatableText("container.crafting"));
+        super(player.playerScreenHandler, player.getInventory(), new TranslatableText("container.crafting"));
         this.passEvents = true;
         this.titleX = 97;
     }
@@ -78,7 +83,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
         // Move RECIPE
         moveRecipeBook();
         // ADD Other Menu Button
-        this.addButton(new TexturedButtonWidget(this.x + 146, this.y + 61, 20, 18, 223, 36, 18, EDORA_MAIN_MENU, 256, 256,
+        this.addDrawableChild(new TexturedButtonWidget(this.x + 146, this.y + 61, 20, 18, 223, 36, 18, EDORA_MAIN_MENU, 256, 256,
         buttonWidget -> {
             this.mouseDown = true;
             this.mouseDown = true;
@@ -92,19 +97,21 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             else toggleEdoraMenu();
             this.mouseDown = true;
         });
-        this.addButton(menuButton);
+        this.addDrawableChild(menuButton);
         // Nation Button
         if(edoraMenuIsOpen()) {
             natButton = new NationButton(x - 39 , y + 19, NationButton.NationEnum.valueOf(edoraDATA.getString("nationName")));
-            this.addButton(natButton);
+            this.addDrawableChild(natButton);
         }
     }
 
     private void moveRecipeBook() {
-        if(!this.buttons.isEmpty()){
-            this.buttons.get(0).active = false;
-            this.buttons.remove(0);
-            this.addButton(new TexturedButtonWidget(this.x + 123, this.y + 61, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE,
+        List<Drawable> drawables = ((ScreenAccessor) this).getDrawables();
+        if(!drawables.isEmpty()){
+            TexturedButtonWidget recipeBook = (TexturedButtonWidget)drawables.get(0);
+            recipeBook.active = false;
+            drawables.remove(0);
+            this.addDrawableChild(new TexturedButtonWidget(this.x + 123, this.y + 61, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEXTURE,
             buttonWidget -> toggleRecipeButton() ));
         }
     }
@@ -121,7 +128,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
 
     @Override
     public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
         this.client.getTextureManager().bindTexture(edoraMenuIsOpen() ? EDORA_MAIN_MENU : BACKGROUND_TEXTURE);
         int i = this.x;
         int j = this.y;
@@ -153,18 +160,20 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
 
     public void toggleRecipeButton() {
         if(!recipeBook.isOpen() && edoraMenuIsOpen()) closeEdoraMenu();
-        this.recipeBook.reset(this.narrow);
+        this.recipeBook.reset();
         this.recipeBook.toggleOpen();
         int lastX = this.x;
-        this.x = this.recipeBook.findLeftEdge(this.narrow, this.width, this.backgroundWidth);
+        this.x = this.recipeBook.findLeftEdge(this.width, this.backgroundWidth);
         this.mouseDown = true;
-        for (AbstractButtonWidget button : this.buttons) {
+        List<Drawable> drawables = ((ScreenAccessor) this).getDrawables();
+        for (Drawable drawable : drawables) {
+            ClickableWidget button = (ClickableWidget)drawable;
             button.x = button.x-lastX+this.x;
         }
     }
 
     @Override
-    public void openEdoraMenu(CompoundTag data) {
+    public void openEdoraMenu(NbtCompound data) {
         edoraDATA = data;
         edoraMenuOpenState = true;
         // Close Recipe if open
@@ -173,7 +182,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
             natButton.visible = true;
         } else {
             natButton = new NationButton(x - 39 , y + 19, NationButton.NationEnum.valueOf(data.getString("nationName")));
-            this.addButton(natButton);
+            this.addDrawableChild(natButton);
         }
     }
 
@@ -194,7 +203,7 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
     }
 
     @Override
-    public void updateData(CompoundTag dataTAG) {
+    public void updateData(NbtCompound dataTAG) {
         edoraDATA = dataTAG;
     }
 

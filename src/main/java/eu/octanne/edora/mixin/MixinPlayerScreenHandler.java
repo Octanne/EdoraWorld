@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -37,7 +37,7 @@ public class MixinPlayerScreenHandler extends AbstractRecipeScreenHandler<Crafti
     }
 
     @Shadow
-    public void populateRecipeFinder(RecipeFinder finder) {
+    public void populateRecipeFinder(RecipeMatcher finder) {
         // Auto-generated method stub
     }
 
@@ -83,6 +83,11 @@ public class MixinPlayerScreenHandler extends AbstractRecipeScreenHandler<Crafti
     public RecipeBookCategory getCategory() {
         // Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public boolean canInsertIntoSlot(int index) {
+        return true;
     }
 
     

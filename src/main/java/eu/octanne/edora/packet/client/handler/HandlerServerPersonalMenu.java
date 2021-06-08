@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 
 public class HandlerServerPersonalMenu implements PlayChannelHandler {
@@ -17,7 +17,7 @@ public class HandlerServerPersonalMenu implements PlayChannelHandler {
 	public void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
 			PacketSender responseSender) {
                 int idType = buf.readInt();
-                CompoundTag tag = buf.readCompoundTag();
+                NbtCompound tag = buf.readNbt();
                 client.execute(() -> {
                     if(idType == MenuType.NATION_SELECTOR.getIndex()) {
                         String natName = tag.getString("nationName");
