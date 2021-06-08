@@ -2,8 +2,6 @@ package eu.octanne.edora.client.screen.menu;
 
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.client.EdoraClient;
-import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen.NationButtonWidget;
-import eu.octanne.edora.client.screen.menu.NationChooseMenuScreen.NationEnum;
 import eu.octanne.edora.packet.MenuType;
 import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.MinecraftClient;

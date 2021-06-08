@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/cobbled_deepslate_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/cobbled_deepslate"
+    },
+    "type=top": {
+      "model": "minecraft:block/cobbled_deepslate_slab_top"
+    },
+    "type=east": {
+      "model": "minecraft:block/cobbled_deepslate_slab_vert",
+      "y" : 90,
+      "uvlock": true
+    },
+    "type=west": {
+      "model": "minecraft:block/cobbled_deepslate_slab_vert",
+      "y" : -90,
+      "uvlock": true
+    },
+    "type=north": {
+      "model": "minecraft:block/cobbled_deepslate_slab_vert"
+    },
+    "type=south": {
+      "model": "minecraft:block/cobbled_deepslate_slab_vert",
+      "y" : 180,
+      "uvlock": true
+    }
+  }
+}

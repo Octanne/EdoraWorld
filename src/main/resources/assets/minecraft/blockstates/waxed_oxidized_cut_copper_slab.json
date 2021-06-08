@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "minecraft:block/oxidized_cut_copper_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/oxidized_cut_copper"
+    },
+    "type=top": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_top"
+    },
+    "type=east": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_vert",
+      "y" : 90,
+      "uvlock": true
+    },
+    "type=west": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_vert",
+      "y" : -90,
+      "uvlock": true
+    },
+    "type=north": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_vert"
+    },
+    "type=south": {
+      "model": "minecraft:block/oxidized_cut_copper_slab_vert",
+      "y" : 180,
+      "uvlock": true
+    }
+  }
+}
