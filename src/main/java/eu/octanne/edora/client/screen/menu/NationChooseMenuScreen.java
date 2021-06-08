@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 
 public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends HandledScreen<T>*/ Screen {
 
-    private static final Identifier TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/nation_choix.png");
+    private static final Identifier BACKGROUND_TEXTURE = new Identifier(EdoraMain.MOD_ID, "textures/gui/container/nation_choix.png");
     NationEnum selected = null;
 
     public NationChooseMenuScreen(PlayerEntity player, String natName) {
@@ -74,7 +74,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         // Chargement de la texture
-        this.client.getTextureManager().bindTexture(TEXTURE);
+        this.client.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
 
         // Fond foncé derrière le GUI
         this.renderBackground(matrices, 0);
@@ -120,7 +120,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         private void drawUnselected(MatrixStack matrices, TextureManager textureManager) {
-            textureManager.bindTexture(NationChooseMenuScreen.TEXTURE);
+            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)this.x, (double)this.y, 0.0D);
             drawTexture(matrices, 0, 0, 148, 21, 20, 20, 512, 512);
@@ -128,7 +128,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         private void drawSelected(MatrixStack matrices, TextureManager textureManager) {
-            textureManager.bindTexture(NationChooseMenuScreen.TEXTURE);
+            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)this.x, (double)this.y, 0.0D);
             drawTexture(matrices, 0, 0, 148, 1, 20, 20, 512, 512);
@@ -191,7 +191,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         public void drawUnselected(MatrixStack matrices, TextureManager textureManager, int x, int y) {
-            textureManager.bindTexture(NationChooseMenuScreen.TEXTURE);
+            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)x, (double)y, 0.0D);
             drawTexture(matrices, 0, 0, this.unselectedU, this.unselectedV, 131, 32, 512, 512);
@@ -199,7 +199,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          }
    
          public void drawSelected(MatrixStack matrices, TextureManager textureManager, int x, int y) {
-            textureManager.bindTexture(NationChooseMenuScreen.TEXTURE);
+            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)x, (double)y, 0.0D);
             drawTexture(matrices, 0, 0, this.selectedU, this.selectedV, 131, 32, 512, 512);

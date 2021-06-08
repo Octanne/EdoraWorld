@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public class BackpackScreen extends HandledScreen<BackpackScreenHandler> {
 
-    private Identifier TEXTURE;
+    private Identifier BACKGROUND_TEXTURE;
     private BackpackItem backpackItem;
     
     public BackpackScreen(BackpackScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -20,20 +20,20 @@ public class BackpackScreen extends HandledScreen<BackpackScreenHandler> {
         this.backpackItem = handler.getItem();
 
         if(backpackItem.getNbSlots() == 9) {
-            this.TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+            this.BACKGROUND_TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
         } else if(backpackItem.getNbSlots() == 27) {
-            this.TEXTURE = new Identifier("minecraft", "textures/gui/container/shulker_box.png");
+            this.BACKGROUND_TEXTURE = new Identifier("minecraft", "textures/gui/container/shulker_box.png");
         } else if(backpackItem.getNbSlots() == 54) {
             this.backgroundHeight = 222;
             this.playerInventoryTitleY = 128;
-            this.TEXTURE = new Identifier("minecraft", "textures/gui/container/generic_54.png");
+            this.BACKGROUND_TEXTURE = new Identifier("minecraft", "textures/gui/container/generic_54.png");
         }
     }
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        client.getTextureManager().bindTexture(TEXTURE);
+        client.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
