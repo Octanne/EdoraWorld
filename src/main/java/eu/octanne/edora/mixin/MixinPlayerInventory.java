@@ -29,8 +29,7 @@ public class MixinPlayerInventory implements Inventory, Nameable {
     @Unique
     public DefaultedList<ItemStack> edoraSlot;
     
-    @Shadow
-    private List<DefaultedList<ItemStack>> combinedInventory;
+    @Shadow private List<DefaultedList<ItemStack>> combinedInventory;
     @Shadow public DefaultedList<ItemStack> main;
     @Shadow public DefaultedList<ItemStack> armor;
     @Shadow public DefaultedList<ItemStack> offHand;
@@ -40,6 +39,14 @@ public class MixinPlayerInventory implements Inventory, Nameable {
         this.edoraSlot = DefaultedList.ofSize(3, ItemStack.EMPTY);
         this.combinedInventory = ImmutableList.of(this.main, this.armor, this.offHand, this.edoraSlot);
     }
+
+    // @Redirect(method = "<init>(Lnet/minecraft/entity/player/PlayerEntity;)V", at = @At(value = "FIELD", 
+    //     target="Lnet/minecraft/entity/player/PlayerInventory;combinedInventory:Ljava/util/List;",
+    //     opcode = Opcodes.PUTFIELD))
+    // private void injectedCustomInv(PlayerInventory inv, List<DefaultedList<ItemStack>> combined) {
+    //     //this.edoraSlot = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    //     this.combinedInventory = ImmutableList.of(this.main, this.armor, this.offHand, this.edoraSlot);
+    // }
 
     @Inject(at = @At("RETURN"), method = "writeNbt(Lnet/minecraft/nbt/ListTag;)Lnet/minecraft/nbt/ListTag;")
     private void writeNbt(NbtList tag, CallbackInfoReturnable<NbtList> info) {

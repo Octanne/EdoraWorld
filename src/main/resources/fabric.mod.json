@@ -18,6 +18,7 @@
   "license": "MIT",
   "icon": "assets/edora/icon.png",
   "environment": "*",
+  "accessWidener" : "edora.accesswidener",
   "entrypoints": {
     "client": [
       "eu.octanne.edora.client.EdoraClient"
