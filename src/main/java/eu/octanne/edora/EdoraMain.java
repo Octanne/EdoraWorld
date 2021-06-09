@@ -33,7 +33,8 @@ public class EdoraMain {
     public void onInitialize() {
         EdoraItems.registryItems();
         EdoraBlocks.registryBlocks();
-        EdoraBiomes.registryBiomes();
+        EdoraBlocks.registryOreBlocks();
+        //EdoraBiomes.registryBiomes();
     }
 
 }

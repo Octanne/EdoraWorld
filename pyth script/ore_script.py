@@ -27,11 +27,19 @@ if not os.path.exists(blockstatesPath):
   
 # name, fortune?, min drop?, max drop? & mining level 
 # (0 -> Wooden / Golden Pickaxe 1 -> Stone Pickaxe 2 -> Iron Pickaxe 3 -> Diamond Pickaxe 4 -> Netherite Pickaxe)
-oresData = [["silver",True,1,2,2],
-             ["magnesium",True,2,6,2],
-             ["oricalc",True,4,5,2],
-             ["transformium",True,3,5,2],
-             ["bauxyte",True,1,3,2]]
+oresData = [["bauxyte",False,1,2,2,3.0],
+            ["galene",True,1,2,1,3.0],
+			["malachite",True,1,4,2,3.0],
+			["psilomelane",True,1,2,2,3.0],
+			["manganese",True,1,4,2,3.0],
+			["silver",True,1,2,2,3.0],
+			["nickel_sulfur",True,1,4,2,3.0],
+			["uraninyte",True,1,1,2,4.0],
+			["tungsten",False,1,1,2,3.0],
+			["transformium",False,1,1,2,4.5],
+			["oricalc",False,1,1,2,4.5],
+			["trinium",True,1,1,2,3.0],
+			["tin",True,1,2,2,3.0]]
              
 # Load Templates
 
@@ -86,7 +94,7 @@ for oreData in oresData:
   # Item raw mineral
   raw_item_name = "raw_"+oreData[0]
   javaAttributDef.append("public static RawMineralItem "+raw_item_name.upper()+";")
-  javaAttributAsign.append(raw_item_name.upper()+" = new RawMineralItem(new Settings().group(EdoraItems.MINERAL_GROUP));")
+  javaAttributAsign.append(raw_item_name.upper()+" = new RawMineralItem(new Item.Settings().group(EdoraItems.MINERAL_GROUP));")
   javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+raw_item_name.lower()+"\"), "+raw_item_name.upper()+");")
   print(raw_item_name.lower()+" java integration generate!")
   # Json
@@ -101,7 +109,7 @@ for oreData in oresData:
 
   # Block & Item Block
   javaAttributDef.append("public static EdoraOreBlock "+block_name.upper()+";")
-  javaAttributAsign.append(block_name.upper()+" = new EdoraOreBlock(FabricBlockSettings.of(ORE_MATERIAL).breakByTool(FabricToolTags.PICKAXES, "+str(oreData[4])+").requiresTool());")
+  javaAttributAsign.append(block_name.upper()+" = new EdoraOreBlock(FabricBlockSettings.of(ORE_MATERIAL).strength("+str(oreData[5])+"F,"+str(oreData[5])+"F).breakByTool(FabricToolTags.PICKAXES, "+str(oreData[4])+").requiresTool());")
   javaAttributAsign.append("Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, \""+block_name.lower()+"\"), "+block_name.upper()+");")
   javaAttributAsign.append("Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, \""+block_name.lower()+"\"), new BlockItem("+block_name.upper()+", new Item.Settings().group(EdoraItems.ORE_GROUP)));")
   print(block_name.lower()+" java integration generate!")
