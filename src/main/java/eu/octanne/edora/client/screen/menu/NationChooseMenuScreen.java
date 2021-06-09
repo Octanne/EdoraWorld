@@ -1,5 +1,7 @@
 package eu.octanne.edora.client.screen.menu;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.client.EdoraClient;
 import eu.octanne.edora.packet.MenuType;
@@ -7,6 +9,7 @@ import eu.octanne.edora.packet.client.PacketClients;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
@@ -73,11 +76,9 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // Chargement de la texture
-        this.client.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-
-        // Fond foncé derrière le GUI
-        this.renderBackground(matrices, 0);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
 
         // Coordonnées du GUI (centré)
         int i = this.width / 2 - 73;
@@ -120,7 +121,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         private void drawUnselected(MatrixStack matrices, TextureManager textureManager) {
-            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)this.x, (double)this.y, 0.0D);
             drawTexture(matrices, 0, 0, 148, 21, 20, 20, 512, 512);
@@ -128,7 +129,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         private void drawSelected(MatrixStack matrices, TextureManager textureManager) {
-            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)this.x, (double)this.y, 0.0D);
             drawTexture(matrices, 0, 0, 148, 1, 20, 20, 512, 512);
@@ -191,7 +192,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
         }
 
         public void drawUnselected(MatrixStack matrices, TextureManager textureManager, int x, int y) {
-            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)x, (double)y, 0.0D);
             drawTexture(matrices, 0, 0, this.unselectedU, this.unselectedV, 131, 32, 512, 512);
@@ -199,7 +200,7 @@ public class NationChooseMenuScreen extends/*<T extends ScreenHandler> extends H
          }
    
          public void drawSelected(MatrixStack matrices, TextureManager textureManager, int x, int y) {
-            textureManager.bindTexture(NationChooseMenuScreen.BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, NationChooseMenuScreen.BACKGROUND_TEXTURE);
             matrices.push();
             matrices.translate((double)x, (double)y, 0.0D);
             drawTexture(matrices, 0, 0, this.selectedU, this.selectedV, 131, 32, 512, 512);

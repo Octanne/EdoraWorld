@@ -24,6 +24,7 @@ import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -126,14 +127,15 @@ public class MixinInventoryScreen extends AbstractInventoryScreen<PlayerScreenHa
 
     @Override
     public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        this.client.getTextureManager().bindTexture(edoraMenuIsOpen() ? EDORA_MAIN_MENU : BACKGROUND_TEXTURE);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, edoraMenuIsOpen() ? EDORA_MAIN_MENU : BACKGROUND_TEXTURE);
         int i = this.x;
         int j = this.y;
 
         this.drawTexture(matrices, edoraMenuOpenState ? i-47 : i, j, 0, 0, edoraMenuOpenState ? 223 : this.backgroundWidth, this.backgroundHeight);
         // DRAW SLOT OF SECOND ARMOR
-        this.client.getTextureManager().bindTexture(EDORA_MAIN_MENU);
+        RenderSystem.setShaderTexture(0, EDORA_MAIN_MENU);
         this.drawTexture(matrices, x + 76, y + 7, 123, 7, 18, 54);
 
         // DRAW EDORA MENU DATA
