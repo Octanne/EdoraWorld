@@ -59,40 +59,41 @@ public class EdoraServer extends EdoraMain implements DedicatedServerModInitiali
         onInitialize();
     }
 
+    
     private void registerPacketHandlers() {
         ServerPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktClientAskOpenMenu, 
         new HandlerClientAskOpenMenu());
         ServerPlayNetworking.registerGlobalReceiver(PacketIdentifiers.pktClientValideMenuData, 
         new HandlerClientValidateMenuData());
 	}
-
+    
     private void registerEvents() {
         ServerLifecycleEvents.SERVER_STARTING.register(this::onPreEnable);
         ServerLifecycleEvents.SERVER_STARTED.register(this::onEnable);
         ServerLifecycleEvents.SERVER_STOPPING.register(this::onPreDisable);
         ServerLifecycleEvents.SERVER_STOPPED.register(this::onDisable);
-
+        
         ServerEvents.PLAYER_JOIN.register((connection, player, isFirstJoin) -> onPlayerJoin(new PlayerJoinEvent(connection,player,isFirstJoin)));
         ServerEvents.PLAYER_LEAVE.register(player -> onPlayerLeave(new PlayerLeaveEvent(player)));
     }
-
+    
     private void onPreEnable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Loading of the plugin...");
         minecraftServer = server;
         EdoraMain.log(Level.INFO, "The plugin has been loaded!");
     }
-
+    
     private void onEnable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Loading of the plugin...");
-
+        
         NationsManager.loadAllNations();
-
+        
         EdoraMain.log(Level.INFO, "The plugin has been loaded!");
     }
-
+    
     private void onPreDisable(MinecraftServer server) {
         EdoraMain.log(Level.INFO, "Unloading of the plugin...");
-
+        
         EdoraMain.log(Level.INFO, "The plugin has been unloaded!");
     }
 
