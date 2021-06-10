@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "edora:block/mineral/deepslate_ore_bauxyte"
+  }
+}
