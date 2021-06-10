@@ -50,13 +50,23 @@ public class EdoraBlocks {
     public static EdoraOreBlock ORE_TRINIUM;
     public static RawMineralItem RAW_TIN;
     public static EdoraOreBlock ORE_TIN;
+    /** Grownd Block */
+    public static Block DIRT_JUNGLE = new Block(FabricBlockSettings.of(Material.MOSS_BLOCK).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0));
+    public static Block DIRT_ARID = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0));
+    public static Block DIRT_DARK = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0));
+    public static Block DIRT_LANTIA = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0));    
 
+    ;
     /**
      * Registry Blocks
      */
     public static void registryBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_slab"), DIRT_SLAB);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_slab"), new BlockItem(DIRT_SLAB, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+    /** Grownd Block */
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_jungle"), DIRT_JUNGLE);
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_jungle"), new BlockItem(DIRT_JUNGLE, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        
     }
 
     public static void registryOreBlocks() {

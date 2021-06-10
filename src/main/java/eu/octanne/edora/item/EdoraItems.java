@@ -45,7 +45,6 @@ public class EdoraItems {
     public static ItemGroup BLOCK_GROUP;
 
     /**************Mineral Items**************/
-    public static CrystalMineralItem SULFUR_CRYSTAL;
     
     /**************Faction : Any**************/
     public static EcuItem NYLUS_ECU;
@@ -70,7 +69,7 @@ public class EdoraItems {
     public static void registryItemGroups(){
         MINERAL_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "mineral"))
-            .icon(() -> new ItemStack(SULFUR_CRYSTAL))
+            .icon(() -> new ItemStack(Items.GOLD_INGOT))
             .build();
         ORE_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "ore"))
@@ -104,8 +103,6 @@ public class EdoraItems {
          */
         
         /**************Mineral Items**************/
-        SULFUR_CRYSTAL = new CrystalMineralItem(new Settings().group(MINERAL_GROUP));
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "sulfur_crystal"), SULFUR_CRYSTAL);
         
         /**************Faction : Any**************/
         NYLUS_ECU = new EcuItem(new Settings().group(ECONOMY_GROUP).rarity(Rarity.RARE));
