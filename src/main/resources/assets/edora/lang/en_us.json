@@ -61,10 +61,10 @@
     "block.edora.dirt_dark" : "Dark Dirt",
     "block.edora.grass_block_dark" : "Dark Grass Block",
     "block.edora.dirt_lantia" : "Lantia Dirt",
-    "block.edora.grass_block_lantia" : "Lantia Grass Block"
-
-
-
-
+    "block.edora.grass_block_lantia" : "Lantia Grass Block",
+    "item.edora.modular_quantum_helmet" : "Modular Quantum Helmet",
+    "item.edora.modular_quantum_chestplate" : "Modular Quantum Chestplate",
+    "item.edora.modular_quantum_leggings" : "Modular Quantum Leggings",
+    "item.edora.modular_quantum_boots" : "Modular Quantum Boots"
 
 }
