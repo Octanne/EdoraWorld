@@ -119,9 +119,6 @@ for oreData in oresData:
     f.write(line.replace("{$block_name}",block_name.lower()))
   f.close()
   print(block_name.lower()+".json generate!")
-  # TEXTURE
-  img.save(texturesItemPath+"mineral\\"+block_name.lower()+'.png')
-  print(block_name.lower() + ".png generate!")
   # Json Block
   f = open(modelsBlockPath+block_name.lower()+".json", "w")
   for line in block_template:
