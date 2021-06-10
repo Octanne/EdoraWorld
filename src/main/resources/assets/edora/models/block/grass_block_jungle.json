@@ -1,10 +1,10 @@
 {   "parent": "block/block",
     "textures": {
-        "particle": "block/natural/dirt_jungle",
-        "bottom": "block/natural/dirt_jungle",
-        "top": "block/natural/grass_block_top_jungle",
-        "side": "block/natural/grass_block_side_jungle",
-        "overlay": "block/natural/grass_block_side_overlay_jungle"
+        "particle": "edora:block/natural/dirt_jungle",
+        "bottom": "edora:block/natural/dirt_jungle",
+        "top": "edora:block/natural/grass_block_top_jungle",
+        "side": "edora:block/natural/grass_block_side_jungle",
+        "overlay": "edora:block/natural/grass_block_side_overlay_jungle"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],
@@ -16,15 +16,6 @@
                 "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "south" },
                 "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "west" },
                 "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "east" }
-            }
-        },
-        {   "from": [ 0, 0, 0 ],
-            "to": [ 16, 16, 16 ],
-            "faces": {
-                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "north" },
-                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "south" },
-                "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "west" },
-                "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "east" }
             }
         }
     ]

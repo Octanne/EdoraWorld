@@ -2,23 +2,23 @@
     "variants": {
       "snowy=false": [
         {
-          "model": "minecraft:block/grass_block_dark"
+          "model": "edora:block/grass_block_dark"
         },
         {
-          "model": "minecraft:block/grass_block_dark",
+          "model": "edora:block/grass_block_dark",
           "y": 90
         },
         {
-          "model": "minecraft:block/grass_block_dark",
+          "model": "edora:block/grass_block_dark",
           "y": 180
         },
         {
-          "model": "minecraft:block/grass_block_dark",
+          "model": "edora:block/grass_block_dark",
           "y": 270
         }
       ],
       "snowy=true": {
-        "model": "minecraft:block/grass_block_snow_dark"
+        "model": "edora:block/grass_block_snow_dark"
       }
     }
   }

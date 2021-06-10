@@ -85,7 +85,7 @@ public class EdoraBlocks {
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), GRASS_BLOCK_ARID);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), new BlockItem(GRASS_BLOCK_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), GRASS_BLOCK_LANTIA);
-        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), new BlockItem(GRASS_BLOCK_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), new BlockItem(GRASS_BLOCK_LANTIA, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         
     }
 

@@ -1,10 +1,9 @@
 {   "parent": "block/block",
     "textures": {
-        "particle": "block/natural/dirt_arid",
-        "bottom": "block/natural/dirt_arid",
-        "top": "block/natural/grass_block_top_arid",
-        "side": "block/natural/grass_block_side_arid",
-        "overlay": "block/natural/grass_block_side_overlay_arid"
+        "particle": "edora:block/natural/dirt_arid",
+        "bottom": "edora:block/natural/dirt_arid",
+        "top": "edora:block/natural/grass_block_top_arid",
+        "side": "edora:block/natural/grass_block_side_arid"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],
@@ -16,15 +15,6 @@
                 "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "south" },
                 "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "west" },
                 "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#side",   "cullface": "east" }
-            }
-        },
-        {   "from": [ 0, 0, 0 ],
-            "to": [ 16, 16, 16 ],
-            "faces": {
-                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "north" },
-                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "south" },
-                "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "west" },
-                "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "tintindex": 0, "cullface": "east" }
             }
         }
     ]
