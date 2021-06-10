@@ -56,6 +56,7 @@ public class EdoraItems {
     public static Item KALLANA_ITEM;
     public static BackpackItem QUANTUMPACK;
     public static ArmorMaterial MODULAR_QUANTUM_ARMOR_MATERIAL;
+    public static Item MODULAR_QUANTUM_ARMOR_ITEM;
     public static Item MODULAR_QUANTUM_HELMET;
     public static Item MODULAR_QUANTUM_CHESTPLATE;
     public static Item MODULAR_QUANTUM_LEGGINGS;
@@ -123,6 +124,8 @@ public class EdoraItems {
         QUANTUMPACK = new BackpackItem(new Settings().group(KALLANA_GROUP).maxCount(1), new BackpackSettings(54, UUID.fromString("23c6761c-443f-42c4-a5db-02ad7f85fc4b")));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "quantumpack"), QUANTUMPACK);
         MODULAR_QUANTUM_ARMOR_MATERIAL = new ModularQuantumArmorMaterial();
+        MODULAR_QUANTUM_ARMOR_ITEM = new Item(new Item.Settings());
+Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum"), MODULAR_QUANTUM_ARMOR_ITEM);
         MODULAR_QUANTUM_HELMET = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(KALLANA_GROUP));
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "modular_quantum_helmet"), MODULAR_QUANTUM_HELMET);
         MODULAR_QUANTUM_CHESTPLATE = new ArmorItem(MODULAR_QUANTUM_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(KALLANA_GROUP));
