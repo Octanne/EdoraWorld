@@ -1,0 +1,21 @@
+{
+    "variants": {
+      "": [
+        {
+          "model": "edora:block/dirt_lantia"
+        },
+        {
+          "model": "edora:block/dirt_lantia",
+          "y": 90
+        },
+        {
+          "model": "edora:block/dirt_lantia",
+          "y": 180
+        },
+        {
+          "model": "edora:block/dirt_lantia",
+          "y": 270
+        }
+      ]
+    }
+  }

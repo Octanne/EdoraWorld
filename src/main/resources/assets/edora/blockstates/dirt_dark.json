@@ -1,0 +1,21 @@
+{
+    "variants": {
+      "": [
+        {
+          "model": "edora:block/dirt_dark"
+        },
+        {
+          "model": "edora:block/dirt_dark",
+          "y": 90
+        },
+        {
+          "model": "edora:block/dirt_dark",
+          "y": 180
+        },
+        {
+          "model": "edora:block/dirt_dark",
+          "y": 270
+        }
+      ]
+    }
+  }
