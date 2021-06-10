@@ -69,7 +69,7 @@ public class EdoraBlocks {
     public static void registryBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_slab"), DIRT_SLAB);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_slab"), new BlockItem(DIRT_SLAB, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
-    /** Grownd Block */
+        /** Grownd Block */
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_jungle"), DIRT_JUNGLE);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_jungle"), new BlockItem(DIRT_JUNGLE, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_dark"), DIRT_DARK);
