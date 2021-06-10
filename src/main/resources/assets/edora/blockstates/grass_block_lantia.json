@@ -1,0 +1,24 @@
+{
+    "variants": {
+      "snowy=false": [
+        {
+          "model": "minecraft:block/grass_block_lantia"
+        },
+        {
+          "model": "minecraft:block/grass_block_lantia",
+          "y": 90
+        },
+        {
+          "model": "minecraft:block/grass_block_lantia",
+          "y": 180
+        },
+        {
+          "model": "minecraft:block/grass_block_lantia",
+          "y": 270
+        }
+      ],
+      "snowy=true": {
+        "model": "minecraft:block/grass_block_snow_lantia"
+      }
+    }
+  }
