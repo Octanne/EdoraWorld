@@ -1,6 +1,7 @@
 package eu.octanne.edora.block;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.block.blocks.EdoraGrassBlock;
 import eu.octanne.edora.block.blocks.EdoraOreBlock;
 import eu.octanne.edora.block.blocks.EdoraSlabBlock;
 import eu.octanne.edora.item.EdoraItems;
@@ -58,7 +59,7 @@ public class EdoraBlocks {
     public static Block DIRT_ARID = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_DARK = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_LANTIA = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));    
-    public static Block GRASS_JUNGLE = new GrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS));
+    public static Block GRASS_JUNGLE = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_JUNGLE);
     /**
      * Registry Blocks
      */
@@ -74,6 +75,8 @@ public class EdoraBlocks {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_arid"), new BlockItem(DIRT_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_lantia"), DIRT_LANTIA);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_lantia"), new BlockItem(DIRT_LANTIA, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_jungle"), GRASS_JUNGLE);
+        
     }
 
     public static void registryOreBlocks() {
