@@ -3,6 +3,7 @@ package eu.octanne.edora.item;
 import java.util.UUID;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.block.EdoraBlocks;
 import eu.octanne.edora.item.items.BackpackItem;
 import eu.octanne.edora.item.items.EcuItem;
 import eu.octanne.edora.item.items.Settings.BackpackSettings;
@@ -10,7 +11,6 @@ import eu.octanne.edora.materials.ModularQuantumArmorMaterial;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -68,11 +68,11 @@ public class EdoraItems {
     public static void registryItemGroups(){
         MINERAL_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "mineral"))
-            .icon(() -> new ItemStack(Items.GOLD_INGOT))
+            .icon(() -> new ItemStack(EdoraBlocks.RAW_ORICALC))
             .build();
         ORE_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "ore"))
-            .icon(() -> new ItemStack(Blocks.GOLD_ORE))
+            .icon(() -> new ItemStack(EdoraBlocks.ORE_BAUXYTE))
             .build();
         ECONOMY_GROUP = FabricItemGroupBuilder.create(
             new Identifier(EdoraMain.MOD_ID, "economy"))
