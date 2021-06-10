@@ -27,5 +27,44 @@
     "screen.edora.guilde" : "Guild",
     "screen.edora.town" : "Town",
     "message.edora.backpack.destroy" : "You don't have the abilities to open it... The backpack destroyed himself.",
-    "generator.genmap" : "GenMap"
+    "generator.genmap" : "GenMap",
+    "item.edora.raw_bauxyte" : "Raw Bauxyte",
+    "item.edora.raw_galene" : "Raw Galene",
+    "item.edora.raw_malachite" : "Raw Malachite",
+    "item.edora.raw_psilomelane" : "Raw Psilomelane",
+    "item.edora.raw_manganese" : "Raw Manganese",
+    "item.edora.raw_silver" : "Raw Silver",
+    "item.edora.raw_nickel_sulfur" : "Raw Nickel-Sulfur",
+    "item.edora.raw_uraninyte" : "Raw Uraninyte",
+    "item.edora.raw_tungsten" : "Raw Tungsten",
+    "item.edora.raw_transformium" : "Raw Transformium",
+    "item.edora.raw_oricalc" : "Raw Oricalc",
+    "item.edora.raw_trinium" : "Raw Trinium",
+    "item.edora.raw_tin" : "Raw Tin",
+    "block.edora.ore_bauxyte" : "Bauxyte Ore",
+    "block.edora.ore_galene" : "Galene Ore",
+    "block.edora.ore_malachite" : "Malachite Ore",
+    "block.edora.ore_psilomelane" : "Psilomelane Ore",
+    "block.edora.ore_manganese" : "Manganese Ore",
+    "block.edora.ore_silver" : "Silver Ore",
+    "block.edora.ore_nickel_sulfur" : "Nickel-Sulfur Ore",
+    "block.edora.ore_uraninyte" : "Uraninyte Ore",
+    "block.edora.ore_tungsten" : "Tungsten Ore",
+    "block.edora.ore_transformium" : "Transformium Ore",
+    "block.edora.ore_oricalc" : "Oricalc Ore",
+    "block.edora.ore_trinium" : "Trinium Ore",
+    "block.edora.ore_tin" : "Tin Ore",
+    "block.edora.dirt_jungle" : "Jungle Dirt",
+    "block.edora.grass_block_jungle" : "Jungle Grass Block",
+    "block.edora.dirt_arid" : "Arid Dirt",
+    "block.edora.grass_block_arid" : "Arid Grass Block",
+    "block.edora.dirt_dark" : "Dark Dirt",
+    "block.edora.grass_block_dark" : "Dark Grass Block",
+    "block.edora.dirt_lantia" : "Lantia Dirt",
+    "block.edora.grass_block_lantia" : "Lantia Grass Block"
+
+
+
+
+
 }
