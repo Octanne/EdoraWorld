@@ -17,8 +17,7 @@ public class ModularQuantumArmorMaterial implements ArmorMaterial{
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        // return PROTECTION_VALUES[slot.getEntitySlotId()]; // TODO ne marche pas
-        return 5;
+        return PROTECTION_VALUES[slot.getEntitySlotId()];
     }
 
     @Override

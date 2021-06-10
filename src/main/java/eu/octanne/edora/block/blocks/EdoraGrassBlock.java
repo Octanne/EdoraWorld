@@ -2,7 +2,6 @@ package eu.octanne.edora.block.blocks;
 
 import java.util.Random;
 
-import eu.octanne.edora.block.EdoraBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
