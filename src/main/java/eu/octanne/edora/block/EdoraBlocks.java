@@ -59,7 +59,10 @@ public class EdoraBlocks {
     public static Block DIRT_ARID = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_DARK = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_LANTIA = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));    
-    public static Block GRASS_JUNGLE = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_JUNGLE);
+    public static Block GRASS_BLOCK_JUNGLE = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_JUNGLE);
+    public static Block GRASS_BLOCK_ARID = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_ARID);
+    public static Block GRASS_BLOCK_DARK = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_DARK);
+    public static Block GRASS_BLOCK_LANTIA = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_LANTIA);
     /**
      * Registry Blocks
      */
@@ -75,7 +78,14 @@ public class EdoraBlocks {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_arid"), new BlockItem(DIRT_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "dirt_lantia"), DIRT_LANTIA);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_lantia"), new BlockItem(DIRT_LANTIA, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
-        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_jungle"), GRASS_JUNGLE);
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_jungle"), GRASS_BLOCK_JUNGLE);
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_jungle"), new BlockItem(GRASS_BLOCK_JUNGLE, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_dark"), GRASS_BLOCK_DARK);
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_dark"), new BlockItem(GRASS_BLOCK_DARK, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), GRASS_BLOCK_ARID);
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), new BlockItem(GRASS_BLOCK_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
+        Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), GRASS_BLOCK_LANTIA);
+        Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), new BlockItem(GRASS_BLOCK_ARID, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         
     }
 
