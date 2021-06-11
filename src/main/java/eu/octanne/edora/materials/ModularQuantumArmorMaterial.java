@@ -1,12 +1,11 @@
 package eu.octanne.edora.materials;
 
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
-public class ModularQuantumArmorMaterial implements ArmorMaterial{
+public class ModularQuantumArmorMaterial extends EdoraArmorMaterial {
     private static final int[] BASE_DURABILITY = new int[] {13, 15, 16, 11}; // TODO: à modifier
     private static final int[] PROTECTION_VALUES = new int[] {3, 6, 8, 3}; 
 
