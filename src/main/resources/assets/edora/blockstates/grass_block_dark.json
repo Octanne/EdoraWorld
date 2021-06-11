@@ -18,7 +18,7 @@
         }
       ],
       "snowy=true": {
-        "model": "edora:block/grass_block_snow_dark"
+        "model": "edora:block/grass_block_dark"
       }
     }
   }
