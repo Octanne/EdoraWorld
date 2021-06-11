@@ -28,7 +28,7 @@ public class JungleSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
             BlockState defaultBlock, BlockState fluidBlock, BlockState topBlock, BlockState underBlock,
             BlockState underwaterBlock, int seaLevel, int i) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
-        int j = (int) (noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
+        int j = (int) (noise / 10.0D + 10.0D + random.nextDouble() * 0.25D);
         int k;
         BlockState blockState5;
         if (j == 0) {
@@ -99,6 +99,5 @@ public class JungleSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
                 }
             }
         }
-
     }
 }

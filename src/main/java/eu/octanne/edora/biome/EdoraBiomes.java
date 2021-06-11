@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 import eu.octanne.edora.EdoraMain;
+import eu.octanne.edora.biome.features.EdoraConfiguredFeatures;
+import eu.octanne.edora.biome.features.EdoraDefaultBiomeFeatures;
 import eu.octanne.edora.biome.surfacebuilder.ConfiguredEdoraSurfaceBuilders;
 import eu.octanne.edora.mixin.AddBaseBiomesLayerAccessor;
 import eu.octanne.edora.mixin.BuiltinBiomesAccessor;
@@ -18,6 +20,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 public class EdoraBiomes {
     // Biomes
@@ -25,7 +29,6 @@ public class EdoraBiomes {
         new Identifier(EdoraMain.MOD_ID, "jungle"));
     private static Biome JUNGLE = createEdoraJungle();
 
-    @SuppressWarnings("deprecated")
     public static void registryBiomes() {
         registerBiome(JUNGLE,JUNGLE_KEY);
     }
@@ -53,6 +56,13 @@ public class EdoraBiomes {
         SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
         GenerationSettings.Builder generationSettings = new GenerationSettings.Builder();
         generationSettings.surfaceBuilder(ConfiguredEdoraSurfaceBuilders.JUNGLE);
+        DefaultBiomeFeatures.addDefaultDisks(generationSettings);
+        DefaultBiomeFeatures.addMineables(generationSettings);
+        // COMMON ORE TO ALL BIOME ADD
+        EdoraDefaultBiomeFeatures.addCommonOres(generationSettings);
+        // ADD LIKE THIS FOR SPECIFIC ORE TO SPAWN ON THE BIOME
+        generationSettings.feature(GenerationStep.Feature.UNDERGROUND_ORES, EdoraConfiguredFeatures.ORE_BAUXYTE);
+        
         return (new Biome.Builder())
         .precipitation(Biome.Precipitation.RAIN)
         .category(Biome.Category.JUNGLE)
