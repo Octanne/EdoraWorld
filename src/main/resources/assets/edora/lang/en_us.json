@@ -78,6 +78,7 @@
     "item.edora.modular_quantum_helmet" : "Modular Quantum Helmet",
     "item.edora.modular_quantum_chestplate" : "Modular Quantum Chestplate",
     "item.edora.modular_quantum_leggings" : "Modular Quantum Leggings",
-    "item.edora.modular_quantum_boots" : "Modular Quantum Boots"
+    "item.edora.modular_quantum_boots" : "Modular Quantum Boots",
+    "biome.edora.jungle" : "Edora Jungle"
 
 }

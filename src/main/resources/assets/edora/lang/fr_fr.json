@@ -75,5 +75,6 @@
     "item.edora.modular_quantum_helmet" : "Casque Quantique Modulable",
     "item.edora.modular_quantum_chestplate" : "Plastron Quantique Modulable",
     "item.edora.modular_quantum_leggings" : "Jambières Quantique Modulable",
-    "item.edora.modular_quantum_boots" : "Bottes Quantique Modulable"
+    "item.edora.modular_quantum_boots" : "Bottes Quantique Modulable",
+    "biome.edora.jungle" : "Jingle d'Edora"
 }

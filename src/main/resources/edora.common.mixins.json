@@ -6,7 +6,10 @@
   "mixins": [
     "MixinPlayerInventory",
     "MixinPlayerScreenHandler",
-    "MixinBlocks"
+    "MixinBlocks",
+    "BuiltinBiomesAccessor",
+    "AddBaseBiomesLayerAccessor",
+    "VanillaLayeredBiomeSourceAccessor"
   ],
   "client": [],
   "server": [],

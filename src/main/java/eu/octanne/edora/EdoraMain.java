@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import eu.octanne.edora.biome.EdoraBiomes;
 import eu.octanne.edora.block.EdoraBlocks;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.screenhandler.BackpackScreenHandler;
@@ -33,7 +34,7 @@ public class EdoraMain {
         EdoraItems.registryItems();
         EdoraBlocks.registryBlocks();
         EdoraBlocks.registryOreBlocks();
-        //EdoraBiomes.registryBiomes();
+        EdoraBiomes.registryBiomes();
     }
 
 }
