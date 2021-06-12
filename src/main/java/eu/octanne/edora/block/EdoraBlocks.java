@@ -72,10 +72,10 @@ public class EdoraBlocks {
     public static Block DIRT_ARID = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_DARK = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));
     public static Block DIRT_LANTIA = new Block(FabricBlockSettings.of(Material.SOIL).strength(0.5f, 0.5f).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRAVEL));    
-    public static Block GRASS_BLOCK_JUNGLE = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_JUNGLE);
-    public static Block GRASS_BLOCK_ARID = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_ARID);
-    public static Block GRASS_BLOCK_DARK = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_DARK);
-    public static Block GRASS_BLOCK_LANTIA = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_LANTIA);
+    public static Block GRASS_BLOCK_JUNGLE = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_JUNGLE);
+    public static Block GRASS_BLOCK_ARID = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_ARID);
+    public static Block GRASS_BLOCK_DARK = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_DARK);
+    public static Block GRASS_BLOCK_LANTIA = new EdoraGrassBlock(FabricBlockSettings.of(Material.SOLID_ORGANIC).ticksRandomly().strength(0.6F).breakByTool(FabricToolTags.SHOVELS, 0).sounds(BlockSoundGroup.GRASS), EdoraBlocks.DIRT_LANTIA);
     /**
      * Registry Blocks
      */
