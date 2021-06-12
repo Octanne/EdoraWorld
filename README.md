@@ -2,6 +2,7 @@
 # EdoraWorld | Fabric Mod
 
 [FR] EdoraWord est un Mod Minecraft sous le loader Fabric conçu dans l'optique de la création d'un monde RPG inédit créer par nous même.
+
 [EN] EdoraWorld is a Minecraft Mod under Fabric loader designed for the development of an RPG universe create by US. 
 
 ## Setup / >iki Loader
@@ -9,4 +10,5 @@ For setup instructions please see the [fabric wiki page](https://fabricmc.net/wi
 
 ## License
 [FR] Merci de respecter la réglementation de la license jointes.
+
 [EN] Thank to respect the all license agreement.
