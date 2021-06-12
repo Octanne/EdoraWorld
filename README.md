@@ -5,7 +5,7 @@
 
 [EN] EdoraWorld is a Minecraft Mod under Fabric loader designed for the development of an RPG universe create by US. 
 
-## Setup / >iki Loader
+## Setup / Wiki Loader
 For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
 
 ## License
