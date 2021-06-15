@@ -1,0 +1,31 @@
+{
+    "replace": false,
+    "values": [
+        "edora:ore_bauxyte",
+        "edora:ore_galene",
+        "edora:ore_malachite",
+        "edora:ore_psilomelane",
+        "edora:ore_manganese",
+        "edora:ore_silver",
+        "edora:ore_nickel_sulfur",
+        "edora:ore_uraninyte",
+        "edora:ore_tungsten",
+        "edora:ore_transformium",
+        "edora:ore_oricalc",
+        "edora:ore_trinium",
+        "edora:ore_tin",
+        "edora:deepslate_ore_bauxyte",
+        "edora:deepslate_ore_galene",
+        "edora:deepslate_ore_malachite",
+        "edora:deepslate_ore_psilomelane",
+        "edora:deepslate_ore_manganese",
+        "edora:deepslate_ore_silver",
+        "edora:deepslate_ore_nickel_sulfur",
+        "edora:deepslate_ore_uraninyte",
+        "edora:deepslate_ore_tungsten",
+        "edora:deepslate_ore_transformium",
+        "edora:deepslate_ore_oricalc",
+        "edora:deepslate_ore_trinium",
+        "edora:deepslate_ore_tin"
+    ]
+  }

@@ -1,0 +1,14 @@
+{
+    "replace": false,
+    "values": [
+        "edora:dirt_slab",
+        "edora:dirt_jungle",
+        "edora:dirt_dark",
+        "edora:dirt_arid",
+        "edora:dirt_lantia",
+        "edora:grass_block_jungle",
+        "edora:grass_block_dark",
+        "edora:grass_block_arid",
+        "edora:grass_block_lantia"
+    ]
+  }
