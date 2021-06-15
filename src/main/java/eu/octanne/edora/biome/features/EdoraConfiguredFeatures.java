@@ -18,12 +18,12 @@ public class EdoraConfiguredFeatures {
     private static final ImmutableList<OreFeatureConfig.Target> ORE_BAUXYTE_TARGET;
 
     private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String id, ConfiguredFeature<FC, ?> configuredFeature) {
-        return (ConfiguredFeature)Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, (String)id, configuredFeature);
+        return (ConfiguredFeature<FC,?>)Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, (String)id, configuredFeature);
     }
 
     static {
         ORE_BAUXYTE_TARGET = ImmutableList.of(OreFeatureConfig.createTarget(OreFeatureConfig.Rules.STONE_ORE_REPLACEABLES, EdoraBlocks.ORE_BAUXYTE.getDefaultState()), OreFeatureConfig.createTarget(OreFeatureConfig.Rules.DEEPSLATE_ORE_REPLACEABLES, EdoraBlocks.DEEPSLATE_ORE_BAUXYTE.getDefaultState()));
-        ORE_BAUXYTE = register("ore_bauxyte", (ConfiguredFeature)((ConfiguredFeature)((ConfiguredFeature)Feature.ORE.configure(new OreFeatureConfig(ORE_BAUXYTE_TARGET, 9)).uniformRange(YOffset.getBottom(), YOffset.fixed(31))).spreadHorizontally()).repeat(4));
+        ORE_BAUXYTE = register("ore_bauxyte", (ConfiguredFeature<?,?>)((ConfiguredFeature<?,?>)((ConfiguredFeature<?,?>)Feature.ORE.configure(new OreFeatureConfig(ORE_BAUXYTE_TARGET, 9)).uniformRange(YOffset.getBottom(), YOffset.fixed(31))).spreadHorizontally()).repeat(4));
     }
    
 }

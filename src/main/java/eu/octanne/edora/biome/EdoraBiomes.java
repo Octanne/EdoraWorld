@@ -58,6 +58,11 @@ public class EdoraBiomes {
         generationSettings.surfaceBuilder(ConfiguredEdoraSurfaceBuilders.JUNGLE);
         DefaultBiomeFeatures.addDefaultDisks(generationSettings);
         DefaultBiomeFeatures.addMineables(generationSettings);
+
+        DefaultBiomeFeatures.addJungleTrees(generationSettings);
+        DefaultBiomeFeatures.addJungleGrass(generationSettings);
+        DefaultBiomeFeatures.addJungleVegetation(generationSettings);
+        
         // COMMON ORE TO ALL BIOME ADD
         EdoraDefaultBiomeFeatures.addCommonOres(generationSettings);
         // ADD LIKE THIS FOR SPECIFIC ORE TO SPAWN ON THE BIOME
