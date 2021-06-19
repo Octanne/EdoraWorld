@@ -1,5 +1,6 @@
 package eu.octanne.edora.client;
 
+import eu.octanne.edora.block.EdoraBlocks;
 import org.lwjgl.glfw.GLFW;
 
 import eu.octanne.edora.EdoraMain;
@@ -42,9 +43,11 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
         // Register Screens
         registerScreens();
 
-
         // init Client Server Share Part
         onInitialize();
+
+        // Register Render Color Blocks
+        EdoraBlocks.registerColorBlocks();
     }
 
     private void registerPacketHandlers() {

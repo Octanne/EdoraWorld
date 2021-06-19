@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 
-public class EdoraGrassBlock extends GrassBlock{
+public class EdoraGrassBlock extends GrassBlock {
 
     private Block dirt_block;
 

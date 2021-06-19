@@ -80,6 +80,7 @@ public class EdoraBiomes {
             .waterFogColor(0x050533)
             .fogColor(0xc0d8ff)
             .skyColor(0x77adff)
+            .grassColor(0x33AD1C)
             .build())
         .spawnSettings(spawnSettings.build())
         .generationSettings(generationSettings.build())
