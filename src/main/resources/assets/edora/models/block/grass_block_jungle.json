@@ -3,6 +3,6 @@
 	"textures": {
 		"particle": "edora:block/natural/dirt_jungle",
 		"bottom": "edora:block/natural/dirt_jungle",
-		"side": "edora:block/natural/grass_block_side_jungle"
+		"side": "edora:block/natural/dirt_jungle"
 	}
 }

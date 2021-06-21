@@ -3,7 +3,7 @@
 	"textures": {
 		"particle": "edora:block/natural/dirt_dark",
 		"bottom": "edora:block/natural/dirt_dark",
-		"side": "edora:block/natural/grass_block_side_dark",
+		"side": "edora:block/natural/dirt_dark",
 		"overlay": "edora:block/natural/grass_block_side_dark_overlay"
 	}
 }

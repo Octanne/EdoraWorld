@@ -3,6 +3,6 @@
 	"textures": {
 		"particle": "edora:block/natural/dirt_lantia",
 		"bottom": "edora:block/natural/dirt_lantia",
-		"side": "edora:block/natural/grass_block_side_lantia"
+		"side": "edora:block/natural/dirt_lantia"
 	}
 }
