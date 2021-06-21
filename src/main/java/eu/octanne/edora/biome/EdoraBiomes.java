@@ -33,6 +33,7 @@ public class EdoraBiomes {
             new Identifier(EdoraMain.MOD_ID, "arid"));
     public static final RegistryKey<Biome> LANTIA_KEY = RegistryKey.of(Registry.BIOME_KEY,
             new Identifier(EdoraMain.MOD_ID, "lantia"));
+
     private static Biome JUNGLE = createEdoraJungle();
     private static Biome DARK = createEdoraDark();
     private static Biome ARID = createEdoraArid();
@@ -96,9 +97,10 @@ public class EdoraBiomes {
         DefaultBiomeFeatures.addDefaultDisks(generationSettings);
         DefaultBiomeFeatures.addMineables(generationSettings);
 
-        DefaultBiomeFeatures.addJungleTrees(generationSettings);
-        DefaultBiomeFeatures.addJungleGrass(generationSettings);
-        DefaultBiomeFeatures.addJungleVegetation(generationSettings);
+        DefaultBiomeFeatures.addBadlandsPlateauTrees(generationSettings);
+        DefaultBiomeFeatures.addBadlandsGrass(generationSettings);
+        DefaultBiomeFeatures.addExtraDefaultFlowers(generationSettings);
+        DefaultBiomeFeatures.addBadlandsVegetation(generationSettings);
 
         // COMMON ORE TO ALL BIOME ADD
         EdoraDefaultBiomeFeatures.addCommonOres(generationSettings);
@@ -123,9 +125,9 @@ public class EdoraBiomes {
         DefaultBiomeFeatures.addDefaultDisks(generationSettings);
         DefaultBiomeFeatures.addMineables(generationSettings);
 
-        DefaultBiomeFeatures.addJungleTrees(generationSettings);
-        DefaultBiomeFeatures.addJungleGrass(generationSettings);
-        DefaultBiomeFeatures.addJungleVegetation(generationSettings);
+        DefaultBiomeFeatures.addSavannaTrees(generationSettings);
+        DefaultBiomeFeatures.addSavannaGrass(generationSettings);
+        DefaultBiomeFeatures.addSavannaTallGrass(generationSettings);
 
         // COMMON ORE TO ALL BIOME ADD
         EdoraDefaultBiomeFeatures.addCommonOres(generationSettings);
