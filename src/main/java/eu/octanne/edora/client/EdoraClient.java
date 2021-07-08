@@ -43,6 +43,8 @@ public class EdoraClient extends EdoraMain implements ClientModInitializer {
         // Register Screens
         registerScreens();
 
+        EdoraBlocks.registerBlockRenderLayerMap();
+
         // init Client Server Share Part
         onInitialize();
 

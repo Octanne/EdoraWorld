@@ -1,11 +1,15 @@
 package eu.octanne.edora.block;
 
+import org.apache.logging.log4j.Level;
+
 import eu.octanne.edora.EdoraMain;
 import eu.octanne.edora.block.blocks.EdoraGrassBlock;
 import eu.octanne.edora.block.blocks.EdoraOreBlock;
 import eu.octanne.edora.block.blocks.EdoraSlabBlock;
 import eu.octanne.edora.item.EdoraItems;
 import eu.octanne.edora.item.items.minerals.RawMineralItem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -17,6 +21,7 @@ import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -100,15 +105,19 @@ public class EdoraBlocks {
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "dirt_lantia"), new BlockItem(DIRT_LANTIA, new Item.Settings().group(EdoraItems.BLOCK_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_jungle"), GRASS_BLOCK_JUNGLE);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_jungle"), GRASS_JUNGLE_ITEM);
-        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_JUNGLE, RenderLayer.getTranslucent());
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_dark"), GRASS_BLOCK_DARK);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_dark"), GRASS_DARK_ITEM);
-        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_DARK, RenderLayer.getTranslucent());
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), GRASS_BLOCK_ARID);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_arid"), GRASS_ARID_ITEM);
-        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_ARID, RenderLayer.getTranslucent());
         Registry.register(Registry.BLOCK, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), GRASS_BLOCK_LANTIA);
         Registry.register(Registry.ITEM, new Identifier(EdoraMain.MOD_ID, "grass_block_lantia"), GRASS_LANTIA_ITEM);
+    }
+    
+    @Environment(EnvType.CLIENT)
+    public static void registerBlockRenderLayerMap() {
+        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_JUNGLE, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_DARK, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_ARID, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(GRASS_BLOCK_LANTIA, RenderLayer.getTranslucent());
     }
 
